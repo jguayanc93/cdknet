@@ -1,0 +1,21 @@
+{
+  "name": "cdknet",
+  "version": "1.0.0",
+  "description": "intra net demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "juan carlos",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "jws": "^4.0.0",
+    "multer": "^2.0.2",
+    "tedious": "^18.6.1",
+    "xlsx": "^0.18.5"
+  }
+}
