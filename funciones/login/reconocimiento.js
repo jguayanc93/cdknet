@@ -6,6 +6,8 @@ const {conn} = require('../../conexion/cnn')
 let {comprobacion_logeo} = require('../../querys/login/reconocimiento');
 //////espacio para la implementacion del token
 let {jwtgenerator} = require('../../login/token')
+////ESPACIO PARA LOS MANEJOS DE ERRORES CON RESPUESTA
+const {error_corrector} = require('../error/err1')
 
 async function logeo(req,res,next) {
     try{
@@ -22,18 +24,18 @@ async function logeo(req,res,next) {
             secure:true,
             signed:true
         })
-        // res.redirect('/v1/login/identificador');
+        res.redirect('/v1/login/identificador');
         // res.redirect('identificador');////resolver esto despues
-        res.status(200).json(JSON.stringify(segunda_call));
+        // res.status(200).json(JSON.stringify(segunda_call));
     }
     catch(err){        
-        console.log(err);
+        error_corrector(res,err);
         /////el error debes manejarlo con una funcion especial para diferenciar las trabas
-        res.status(400).json({
-            "status":"ERROR",
-            "codigo":2,
-            "msg":err
-        })
+        // res.status(400).json({
+        //     "status":"ERROR",
+        //     "codigo":2,
+        //     "msg":err
+        // })        
     }
 }
 

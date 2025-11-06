@@ -7,13 +7,13 @@ const config = {
     authentication:{
         type:'default',
         options:{
-            userName:process.env.BDUSER,
-            password:process.env.BDPASS
+            userName:'sa',
+            password:'Nava2008'
         }
     },
     options:{
         encrypt:false,
-        database:process.env.BDNAME,
+        database:'bdnava01',
         rowCollectionOnRequestCompletion:true,
         trustServerCertificate:true,
         requestTimeout:0

@@ -15,7 +15,7 @@ let jwtgenerator = (obj) => {
     const firma = {
         header:{alg:'HS256',"typ":"JWT"},
         payload:userpayloaddata,
-        secret:process.env.PALABRA_CLAVE
+        secret:'chistemas'
     }
 
     return jws.sign(firma);

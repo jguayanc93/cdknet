@@ -4,8 +4,8 @@ const {Request,TYPES} = require('../../conexion/cadena')
 let comprobacion_logeo = (resolve,reject,conexion,req,next)=>{
     let usu=req.body.cuenta;
     let pass=req.body.pass;
-    // let sq_sql="jc_user_identificador";
-    let sq_sql=process.env.LOGIN_IDENTIFICADOR;
+    let sq_sql="jc_user_identificador";
+    // let sq_sql=process.env.LOGIN_IDENTIFICADOR;
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
         if(err){
             console.log(err);
@@ -16,7 +16,7 @@ let comprobacion_logeo = (resolve,reject,conexion,req,next)=>{
             conexion.close();
 
             if(rows.length==0){
-                reject("vacio");
+                reject("no cdk user");
             }
             else{
                 let respuesta=[];
