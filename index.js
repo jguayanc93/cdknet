@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000;
 
 app.use(cors(corhabilitaciones))
 
-app.use([express.json(),cookieParser(process.env.SECRET_PASS)])
+app.use([express.json(),cookieParser('CDK')])////este siempre data error en produccion
 
 const ruta = require('./rutas/rutas')
 

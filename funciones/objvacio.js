@@ -2,7 +2,7 @@ const objevacio=(req,res,next)=>{
     let existentes=[];
 
     for(let propiedad in req.signedCookies){
-        if(Object.hasOwn(objecuerpo,propiedad)){
+        if(Object.hasOwn(req.signedCookies,propiedad)){
             existentes.push(propiedad);
         }
     }    
