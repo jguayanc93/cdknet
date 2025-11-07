@@ -9,6 +9,7 @@ const {objevacio} = require('../funciones/objvacio')
 //////ESPACIO PARA FUNCIONES DE COMPROBACION PARA LOS QUERYS
 const {logeo} = require('../funciones/login/reconocimiento');
 const {usuario_autenticador} = require('../funciones/login/identificador')
+const {usuario_tipo} = require('../funciones/login/registro')
 
 router.use(express.json());
 
@@ -23,6 +24,8 @@ router.get('/identificador',(req,res)=>{
         "msg":"no logeado en otra ruta"
     })
 })////deberia ser cuando no esta identificado
+
+router.get('/registro',usuario_tipo)
 
 
 module.exports=router
