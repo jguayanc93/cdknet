@@ -10,6 +10,7 @@ const {objevacio} = require('../funciones/objvacio')
 const {logeo} = require('../funciones/login/reconocimiento');
 const {usuario_autenticador} = require('../funciones/login/identificador')
 const {usuario_tipo} = require('../funciones/login/registro')
+const {usuario_registrado} = require('../funciones/login/registro_completo')
 
 router.use(express.json());
 
@@ -26,6 +27,7 @@ router.get('/identificador',(req,res)=>{
 })////deberia ser cuando no esta identificado
 
 router.get('/registro',usuario_tipo)
+router.get('/registro/completado',usuario_registrado)
 
 
 module.exports=router
