@@ -3,7 +3,7 @@ const {Request,TYPES} = require('../../conexion/cadena')
 
 let identificador_logeo = (resolve,reject,payload,conexion)=>{
 
-    let sq_sql="select * from tbl_api_vendedores_diferenciador where codven=@vendedor";
+    let sq_sql="select * from tbl_api_vendedores_diferenciador where codusu=@vendedor";
     // let sq_sql=process.env.LOGIN_IDENTIFICADOR;
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
         if(err){
@@ -36,7 +36,7 @@ let identificador_logeo = (resolve,reject,payload,conexion)=>{
             }
         }
     })
-    consulta.addParameter('vendedor',TYPES.VarChar,payload.codigo);
+    consulta.addParameter('vendedor',TYPES.VarChar,payload.identificador);
     // consulta.addParameter('passcuenta',TYPES.VarChar,pass);
     conexion.execSql(consulta);
 }

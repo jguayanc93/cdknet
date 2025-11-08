@@ -17,7 +17,7 @@ async function usuario_tipo(req,res,next) {
         // const segunda_call= await obtenerpromesa_conexion();
         // const tercera_call= await consulta2(primera_call,segunda_call);
 
-        res.status(200).json(JSON.stringify({"grupo":primera_call.id_grupo}));
+        res.status(200).json(JSON.stringify({"grupo":primera_call.nom_grupo}));
     }
     catch(err){        
         error_corrector(res,err);
