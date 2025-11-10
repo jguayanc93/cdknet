@@ -27,7 +27,7 @@ router.get('/identificador',(req,res)=>{
 })////deberia ser cuando no esta identificado
 
 router.get('/registro',usuario_tipo)
-router.get('/registro/completado',usuario_registrado)
+router.post('/registro/completado',upload.none(),usuario_registrado)
 
 
 module.exports=router

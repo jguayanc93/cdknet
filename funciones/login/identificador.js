@@ -19,6 +19,16 @@ async function usuario_autenticador(req,res,next) {
         const segunda_call= await obtenerpromesa_conexion();
         const tercera_call= await consulta2(primera_call,segunda_call);
 
+        res.cookie('tip',tercera_call,{
+            domain:'compudiskett.com.pe',
+            path:'/',
+            httpOnly:true,
+            maxAge:1000 * 60 * 60,
+            sameSite:'None',
+            secure:true,
+            signed:true
+        })
+
         res.status(200).json(JSON.stringify({"correcto":tercera_call}));
     }
     catch(err){        
