@@ -2,7 +2,7 @@ require('dotenv').config();
 const jws = require('jws');
 // const cookieParser = require('cookie-parser')
 // const {Request,TYPES} = require('../../conexion/cadena')
-const {conn} = require('../../conexion/cnn')
+// const {conn} = require('../../conexion/cnn')
 /////////espacio para la llamada de los querys
 let {identificador_logeo} = require('../../querys/login/identificador');
 ////ESPACIO PARA LOS MANEJOS DE ERRORES CON RESPUESTA
@@ -18,8 +18,8 @@ async function vendedor_permisos(req,res,next) {
         const tercer_call= await consulta3(primera_call,segunda_call,req,next);
         // const segunda_call= await obtenerpromesa_conexion();
 
-        res.status(200).json(JSON.stringify({"tipo":tercer_call}));
-        // res.redirect('/v1/vendedor/');
+        // res.status(200).json(JSON.stringify({"tipo":tercer_call}));
+        res.redirect(tercer_call);
     }
     catch(err){        
         error_corrector(res,err);
@@ -62,7 +62,8 @@ function galleta_tipo(resolve,reject,req,next){
 
 function mandar_a_su_ruta(resolve,reject,payload,tipo,req,next){
     const diferenciador=tipo.toLowerCase();
-    resolve(diferenciador);
+    let ruta_dinamica=`/v1/vendedor/${diferenciador}`;
+    resolve(ruta_dinamica);
 
 }
 
