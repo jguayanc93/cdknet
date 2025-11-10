@@ -22,6 +22,6 @@ app.use('/v1',express.static('public'))
 
 app.use('/v1/login',ruta.login);
 
-// app.use('/v1/vendedor',ruta.vendedor);
+app.use('/v1/vendedor',ruta.vendedor);
 
 app.listen(port,()=>{console.log("servicio levantado")})

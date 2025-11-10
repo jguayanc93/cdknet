@@ -1,7 +1,7 @@
 ///lista de caminos y paths de rutas
 const login = require('../login/loggeo.js');
 
-// const vendedor = require('../vendedor/vendedor.js');
+const vendedor = require('../vendedor/vendedor.js');
 
 // const coti = require('../cotizacion/cotizacion.js');
 
@@ -14,4 +14,4 @@ const login = require('../login/loggeo.js');
 // const reporte = require('../reportes/reportes.js');
 
 // module.exports={login,vendedor,coti,prom,cuotas,lista,reporte}
-module.exports={login}
+module.exports={login,vendedor}

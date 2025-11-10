@@ -32,7 +32,7 @@ let identificador_logeo = (resolve,reject,payload,conexion)=>{
                     respuesta.push(tmp);
                 });
 
-                resolve(respuesta[0]);
+                resolve(respuesta[0][0]);
             }
         }
     })
