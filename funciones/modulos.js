@@ -1,12 +1,3 @@
-/////esto se usara mas adelante para dar ciertos permisos por usuario
-const cotizacion=["crear","modificar","eliminar"];
-// const pedidos=["crear","modificar","eliminar"];
-const facturas=["modificar","despachar"];
-const listas=["cotizacion","pedidos","facturas"];
-const promocion=["crear","eliminar"];
-const reporte=["crear"];
-const cuota=["volumen","rentabilidad","cobertura"];
-
 // const modulos_generales=[cotizacion,facturas,promocion,reporte];
 
 const grp20={

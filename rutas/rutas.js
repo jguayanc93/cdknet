@@ -3,7 +3,7 @@ const login = require('../login/loggeo.js');
 
 const vendedor = require('../vendedor/vendedor.js');
 
-// const coti = require('../cotizacion/cotizacion.js');
+const coti = require('../cotizacion/cotizacion.js');
 
 // const prom = require('../promos/promociones.js');
 
@@ -14,4 +14,4 @@ const vendedor = require('../vendedor/vendedor.js');
 // const reporte = require('../reportes/reportes.js');
 
 // module.exports={login,vendedor,coti,prom,cuotas,lista,reporte}
-module.exports={login,vendedor}
+module.exports={login,vendedor,coti}
