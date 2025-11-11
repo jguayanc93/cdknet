@@ -8,7 +8,7 @@ const router = express.Router();
 const {objevacio} = require('../funciones/objvacio')
 //////ESPACIO PARA FUNCIONES DE COMPROBACION PARA LOS QUERYS
 const {vendedor_permisos} = require('../funciones/vendedor/redirigir_tipo')
-const {cobertura_modulos} = require('../funciones/vendedor/cobertura_modulos')
+const {grupos_modulos} = require('../funciones/vendedor/cobertura_modulos')
 // const {} = require('../funciones/vendedor/cartera_modulos')
 
 router.use(express.json());
@@ -17,10 +17,10 @@ router.use(express.json());
 router.get('/',objevacio,vendedor_permisos)
 router.get('/',(req,res)=>{res.status(200).send("deberia enviarte al login de nuevo por no tener galletas")})
 
-router.get('/cobertura',cobertura_modulos)
-// router.get('/cartera',)
-// router.get('/jefatura',)
-// router.get('/especialista',)
+router.get('/cobertura',grupos_modulos)
+router.get('/cartera',grupos_modulos)
+router.get('/jefatura',grupos_modulos)
+router.get('/especialista',grupos_modulos)
 // router.get('/zona',)
 
 module.exports=router

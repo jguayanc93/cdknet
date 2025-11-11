@@ -10,14 +10,14 @@ let modulos = require('../modulos')
 ////ESPACIO PARA LOS MANEJOS DE ERRORES CON RESPUESTA
 const {error_corrector} = require('../error/err1')
 
-async function cobertura_modulos(req,res,next) {
+async function grupos_modulos(req,res,next) {
     try{
         ////para dar ciertos permisos y caracteristicas especiales y poder dividirlos
         const primera_call= await consulta1(req,next);
         const segunda_call= await consulta2(primera_call,req,next);
         // const segunda_call= await obtenerpromesa_conexion();
 
-        res.status(200).json(JSON.stringify({"permisos":segunda_call}));
+        res.status(200).json(JSON.stringify(segunda_call));
     }
     catch(err){
         error_corrector(res,err);
@@ -51,4 +51,4 @@ function galleta_credencial(resolve,reject,req,next){
     
 }
 
-module.exports={cobertura_modulos}
+module.exports={grupos_modulos}
