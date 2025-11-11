@@ -46,7 +46,7 @@ function ver_permisos(resolve,reject,payload,tipo,req,next){
     let accesos_garantizados=[];
 
     for(const access of Object.keys(permisos["cotizacion"])){
-        if(permisos["cotizacion"][access].includes(grupo)){
+        if(permisos["cotizacion"][access].includes(parseInt(grupo))){
             accesos_garantizados.push(access);
         }
     }
