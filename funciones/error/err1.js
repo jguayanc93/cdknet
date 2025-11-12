@@ -19,8 +19,12 @@ const error_corrector=(res,mensaje)=>{
             res.status(400).json({"status":mensaje,"codigo":2,"msg":"el user no esta registrado en la intranet"})
             break;
 
+        case "cliente no similitudes":
+            res.status(400).json({"status":mensaje,"codigo":2,"msg":"no se encontro ninguna similitud"})
+            break;
+
         case "":
-            res.status(500).json({"status":mensaje,"codigo":1,"msg":""})
+            res.status(400).json({"status":mensaje,"codigo":2,"msg":""})
             break;
 
         default:

@@ -6,6 +6,7 @@ const router = express.Router();
 // const upload = multer();
 ///////ESPACIO PARA FUNCIONES GENERALES SI TUVIERA 0 REQUIERA
 const {objevacio} = require('../funciones/objvacio')
+// const {}= require('../funciones/cliente/buscar')
 //////ESPACIO PARA FUNCIONES DE COMPROBACION PARA LOS QUERYS
 const {vendedor_permisos} = require('../funciones/vendedor/redirigir_tipo')
 // const {grupos_modulos} = require('../funciones/vendedor/cobertura_modulos')
@@ -18,7 +19,7 @@ router.get('/',objevacio,coti_permisos)
 // router.get('/',(req,res)=>{res.status(200).send("deberia enviarte al login de nuevo por no tener galletas")})
 
 /////estas rutas son para sus respectivos accesos segun pueda o no
-// router.get('/create',grupos_modulos)
+// router.get('/create',)
 // router.get('/read',)
 // router.get('/update',)
 // router.get('/delete',)
