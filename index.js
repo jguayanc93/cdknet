@@ -28,4 +28,6 @@ app.use('/v1/cotizacion',ruta.coti)
 
 app.use('/v1/cliente',ruta.cliente);
 
+app.use('/v1/producto',ruta.producto);
+
 app.listen(port,()=>{console.log("servicio levantado")})

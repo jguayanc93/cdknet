@@ -5,6 +5,8 @@ const vendedor = require('../vendedor/vendedor.js');
 
 const cliente = require('../cliente/cliente.js');
 
+const producto = require('../producto/producto.js')
+
 const coti = require('../cotizacion/cotizacion.js');
 
 // const prom = require('../promos/promociones.js');
@@ -16,4 +18,4 @@ const coti = require('../cotizacion/cotizacion.js');
 // const reporte = require('../reportes/reportes.js');
 
 // module.exports={login,vendedor,coti,prom,cuotas,lista,reporte}
-module.exports={login,vendedor,coti,cliente}
+module.exports={login,vendedor,coti,cliente,producto}
