@@ -15,7 +15,7 @@ router.use(express.json());
 // router.get('/',objevacio,coti_permisos)
 
 /////estas rutas son para sus respectivos accesos segun pueda o no
-router.get('/buscar',buscar)
+router.post('/buscar',buscar)
 // router.get('/id',)
 
 module.exports=router
