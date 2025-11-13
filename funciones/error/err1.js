@@ -31,6 +31,10 @@ const error_corrector=(res,mensaje)=>{
             res.status(400).json({"status":mensaje,"codigo":2,"msg":"no se encontro ninguna similitud"})
             break;
 
+        case "producto no registrado":
+            res.status(400).json({"status":mensaje,"codigo":2,"msg":"el producto no existe en los registros"})
+            break;
+
         case "":
             res.status(400).json({"status":mensaje,"codigo":2,"msg":""})
             break;

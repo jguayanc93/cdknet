@@ -3,7 +3,7 @@ const jws = require('jws');
 
 const {conn} = require('../../conexion/cnn')
 /////////espacio para la llamada de los querys
-let {cliente_id} = require('../../querys/cliente/identificar');
+let {producto_id} = require('../../querys/producto/identificar');
 ///////ESPACIO PARA FUNCIONES GENERALES
 
 ////ESPACIO PARA LOS MANEJOS DE ERRORES CON RESPUESTA
@@ -29,7 +29,7 @@ function consulta1(req,next){
 }
 
 function consulta2(conexion,req,next){
-    return new Promise((resolve,reject)=>cliente_id(resolve,reject,conexion,req,next))
+    return new Promise((resolve,reject)=>producto_id(resolve,reject,conexion,req,next))
 }
 
 function galleta_credencial(resolve,reject,req,next){

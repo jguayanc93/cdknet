@@ -9,13 +9,13 @@ const upload = multer();
 // const {objevacio} = require('../funciones/objvacio')
 //////ESPACIO PARA FUNCIONES
 const {buscar} = require('../funciones/producto/buscar')
-// const {} = require()
+const {identificado} = require('../funciones/producto/identificado')
 
 router.use(express.json());
 
 
 /////estas rutas son para sus respectivos accesos segun pueda o no
 router.post('/buscar',buscar)
-// router.post('/id',identificado)
+router.post('/id',identificado)
 
 module.exports=router
