@@ -29,10 +29,10 @@ function consulta1(req,next){
 }
 
 function productos_rentabilidad(resolve,reject,req,next){
-    let productos = req.body.productos;
+    let objeto = req.body.productos;
     
     let filtrado={};
-    for(let indice in productos){
+    for(let indice in objeto){
         ///////////solo para el nombre
         let nombre=objeto[indice][0];
         ///////////solo para cantidad
