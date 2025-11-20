@@ -33,7 +33,7 @@ let producto_id = (resolve,reject,conexion,req,next)=>{
                     respuesta.push(tmp);
                 });
                 Object.assign(respuesta2,respuesta);
-                resolve(respuesta2);
+                resolve(respuesta2[0]);
             }
         }
     })

@@ -7,11 +7,11 @@
 // const reporte=["crear"];
 // const cuota=["volumen","rentabilidad","cobertura"];
 const cotizacion={
-    "crear":[20,34],
-    "leer":[20,25],
-    "update":[20,34],
-    "delete":[25,34],
-    "alm":[20,34]
+    "crear":[20,34,32],
+    "leer":[20,25,32],
+    "update":[20,34,32],
+    "delete":[25,34,32],
+    "alm":[20,34,32]
 }
 
 const pedido={
