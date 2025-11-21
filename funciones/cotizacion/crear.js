@@ -19,17 +19,17 @@ async function creacion(req,res,next) {
         const segundo_call = await consulta2(req.body);//totalisados para la cabecera
         const tercer_call = await obtenerpromesa_conexion();
         const cuarta_call = await consulta3(tercer_call);//tipo de cambio
-        // const quinta_call = await obtenerpromesa_conexion();
-        // const sexta_call = await consulta4(quinta_call);//correlativo actual
-        // const setima_call = await obtenerpromesa_conexion();
-        // const octava_call = await consulta5(setima_call,sexta_call);//actualisar el correlativo en la tabla
-        // const novena_call = await obtenerpromesa_conexion();
-        // const decima_call = await consulta6(novena_call,req.body["cliente"][0]);//atencion del cliente
+        const quinta_call = await obtenerpromesa_conexion();
+        const sexta_call = await consulta4(quinta_call);//correlativo actual
+        const setima_call = await obtenerpromesa_conexion();
+        const octava_call = await consulta5(setima_call,sexta_call);//actualisar el correlativo en la tabla
+        const novena_call = await obtenerpromesa_conexion();
+        const decima_call = await consulta6(novena_call,req.body["cliente"][0]);//atencion del cliente
         // const undecima_call = await obtenerpromesa_conexion();
         // const doceava_call= await consulta7(undecima_call,cuarta_call,sexta_call,req.body["cliente"],decima_call,segundo_call);
 
         // res.status(200).json(JSON.stringify(tercer_call));
-        res.status(200).json(JSON.stringify({"cuarto":cuarta_call}));
+        res.status(200).json(JSON.stringify({"decima":decima_call}));
     }
     catch(err){
         error_corrector(res,err);
