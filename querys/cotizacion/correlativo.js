@@ -29,7 +29,7 @@ let num_correlativo = (resolve,reject,conexion)=>{
                     respuesta.push(tmp);
                 });
                 let comodin="009-00";
-                let n_actual = parseInt(respuesta[0]);
+                let n_actual = parseInt(respuesta[0][0]);
                 let n_calcular=n_actual+1;
                 let formato=comodin+n_calcular.toString();
 
