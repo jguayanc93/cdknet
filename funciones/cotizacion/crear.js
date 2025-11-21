@@ -8,6 +8,7 @@ let {num_correlativo} = require('../../querys/cotizacion/correlativo')
 let {correlativo_update} = require('../../querys/cotizacion/correlativo_update')
 let {coti_atencion} = require('../../querys/cotizacion/atencion')
 let {coti_cabecera} = require('../../querys/cotizacion/crear_cabecera')
+let {coti_detallado} = require('../../querys/cotizacion/crear_detallado')
 ///////ESPACIO PARA FUNCIONES GENERALES
 
 ////ESPACIO PARA LOS MANEJOS DE ERRORES CON RESPUESTA
@@ -27,9 +28,12 @@ async function creacion(req,res,next) {
         const decima_call = await consulta6(novena_call,req.body["cliente"][0]);//atencion del cliente
         const undecima_call = await obtenerpromesa_conexion();
         const doceava_call= await consulta7(undecima_call,cuarta_call,sexta_call,req.body["cliente"],decima_call,segundo_call);
+        ////CONSTRUIDO CON EXITO EL MST FALTA EL DETALLADO
+        const treceava_call = await obtenerpromesa_conexion();
+        const catorceava_call = await consulta8(treceava_call,req.body,segundo_call[0],cuarta_call,sexta_call);
 
         // res.status(200).json(JSON.stringify(tercer_call));
-        res.status(200).json(JSON.stringify({"doceava":doceava_call}));
+        res.status(200).json(JSON.stringify({"catorceava":catorceava_call}));
     }
     catch(err){
         error_corrector(res,err);
@@ -53,6 +57,10 @@ function consulta6(conexion,codcli){ return new Promise((resolve,reject)=>coti_a
 function consulta7(conexion,fecha,formato,info_cliente,atencion,totalisado){
     return new Promise((resolve,reject)=>coti_cabecera(resolve,reject,conexion,fecha,formato,info_cliente,atencion,totalisado))
 }
+
+function consulta8(conexion,info_cliente,objtotal,fecha,formato){
+    return new Promise((resolve,reject)=>coti_detallado(resolve,reject,conexion,info_cliente,objtotal,fecha,formato))
+};
 
 function galleta_credencial(resolve,reject,req,next){
     let user_id=req.signedCookies.cdk;
