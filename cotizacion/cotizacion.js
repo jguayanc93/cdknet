@@ -19,7 +19,7 @@ router.get('/',objevacio,coti_permisos)
 // router.get('/',(req,res)=>{res.status(200).send("deberia enviarte al login de nuevo por no tener galletas")})
 
 /////estas rutas son para sus respectivos accesos segun pueda o no
-router.get('/create',creacion)
+router.post('/create',creacion)
 // router.get('/read',)
 // router.get('/update',)
 // router.get('/delete',)
