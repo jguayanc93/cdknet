@@ -21,8 +21,8 @@ async function creacion(req,res,next) {
         const cuarta_call = await consulta3(tercer_call);//tipo de cambio
         const quinta_call = await obtenerpromesa_conexion();
         const sexta_call = await consulta4(quinta_call);//correlativo actual
-        const setima_call = await obtenerpromesa_conexion();
-        const octava_call = await consulta5(setima_call,sexta_call);//actualisar el correlativo en la tabla
+        // const setima_call = await obtenerpromesa_conexion();
+        // const octava_call = await consulta5(setima_call,sexta_call);//actualisar el correlativo en la tabla
         const novena_call = await obtenerpromesa_conexion();
         const decima_call = await consulta6(novena_call,req.body["cliente"][0]);//atencion del cliente
         // const undecima_call = await obtenerpromesa_conexion();
