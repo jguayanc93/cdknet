@@ -7,7 +7,7 @@
 // const reporte=["crear"];
 // const cuota=["volumen","rentabilidad","cobertura"];
 const cotizacion={
-    "crear":[20,34,32],
+    "crear":[20,34,25,32],
     "leer":[20,25,32],
     "update":[20,34,32],
     "delete":[25,34,32],

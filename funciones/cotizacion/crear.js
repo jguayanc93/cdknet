@@ -7,7 +7,7 @@ let {tipo_cambio} = require('../../querys/cotizacion/tipcambio');
 let {num_correlativo} = require('../../querys/cotizacion/correlativo')
 let {correlativo_update} = require('../../querys/cotizacion/correlativo_update')
 let {coti_atencion} = require('../../querys/cotizacion/atencion')
-// let {coti_cabecera} = require('../../querys/cotizacion/crear_cabecera')
+let {coti_cabecera} = require('../../querys/cotizacion/crear_cabecera')
 ///////ESPACIO PARA FUNCIONES GENERALES
 
 ////ESPACIO PARA LOS MANEJOS DE ERRORES CON RESPUESTA
@@ -21,15 +21,15 @@ async function creacion(req,res,next) {
         const cuarta_call = await consulta3(tercer_call);//tipo de cambio
         const quinta_call = await obtenerpromesa_conexion();
         const sexta_call = await consulta4(quinta_call);//correlativo actual
-        // const setima_call = await obtenerpromesa_conexion();
-        // const octava_call = await consulta5(setima_call,sexta_call);//actualisar el correlativo en la tabla
+        const setima_call = await obtenerpromesa_conexion();
+        const octava_call = await consulta5(setima_call,sexta_call);//actualisar el correlativo en la tabla
         const novena_call = await obtenerpromesa_conexion();
         const decima_call = await consulta6(novena_call,req.body["cliente"][0]);//atencion del cliente
-        // const undecima_call = await obtenerpromesa_conexion();
-        // const doceava_call= await consulta7(undecima_call,cuarta_call,sexta_call,req.body["cliente"],decima_call,segundo_call);
+        const undecima_call = await obtenerpromesa_conexion();
+        const doceava_call= await consulta7(undecima_call,cuarta_call,sexta_call,req.body["cliente"],decima_call,segundo_call);
 
         // res.status(200).json(JSON.stringify(tercer_call));
-        res.status(200).json(JSON.stringify({"decima":decima_call}));
+        res.status(200).json(JSON.stringify({"doceava":doceava_call}));
     }
     catch(err){
         error_corrector(res,err);
@@ -50,8 +50,8 @@ function consulta5(conexion,correlativo){ return new Promise((resolve,reject)=>c
 
 function consulta6(conexion,codcli){ return new Promise((resolve,reject)=>coti_atencion(resolve,reject,conexion,codcli)) }
 
-function consulta7(conexion,fecha,formato,info_cliente,atencion,totalisados){
-    return new Promise((resolve,reject)=>coti_cabecera(resolve,reject,conexion,fecha,formato,info_cliente,atencion,totalisados))
+function consulta7(conexion,fecha,formato,info_cliente,atencion,totalisado){
+    return new Promise((resolve,reject)=>coti_cabecera(resolve,reject,conexion,fecha,formato,info_cliente,atencion,totalisado))
 }
 
 function galleta_credencial(resolve,reject,req,next){

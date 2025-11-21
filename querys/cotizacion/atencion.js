@@ -17,8 +17,7 @@ let coti_atencion = (resolve,reject,conexion,codcli)=>{
                 reject("atencion no registrada");
             }
             else{
-                let respuesta=[];
-                // let respuesta2={};
+                let respuesta=[];                
                 let contador=0;
                 rows.forEach(fila=>{
                     let tmp={};
@@ -29,8 +28,8 @@ let coti_atencion = (resolve,reject,conexion,codcli)=>{
                     })
                     respuesta.push(tmp);
                 });
-                // Object.assign(respuesta2,respuesta);
-                resolve(respuesta[0]);
+                
+                resolve(respuesta[0][0]);
             }
         }
     })

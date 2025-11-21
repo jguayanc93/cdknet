@@ -30,7 +30,7 @@ let tipo_cambio = (resolve,reject,conexion)=>{
                     respuesta.push(tmp);
                 });
                 // Object.assign(respuesta2,respuesta);
-                resolve(respuesta);
+                resolve(respuesta[0]);
             }
         }
     })
