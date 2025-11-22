@@ -9,6 +9,7 @@ const grp20={
 }
 const grp25={
     "cotizacion":"Permite manejar cotizaciones",
+    "factura":"Permite manejar facturas",
     "promocion":"Permite adjuntar y retirar promociones",
     "reporte":"Permite sacar reportes de marcas"
 };

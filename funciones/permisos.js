@@ -9,9 +9,9 @@
 const cotizacion={
     "crear":[20,34,25,32],
     "leer":[20,25,32],
-    "update":[20,34,32],
+    "update":[20,25,34,32],
     "delete":[25,34,32],
-    "alm":[20,34,32]
+    "alm":[20,25,34,32]
 }
 
 const pedido={
@@ -25,9 +25,9 @@ const pedido={
 const factura={
     "crear":[],
     "leer":[],
-    "update":[20,34],
+    "update":[20,25,34],
     "delete":[],
-    "despachar":[20]
+    "despachar":[20,25]
 }
 
 
