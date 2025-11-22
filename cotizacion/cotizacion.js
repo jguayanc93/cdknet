@@ -11,7 +11,7 @@ const {vendedor_permisos} = require('../funciones/vendedor/redirigir_tipo')
 // const {grupos_modulos} = require('../funciones/vendedor/cobertura_modulos')
 const {coti_permisos} = require('../funciones/cotizacion/permisos')
 const {creacion} = require('../funciones/cotizacion/crear')
-// const {modificacion} = require('../funciones/cotizacion/modificar')
+const {modificacion} = require('../funciones/cotizacion/modificar')
 const {revisar} = require('../funciones/cotizacion/mostrar')
 
 router.use(express.json());
@@ -23,7 +23,7 @@ router.get('/',objevacio,coti_permisos)
 /////estas rutas son para sus respectivos accesos segun pueda o no
 router.post('/create',creacion)
 router.post('/read',revisar)
-// router.post('/update',modificacion)
+router.post('/update',modificacion)
 // router.get('/delete',)
 // router.get('/alm',)
 
