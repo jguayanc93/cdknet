@@ -11,6 +11,7 @@ const upload = multer();
 const {buscar} = require('../funciones/producto/buscar')
 const {identificado} = require('../funciones/producto/identificado')
 const {rentabilidad} = require('../funciones/producto/rentabilidad')
+const {encontrado} = require('../funciones/producto/encontrado')
 
 router.use(express.json());
 
@@ -18,6 +19,8 @@ router.use(express.json());
 /////estas rutas son para sus respectivos accesos segun pueda o no
 router.post('/buscar',buscar)
 router.post('/id',identificado)
+///esta ruta debe ser corregida despues porqe es duplicidad en la busqueda de productos cuando modifica cotizacion
+router.post('/encontrado',encontrado)
 router.post('/rentabilidad',rentabilidad)
 
 module.exports=router
