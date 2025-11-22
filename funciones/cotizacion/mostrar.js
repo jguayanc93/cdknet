@@ -13,7 +13,7 @@ async function revisar(req,res,next) {
     try{
         const primera_call = await consulta1(req,next);//galletas
         const segunda_call = await obtenerpromesa_conexion();
-        const tercera_call = await consulta2(segunda_call);
+        const tercera_call = await consulta2(segunda_call,req);
         
         // res.status(200).json(JSON.stringify(tercer_call));
         res.status(200).json(JSON.stringify(tercera_call));
@@ -27,7 +27,7 @@ function obtenerpromesa_conexion(){ return new Promise((resolve,reject)=>conn(re
 
 function consulta1(req,next){ return new Promise((resolve,reject)=>galleta_credencial(resolve,reject,req,next)) }
 
-function consulta2(conexion){ return new Promise((resolve,reject)=>coti_ver(resolve,reject,conexion)) }
+function consulta2(conexion,req){ return new Promise((resolve,reject)=>coti_ver(resolve,reject,conexion,req)) }
 
 function galleta_credencial(resolve,reject,req,next){
     let user_id=req.signedCookies.cdk;

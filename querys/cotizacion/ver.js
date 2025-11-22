@@ -1,7 +1,7 @@
 require('dotenv').config();
 const {Request,TYPES} = require('../../conexion/cadena')
 
-let coti_ver = (resolve,reject,conexion)=>{
+let coti_ver = (resolve,reject,conexion,req)=>{
 
     let numero= req.body.ncoti;
     let ncoti="009-00"+numero;
