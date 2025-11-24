@@ -30,4 +30,6 @@ app.use('/v1/cliente',ruta.cliente);
 
 app.use('/v1/producto',ruta.producto);
 
+app.use('/v1/promocion',ruta.promocion);
+
 app.listen(port,()=>{console.log("servicio levantado")})
