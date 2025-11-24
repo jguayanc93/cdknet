@@ -37,7 +37,7 @@ function consulta1(req,next){ return new Promise((resolve,reject)=>galleta_crede
 
 function consulta2(dataenviada){ return new Promise((resolve,reject)=>calcular(resolve,reject,dataenviada)) }
 
-function consulta3(conexion){ return new Promise((resolve,reject)=>limpiar_detallado(resolve,reject,conexion)) }
+function consulta3(conexion,documento){ return new Promise((resolve,reject)=>limpiar_detallado(resolve,reject,conexion,documento)) }
 
 function consulta4(conexion,montos){ return new Promise((resolve,reject)=>cabecera_corregido(resolve,reject,conexion,montos)) }
 
