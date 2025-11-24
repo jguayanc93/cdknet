@@ -14,13 +14,13 @@ const {error_corrector} = require('../error/err1')
 async function modificacion(req,res,next) {
     try{
         const primera_call = await consulta1(req,next);//galletas
-        const segundo_call = await consulta2(req.body);//(documento,totalisado,igv,totalisadoconigv)
+        const segundo_call = await consulta2(req.body.item);//(documento,totalisado,igv,totalisadoconigv)
         const tercer_call = await obtenerpromesa_conexion();
         const cuarta_call = await consulta3(tercer_call,segundo_call[0]);//limpiar el detallado
         const quinta_call = await obtenerpromesa_conexion();
         const sexta_call = await consulta4(quinta_call,segundo_call);///actualisar la cabecera
         const setima_call = await obtenerpromesa_conexion();
-        const octava_call = await consulta5(setima_call,req.body);
+        const octava_call = await consulta5(setima_call,req.body.item);
         
 
         res.status(200).send(octava_call);
