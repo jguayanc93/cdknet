@@ -13,6 +13,7 @@ const {coti_permisos} = require('../funciones/cotizacion/permisos')
 // const {revisar} = require('../funciones/cotizacion/mostrar')
 // const {ver_all} = require('../funciones/cotizacion/mostrar_todo')
 const {prom_buscar} = require('../funciones/promocion/buscar')
+const {prom_analisar} = require('../funciones/promocion/mostrar')
 
 router.use(express.json());
 
@@ -21,8 +22,8 @@ router.get('/',objevacio,coti_permisos)
 // router.get('/',(req,res)=>{res.status(200).send("deberia enviarte al login de nuevo por no tener galletas")})
 
 /////estas rutas son para sus respectivos accesos segun pueda o no
-router.post('/revisar',prom_buscar)
-// router.post('/adjuntar',)
+router.post('/revisar',prom_buscar,prom_analisar)
+// router.post('/mostrar',)
 // router.post('/eliminar',)
 
 module.exports=router
