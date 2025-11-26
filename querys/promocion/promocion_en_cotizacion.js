@@ -2,8 +2,8 @@ require('dotenv').config();
 const {Request,TYPES} = require('../../conexion/cadena')
 
 let coti_contiene_promocion = (resolve,reject,conexion,cuerpo,promocion,next)=>{
-
-    let ncoti= cuerpo.ncoti;
+    
+    let ncoti= "009-00"+cuerpo.ncoti;
     let nomprom = "%"+promocion[1]+"%";
     let idprom = "%"+"#"+promocion[0]+"%";
 
