@@ -17,8 +17,8 @@ let coti_contiene_promocion = (resolve,reject,conexion,cuerpo,promocion,next)=>{
             conexion.close();
             
             if(rows.length==0){
-                // reject("promocion no registrada");
-                next();
+                resolve("next");
+                // next();
             }
             else{
                 reject("promo ya aplicada");

@@ -39,6 +39,14 @@ const error_corrector=(res,mensaje)=>{
             res.status(400).json({"status":mensaje,"codigo":2,"msg":"cotizacion inexistente en los registros"})
             break;
 
+        case "promocion no registrada":
+            res.status(400).json({"status":mensaje,"codigo":2,"msg":"la promocion no existe o esta desabilitada"})
+            break;
+
+        case "ninguna promocion":
+            res.status(400).json({"status":mensaje,"codigo":2,"msg":"ninguna promocion aplicable a estos productos"})
+            break;
+
         case "":
             res.status(400).json({"status":mensaje,"codigo":2,"msg":""})
             break;

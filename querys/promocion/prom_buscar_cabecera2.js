@@ -16,7 +16,7 @@ let prom_buscar_cabecera = (resolve,reject,conexion,cuerpo)=>{
 
             ////////lo mandara aqui porqe aunque si exista no esta registrado en la intranet y debe registrarse
             if(rows.length==0){
-                reject("promocion no activada");
+                reject("promocion no registrada");
             }
             else{
                 let respuesta=[];

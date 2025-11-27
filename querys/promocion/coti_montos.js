@@ -1,11 +1,11 @@
 require('dotenv').config();
 const {Request,TYPES} = require('../../conexion/cadena')
 
-let prom_buscar_detallado = (resolve,reject,conexion,cuerpo)=>{
+let coti_montos = (resolve,reject,conexion,fullpromo)=>{
 
-    let nprom= cuerpo.nprom;
+    let ncoti= fullpromo["descuento"][0];
 
-    let sq_sql="select a.codi,a.monto,a.dsct,a.boncodf,a.stoclim,b.marc,a.idprom,b.pcus from dtl_promocion_progra a join prd0101 b on a.codi=b.codi where idprom=@nprom";
+    let sq_sql="select tota,toti,totn from mst01cot where ndocu=@ncoti";
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
         if(err){
             conexion.close();
@@ -16,9 +16,10 @@ let prom_buscar_detallado = (resolve,reject,conexion,cuerpo)=>{
 
             ////////lo mandara aqui porqe aunque si exista no esta registrado en la intranet y debe registrarse
             if(rows.length==0){
-                reject("promocion no registrada");
+                reject("cotizacion no registrada");
             }
             else{
+                
                 let respuesta=[];
                 let respuesta2={};
                 let contador=0;
@@ -32,13 +33,15 @@ let prom_buscar_detallado = (resolve,reject,conexion,cuerpo)=>{
                     respuesta.push(tmp);
                 });
                 Object.assign(respuesta2,respuesta);
-                console.log("termine la funcion para ver el detallado de la cotizacion")
-                resolve(respuesta2);
+                fullpromo["descuento"][1]=respuesta2[0][0]+fullpromo["descuento"][1];
+                fullpromo["descuento"][2]=respuesta2[0][1]+fullpromo["descuento"][2];
+                fullpromo["descuento"][3]=respuesta2[0][2]+fullpromo["descuento"][3];
+                resolve(fullpromo);
             }
         }
     })
-    consulta.addParameter('nprom',TYPES.VarChar,nprom);
+    consulta.addParameter('ncoti',TYPES.VarChar,ncoti);
     conexion.execSql(consulta);
 }
 
-module.exports={prom_buscar_detallado}
+module.exports={coti_montos}

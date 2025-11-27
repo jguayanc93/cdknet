@@ -27,7 +27,7 @@ async function prom_adjuntar(req,res,next) {
         const setima_call = await consulta5(cuarta_call);//saber_grupo
         
         const octava_call = await obtenerpromesa_conexion();
-        const novena_call = await consulta6(quinta_call,req.body);///promocion detallado
+        const novena_call = await consulta6(octava_call,req.body);///promocion detallado
         /////usare esta funcion como trampolin para direccionarme a su debido lugar
         const decima_call = await consulta7(req.body.nprom,segunda_call,cuarta_call,novena_call,quinta_call,sexta_call);
         const onceava_call = await obtenerpromesa_conexion();
