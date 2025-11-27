@@ -6,7 +6,8 @@ const {conn} = require('../../conexion/cnn')
 // let {promocion_id} = require('../../querys/promocion/promocion_id')
 let {coti_contiene_promocion} = require('../../querys/promocion/promocion_en_cotizacion')
 let {coti_detallado} = require('../../querys/promocion/prom_buscar_cabecera')
-let {prom_buscar_cabecera} = require('../../querys/promocion/prom_buscar_cabecera2')
+// let {prom_buscar_cabecera} = require('../../querys/promocion/prom_buscar_cabecera2')
+let {promocion_id} = require('../../querys/promocion/promocion_id')
 let {prom_buscar_detallado} = require('../../querys/promocion/prom_buscar_detallado')
 ///////ESPACIO PARA FUNCIONES GENERALES
 let v_xitems = require('./xitems')
@@ -30,14 +31,15 @@ async function prom_adjuntar(req,res,next) {
         const novena_call = await consulta6(octava_call,req.body);///promocion detallado
         /////usare esta funcion como trampolin para direccionarme a su debido lugar
         const decima_call = await consulta7(req.body.nprom,segunda_call,cuarta_call,novena_call,quinta_call,sexta_call);
-        const onceava_call = await obtenerpromesa_conexion();
+        // const onceava_call = await obtenerpromesa_conexion();
         ////usare esta otro trampolin para darle lo merecido segun promo
         // INTENTARE USAR UNA DIRECCION DIFERENTE POR MIENTRAS
         if(decima_call.length===0){
-            onceava_call.close();
+            // onceava_call.close();
             res.status(401).send("no promo aplicable");
         }
         else{
+            const onceava_call = await obtenerpromesa_conexion();
             if(quinta_call[1]===1){
                 onceava_call.close();
                 // descuento(res,req.body.nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica,decima_call);
@@ -57,7 +59,8 @@ function obtenerpromesa_conexion(){ return new Promise((resolve,reject)=>conn(re
 
 function consulta1(conexion,body){ return new Promise((resolve,reject)=>coti_detallado(resolve,reject,conexion,body)) }
 
-function consulta2(conexion,body){ return new Promise((resolve,reject)=>prom_buscar_cabecera(resolve,reject,conexion,body)) }
+// function consulta2(conexion,body){ return new Promise((resolve,reject)=>prom_buscar_cabecera(resolve,reject,conexion,body)) }
+function consulta2(conexion,body){ return new Promise((resolve,reject)=>promocion_id(resolve,reject,conexion,body)) }
 
 function consulta3(promocion){ return new Promise((resolve,reject)=>buscar_tipo(resolve,reject,promocion)) }
 
@@ -73,7 +76,6 @@ function consulta8(conexion){ return new Promise((resolve,reject)=>direccionador
 
 function direccionador(resolve,reject,nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica){
     let respuesta_devuelta;
-    // let promo_terminada;
     
     if(tipopromo[0]==1){
         respuesta_devuelta=v_xitems(nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica);
@@ -131,13 +133,11 @@ function buscar_tipo(resolve,reject,respuesta2){
 
 function buscar_metrica(resolve,reject,respuesta2){
     let tipo_metrica=respuesta2[6];
-    // return tipo_metrica;
     resolve(tipo_metrica)
 }
 
 function buscar_grupo(resolve,reject,respuesta2){
     let tipo_grupo=respuesta2[9];
-    // return tipo_grupo;
     resolve(tipo_grupo)
 }
 

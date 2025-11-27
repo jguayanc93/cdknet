@@ -36,7 +36,7 @@ let promo_buscador = (resolve,reject,conexion,respuesta2)=>{
             }
             else{
                 let respuesta=[];
-                let respuesta2={};
+                // let respuesta2={};
                 let contador=0;
                 rows.forEach(fila=>{
                     let tmp={};
@@ -47,32 +47,31 @@ let promo_buscador = (resolve,reject,conexion,respuesta2)=>{
                     })
                     respuesta.push(tmp);
                 });
-                Object.assign(respuesta2,respuesta);
-                // console.log("OBSERVA LOS IDPROM SIN FILTRAR")
-                // console.log(respuesta2);
-                let nuevoobj={};
-                let filtro_final=[];
-                let nueva_programacion=respuesta.forEach((programacion)=>{
-                    if(Object.hasOwn(nuevoobj,programacion[1])){
-                        nuevoobj[programacion[1]]+="/"+programacion[0];
-                    }
-                    else{ nuevoobj[programacion[1]]=String(programacion[0])}
-                })
-                // console.log("OBSERVA LOS IDPROM FILTRADOS")
-                // console.log(nuevoobj);
-                Object.values(nuevoobj).forEach((valor)=>{
-                    let separador=valor.split('/');
-                    for(let idprom of separador){
-                        if(filtro_final.includes(idprom)){}
-                        else{
-                            filtro_final.push(idprom)
-                        }
-                    }
-                })
-                // console.log(filtro_final);
-                resolve(filtro_final)
-                // res.status(200).json(filtro_final)
+                resolve(respuesta);
+                // Object.assign(respuesta2,respuesta);
+                // // console.log("OBSERVA LOS IDPROM SIN FILTRAR")
+                // // console.log(respuesta2);
+                // let nuevoobj={};
+                // let filtro_final=[];
+                // let nueva_programacion=respuesta.forEach((programacion)=>{
+                //     if(Object.hasOwn(nuevoobj,programacion[1])){
+                //         nuevoobj[programacion[1]]+="/"+programacion[0];
+                //     }
+                //     else{ nuevoobj[programacion[1]]=String(programacion[0])}
+                // })
+                // // console.log("OBSERVA LOS IDPROM FILTRADOS")
+                // // console.log(nuevoobj);
+                // Object.values(nuevoobj).forEach((valor)=>{
+                //     let separador=valor.split('/');
+                //     for(let idprom of separador){
+                //         if(filtro_final.includes(idprom)){}
+                //         else{
+                //             filtro_final.push(idprom)
+                //         }
+                //     }
+                // })
                 
+                // resolve(filtro_final)
             }
         }
     })

@@ -4,15 +4,84 @@ let descuento_correspondiente=(nprom,cotdetalle,promcabesa,promdetalle,tipopromo
     let numero_item=1;
     numero_item=Object.keys(cotdetalle).length;
     let cantidad_correspondiente_obtenida;
-    // tipometrica==1 ? cantidad_correspondiente_obtenida=m_valorizado_conjunto(res,nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica,numero_item) : cantidad_correspondiente_obtenida=m_unidades_conjunto(res,nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica,numero_item);
+    
     if(tipometrica==1){
-        cantidad_correspondiente_obtenida=m_valorizado_conjunto(nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica,numero_item);
+        // cantidad_correspondiente_obtenida=m_valorizado_conjunto(nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica,numero_item);
+        cantidad_correspondiente_obtenida=recorrido_conjunto_unidades_valorizados(nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica,numero_item);
     }
     else{
-        cantidad_correspondiente_obtenida=m_unidades_conjunto(nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica,numero_item);
+        // cantidad_correspondiente_obtenida=m_unidades_conjunto(nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica,numero_item);
+        cantidad_correspondiente_obtenida=recorrido_conjunto_unidades_valorizados(nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica,numero_item);
     }
     return cantidad_correspondiente_obtenida;
 }
+
+////////PARA UNIFICAR EN UNA SOLA FUNCION LA SEPARACION DE UNIDADES Y CONJUNTO
+function recorrido_conjunto_unidades_valorizados(nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica,numero_item){
+    ///////////SOLO PARA LOS TOTALISADOS DE LA CABESERA
+    let numero_documento;
+    let cabesatota=0;
+    let cabesatotn=0;
+    ////////////////////////////PARA ACUMULAR LOS ITEMS
+    let n_item=numero_item+1;
+    let items_validos=[];
+    let items_validos2={};
+    let items_promos2=[];
+
+    for(let x in cotdetalle){
+        ///capturando todos los montos del detallado
+        numero_documento=cotdetalle[x][2]////numero de cotizacion
+        cabesatota+=parseFloat(cotdetalle[x][16]);///totalisado sin igv
+        cabesatotn+=parseFloat(cotdetalle[x][18]);///totalisado con igv
+
+        for(let y in promdetalle){
+
+            if(promdetalle[y][0]==cotdetalle[x][9]){///////HASTA AQUI SON IGUALES LUEGO TIENES QUE SEPARARLOS
+
+                let check_monto_prom=promdetalle[y][1];////MONTO MINIMO DE PROMOCION
+                let check_monto_item=cotdetalle[x][14];///MONTO QUE TIENE LA COTIZACION
+                let diferenciar_bonificacion=cotdetalle[x][13].substring(0,11);
+
+                if(diferenciar_bonificacion!="GRATIS/PROM"){////A PARTIR DE AQUI COMIENSA LA DIFERENCIA
+
+                    /////tipometrica=1 valorizado ---- tipometrica2 unidades -- ambos son de conjunto
+                    if(tipometrica===1){
+                        items_validos2[cotdetalle[x][9]]=[promdetalle[y][0],promdetalle[y][1],promdetalle[y][2],promdetalle[y][3],promdetalle[y][4],promdetalle[y][5],promdetalle[y][6],promdetalle[y][7]];
+                        items_validos.push([cotdetalle[x][0],cotdetalle[x][1],cotdetalle[x][2],cotdetalle[x][3],cotdetalle[x][4],cotdetalle[x][9],cotdetalle[x][18]]);
+                        items_promos2.push([promdetalle[y][0],promdetalle[y][1],promdetalle[y][2],promdetalle[y][3],promdetalle[y][4],promdetalle[y][5],promdetalle[y][6],promdetalle[y][7]]);
+                    }
+                    else if(tipometrica===2){
+                        if(check_monto_item>=check_monto_prom){
+
+                            items_validos2[cotdetalle[x][9]]=[promdetalle[y][0],promdetalle[y][1],promdetalle[y][2],promdetalle[y][3],promdetalle[y][4],promdetalle[y][5],promdetalle[y][6],promdetalle[y][7]];
+                            items_validos.push([cotdetalle[x][0],cotdetalle[x][1],cotdetalle[x][2],cotdetalle[x][3],cotdetalle[x][4],cotdetalle[x][13],cotdetalle[x][14]]);
+            //////variable construida para separar q descuento le toca en especifico con el item identicado en el detallado de la prom
+                            items_promos2.push([promdetalle[y][0],promdetalle[y][1],promdetalle[y][2],promdetalle[y][3],promdetalle[y][4],promdetalle[y][5],promdetalle[y][6],promdetalle[y][7]]);
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+    ////trabajando con el resultado
+    let retorno_conjunto;
+    if(items_validos.length===0) return items_validos;
+    else{
+        ////AQUI DE NUEVO DIFERENCIAMOS EL ENVIO A SUS RESPECTIVAS SUMAS Y CALCULOS DE RESULTADOS
+        if(tipometrica===1){
+            retorno_conjunto=suma_cantidades(items_validos,items_promos2,n_item,promcabesa);
+            return [retorno_conjunto,items_validos2,items_promos2,numero_documento,cabesatota,cabesatotn];
+        }
+        else{
+            retorno_conjunto=suma_cantidades2(items_validos,items_promos2,n_item);
+            return [retorno_conjunto,items_validos2,items_promos2,numero_documento,cabesatota,cabesatotn];
+        }
+    }
+}
+
+
 ///////PARA VALORIZADOS EN CONJUNTO
 function m_valorizado_conjunto(nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica,numero_item){
     ///////////SOLO PARA LOS TOTALISADOS DE LA CABESERA
@@ -75,8 +144,6 @@ function suma_cantidades(items_validos,items_promos2,n_item,promcabesa){
     else{
         return [items_validos[0][0],items_validos[0][1],items_validos[0][2],items_validos[0][3],items_validos[0][4],"item nombre",n_item,cantidad_promocion];
     }
-    /////HASTA AQUI
-    // return [items_validos[0][0],items_validos[0][1],items_validos[0][2],items_validos[0][3],items_validos[0][4],"item nombre",n_item,cantidad_promocion];
 }
 
 //////PARA UNIDADES EN CONJUNTO
@@ -107,11 +174,10 @@ function m_unidades_conjunto(nprom,cotdetalle,promcabesa,promdetalle,tipopromo,t
                 let diferenciar_bonificacion=cotdetalle[x][13].substring(0,11);
                 ////VERIFICANDO QUE EL MONTO SEA EL MINIMO REQUERIDO Y RETIRANDO ITEMS QUE SEAN REGALOS
                 if(check_monto_item>=check_monto_prom && diferenciar_bonificacion!="GRATIS/PROM"){
-                    // items_validos2[cotdetalle[x][9]]=[cotdetalle[x][9],check_monto_item,check_monto_prom];
+                    
                     items_validos2[cotdetalle[x][9]]=[promdetalle[y][0],promdetalle[y][1],promdetalle[y][2],promdetalle[y][3],promdetalle[y][4],promdetalle[y][5],promdetalle[y][6],promdetalle[y][7]];
                     items_validos.push([cotdetalle[x][0],cotdetalle[x][1],cotdetalle[x][2],cotdetalle[x][3],cotdetalle[x][4],cotdetalle[x][13],cotdetalle[x][14]]);
 ///////variable construida para separar q descuento le toca en especifico con el item identicado en el detallado de la prom
-                    // items_promos2[promdetalle[y][0]]=[promdetalle[y][0],promdetalle[y][1],promdetalle[y][2],promdetalle[y][3],promdetalle[y][4],promdetalle[y][5],promdetalle[y][6],promdetalle[y][7]];
                     items_promos2.push([promdetalle[y][0],promdetalle[y][1],promdetalle[y][2],promdetalle[y][3],promdetalle[y][4],promdetalle[y][5],promdetalle[y][6],promdetalle[y][7]]);
                 }
             }

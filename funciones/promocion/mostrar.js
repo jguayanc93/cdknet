@@ -18,7 +18,7 @@ async function prom_analisar(req,res,next) {
         const segunda_call = await obtenerpromesa_conexion();
         const tercera_call = await consulta2(segunda_call,req.body);
         const cuarta_call = await obtenerpromesa_conexion();
-        const quinta_call = await consulta3(cuarta_call,req.body,tercera_call,next);
+        const quinta_call = await consulta3(cuarta_call,req.body,tercera_call);
         if(quinta_call==='next'){
             next();
         }
@@ -36,7 +36,7 @@ function consulta1(req,next){ return new Promise((resolve,reject)=>galleta_crede
 
 function consulta2(conexion,cuerpo){ return new Promise((resolve,reject)=>promocion_id(resolve,reject,conexion,cuerpo)) }
 
-function consulta3(conexion,cuerpo,promocion,next){ return new Promise((resolve,reject)=>coti_contiene_promocion(resolve,reject,conexion,cuerpo,promocion,next)) }
+function consulta3(conexion,cuerpo,promocion){ return new Promise((resolve,reject)=>coti_contiene_promocion(resolve,reject,conexion,cuerpo,promocion)) }
 
 function galleta_credencial(resolve,reject,req,next){
     let user_id=req.signedCookies.cdk;
