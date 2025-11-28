@@ -16,7 +16,7 @@ const {error_corrector} = require('../error/err1')
 async function prom_acoplar(req,res,next) {
     try{
         let fullpromo=req.body.fullpromo;
-        // const primera_call = await consulta1(req,next);//galletas
+        const primera_call = await consulta1(req,next);//galletas
         const segunda_call = await consulta2(req.body);
         if(segunda_call==='descuento'){
             const tercera_call = await obtenerpromesa_conexion();
