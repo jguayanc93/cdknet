@@ -1,15 +1,19 @@
 
 function descuento(res,nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica,arr){
+    console.log("QUE ES LO QUE TRAIGO CON ESTE ARRAY")
+    console.log(arr);
     
     let items_validos2;
     let items_promos2;
     let numero_documento;
     let cabesatota;
     let cabesatotn;
+    ////SI SON DIFERENTES PORQUE EL TAMAÑO ES MENOR
+    ////Y EN EL TIPO 3 veo q no tiene el array extraño sobre el detallado de la prom nose porqe
     if(tipopromo[0]==1){
-        items_validos2=arr[0];
-        items_promos2=arr[1];
-        numero_documento=arr[2];
+        items_validos2=arr[0];/////detallado inicial de la cotizacion
+        items_promos2=arr[1];/////objeto con toda la informacion sobre detallado de la promocion
+        numero_documento=arr[2];///un array que contiene la informacion sobre el detallado de la prom porqe???
         cabesatota=arr[3];
         cabesatotn=arr[4];
     }
@@ -48,13 +52,21 @@ function descuento(res,nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipomet
     }
     else{
         let items_validos3={};
+        ///ESTO ES PARA DARLE FORMA AL NOMBRE DE LA PROMOCION
         let comodin_dsc_cabesera=comodin_dsc+promcabesa[1];
+        ////ESTO PARA SACAR EL MONTO DE CUANTO SE LE DEBE DESCONTAR SEGUN PROMOCION
         let cantidad_recibir=items_promos2[0][1]*items_promos2[0][2]*-1;
+        ////ESTO ES PARA MULTIPLICARLO CON LA CANTIDAD QUE MERECE PREVIAMENTE CALCULADO
         let cantidad_recibir2=items_validos2[7]*cantidad_recibir;
+        ////ESTO ES PARA KITIARLE EL IGV
         let cantidad_recibir_sin_igv=(cantidad_recibir2/1.18).toFixed(2);
+        ////ESTO ES PARA DARLE FORMA AL NOMBRE Y NO SUPERAR LOS 80 CARACTERES
         let comodin_completo=comodin_dsc_cabesera;
         comodin_completo.length>80 ? descripcion_acomodada=comodin_completo.substring(0,80) : descripcion_acomodada=comodin_completo;
+        ////ESTO ES PARA LLENAR EL ARRAY CON LOS DEMAS CAMPOS NECESARIOS SUPONGO PARA INSERTARLOS EN EL DETALLADO
         items_validos2.push("D","D","S","0303-010001","DS00","","",descripcion_acomodada,cantidad_recibir_sin_igv,cantidad_recibir_sin_igv,0.00,cantidad_recibir2,'01',0,"N",1,"UND","")
+
+        ////ACA ESTA EL PROBLEMA DE LA INDEXACION CON RESPECTO AL FORMATO GENERADO DE LA PROMOCION
         items_validos3[0]=items_validos2;
         
         cabesatota+=parseFloat(items_validos2[17]);
