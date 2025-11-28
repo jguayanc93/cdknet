@@ -10,4 +10,4 @@ const corhabilitaciones={
     credentials:true
 }
 
-module.exports=corhabilitaciones2;
+module.exports=corhabilitaciones;

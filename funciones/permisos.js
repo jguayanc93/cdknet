@@ -30,11 +30,18 @@ const factura={
     "despachar":[20,25]
 }
 
+const promocion={
+    "crear":[],
+    "leer":[],
+    "update":[20,25,34],
+    "delete":[20,25,34]
+}
+
 
 const permisos={}
 permisos["cotizacion"]=cotizacion;
 permisos["pedido"]=pedido;
 permisos["factura"]=factura;
-// permisos["promocion"]=promocion;
+permisos["promocion"]=promocion;
 
 module.exports=permisos;
