@@ -11,7 +11,7 @@ const {error_corrector} = require('../error/err1')
 
 async function ver_all(req,res,next) {
     try{
-        // const primera_call = await consulta1(req,next);//galletas
+        const primera_call = await consulta1(req,next);//galletas
         const segunda_call = await obtenerpromesa_conexion();
         const tercera_call = await consulta2(segunda_call,req.body);
         

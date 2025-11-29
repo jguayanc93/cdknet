@@ -15,7 +15,6 @@ let minibucle =(resolve,reject,conexion,fullpromo,longitud,contador)=>{
         resolve("anidamiento exitoso");
     }
     else{
-        console.log("debo aparecer 2 veces minimo");
         let sq_sql="GrabaDTLCotFacWeb";
         let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
             if(err){

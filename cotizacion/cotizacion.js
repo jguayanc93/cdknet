@@ -24,7 +24,7 @@ router.get('/',objevacio,coti_permisos)
 /////estas rutas son para sus respectivos accesos segun pueda o no
 router.post('/create',creacion)
 router.post('/read',revisar)
-router.post('/readcomplete',ver_all)
+router.post('/readprom',ver_all)
 router.post('/update',modificacion)
 // router.get('/delete',)
 // router.get('/alm',)
