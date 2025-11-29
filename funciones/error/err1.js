@@ -47,6 +47,10 @@ const error_corrector=(res,mensaje)=>{
             res.status(400).json({"status":mensaje,"codigo":2,"msg":"ninguna promocion aplicable a estos productos"})
             break;
 
+        case "cuota existe":
+            res.status(403).json({"status":mensaje,"codigo":3,"msg":"vendedor tiene un registro de cuota de este mes"})
+            break;
+
         case "":
             res.status(400).json({"status":mensaje,"codigo":2,"msg":""})
             break;
