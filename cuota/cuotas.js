@@ -8,8 +8,8 @@ const router = express.Router();
 const {objevacio} = require('../funciones/objvacio')
 //////ESPACIO PARA FUNCIONES DE COMPROBACION PARA LOS QUERYS
 const {cuota_permisos} = require('../funciones/cuota/permisos')
-const {cuota_registrar} = require('../funciones/cuota/revisar')
-// const {} = require('../funciones/cuota')
+const {cuota_revisar} = require('../funciones/cuota/revisar')
+const {cuota_registrar} = require('../funciones/cuota/registrar')
 // const {prom_buscar} = require('../funciones/promocion/buscar')
 // const {prom_analisar} = require('../funciones/promocion/mostrar')
 // const {prom_remover} = require('../funciones/promocion/remover')
@@ -21,8 +21,8 @@ router.get('/',objevacio,cuota_permisos)
 // router.get('/',(req,res)=>{res.status(200).send("deberia enviarte al login de nuevo por no tener galletas")})
 ////////////REVISA PORQE ESTE COTIZACION DA PROBLEMAS 009-00910388 CUANDO SE LE PIDE QUE TRAIGA SUS PROMOCIONES
 /////estas rutas son para sus respectivos accesos segun pueda o no
-router.get('/revisar',cuota_registrar)
-// router.post('/update',)
+router.get('/revisar',cuota_revisar)
+router.post('/update',cuota_registrar)
 // router.post('/delete',)
 // router.post('/revisar',prom_buscar)
 // router.post('/mostrar',prom_analisar,prom_adjuntar)

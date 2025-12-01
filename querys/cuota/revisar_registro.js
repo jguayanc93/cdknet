@@ -20,7 +20,7 @@ let cuota_existe = (resolve,reject,conexion,galleta)=>{
             }
         }
     })
-    consulta.addParameter('codusu',TYPES.VarChar,galleta.identificador);
+    consulta.addParameter('codusu',TYPES.VarChar,galleta);
     conexion.execSql(consulta);
 }
 

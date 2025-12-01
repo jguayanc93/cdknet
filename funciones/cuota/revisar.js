@@ -11,7 +11,7 @@ let {promo_buscador} = require('../../querys/promocion/buscador')
 ////ESPACIO PARA LOS MANEJOS DE ERRORES CON RESPUESTA
 const {error_corrector} = require('../error/err1')
 
-async function cuota_registrar(req,res,next) {
+async function cuota_revisar(req,res,next) {
     try{
         const primera_call = await consulta1(req,next);//galletas
         const segunda_call = await obtenerpromesa_conexion();
@@ -74,4 +74,4 @@ function galleta_credencial(resolve,reject,req,next){
 
 
 
-module.exports={cuota_registrar}
+module.exports={cuota_revisar}
