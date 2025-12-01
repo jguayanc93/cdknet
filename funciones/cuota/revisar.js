@@ -13,7 +13,7 @@ const {error_corrector} = require('../error/err1')
 
 async function cuota_revisar(req,res,next) {
     try{
-        const primera_call = await consulta1(req,next);//galletas
+        const primera_call = await consulta1(req);//galletas
         const segunda_call = await obtenerpromesa_conexion();
         const tercera_call = await consulta2(segunda_call,primera_call);
         // const cuarta_call = await obtenerpromesa_conexion();
@@ -29,7 +29,7 @@ async function cuota_revisar(req,res,next) {
 
 function obtenerpromesa_conexion(){ return new Promise((resolve,reject)=>conn(resolve,reject)) }
 
-function consulta1(req,next){ return new Promise((resolve,reject)=>galleta_credencial(resolve,reject,req,next)) }
+function consulta1(req){ return new Promise((resolve,reject)=>galleta_credencial(resolve,reject,req)) }
 
 function consulta2(conexion,galleta){ return new Promise((resolve,reject)=>cuota_existe(resolve,reject,conexion,galleta)) }
 
@@ -62,7 +62,7 @@ function promocion_agrupados(resolve,reject,respuesta){
     resolve(filtro_final)
 }
 
-function galleta_credencial(resolve,reject,req,next){
+function galleta_credencial(resolve,reject,req){
     let user_id=req.signedCookies.cdk;
     let valido=jws.verify(user_id,'HS256','chistemas')
     if(valido){
