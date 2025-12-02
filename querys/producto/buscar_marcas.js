@@ -5,7 +5,7 @@ let marca_buscar = (resolve,reject,conexion,req,next)=>{
 
     let caracter=`%${req.body.sugerencia}%`;
     
-    let sp_sql="select codmar,Nommar,abrmar from tbl01mar where codmar NOT IN('0001','0002','0047','0123') AND Nommar like @pista";
+    let sp_sql="select top 4 codmar,Nommar,abrmar from tbl01mar where codmar NOT IN('0001','0002','0047','0123') AND Nommar like @pista";
 
     let consulta= new Request(sp_sql,(err,rowCount,rows)=>{
         if(err){
