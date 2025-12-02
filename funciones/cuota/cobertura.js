@@ -25,7 +25,8 @@ async function cuota_cobertura(req,res,next) {
         const setima_call = await consulta5(sexta_call,primera_call,segunda_call);//monto recaudado hasta el momento
         const octava_call = await consulta6(cuarta_call,setima_call,quinta_call);
         
-        res.status(200).json(octava_call);
+        // res.status(200).json(octava_call);
+        res.status(200).json({"revisa":[octava_call,cuarta_call]});
     }
     catch(err){
         error_corrector(res,err);
