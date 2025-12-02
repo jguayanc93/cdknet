@@ -67,7 +67,7 @@ function galleta_tipo(resolve,reject,req){
 
 function avance_mensaje(resolve,reject,tiempo){
     ////aqui es donde le decimos en texto un mensaje referente al avance
-    switch (tiempo[7]) {
+    switch (true) {
         case tiempo[7]>=30:
             resolve("tienes tiempo de sobra");
             break;

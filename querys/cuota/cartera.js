@@ -32,7 +32,7 @@ let cuota_avance_cartera = (resolve,reject,conexion,galleta,diferenciador)=>{
             }
         }
     })
-    consulta.addParameter('codusu',TYPES.VarChar,galleta.identificador);
+    consulta.addParameter('codven',TYPES.VarChar,galleta.codigo);
     conexion.execSql(consulta);
 }
 
