@@ -25,9 +25,9 @@ router.get('/',objevacio,cuota_permisos)
 /////estas rutas son para sus respectivos accesos segun pueda o no
 router.get('/revisar',cuota_revisar)
 router.post('/update',cuota_registrar)
-router.post('/mostrar',cuota_direccionador)
+router.get('/mostrar',cuota_direccionador)
 /////mandalos a sus respectivas rutas
-router.post('/cobertura',cuota_cobertura)
+router.get('/cobertura',cuota_cobertura)
 router.post('/cartera',cuota_cartera)
 // router.post('/especialista')
 // router.post('/jefatura')
