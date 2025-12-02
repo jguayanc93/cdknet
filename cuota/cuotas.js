@@ -10,9 +10,11 @@ const {objevacio} = require('../funciones/objvacio')
 const {cuota_permisos} = require('../funciones/cuota/permisos')
 const {cuota_revisar} = require('../funciones/cuota/revisar')
 const {cuota_registrar} = require('../funciones/cuota/registrar')
-// const {prom_buscar} = require('../funciones/promocion/buscar')
-// const {prom_analisar} = require('../funciones/promocion/mostrar')
-// const {prom_remover} = require('../funciones/promocion/remover')
+const {cuota_direccionador} = require('../funciones/cuota/mostrar')
+const {cuota_cobertura} = require('../funciones/cuota/cobertura')
+const {cuota_cartera} = require('../funciones/cuota/cartera')
+// const {} = require('../funciones/cuota/especialista')
+// const {} = require('../funciones/cuota/jefatura')
 
 router.use(express.json());
 
@@ -23,10 +25,11 @@ router.get('/',objevacio,cuota_permisos)
 /////estas rutas son para sus respectivos accesos segun pueda o no
 router.get('/revisar',cuota_revisar)
 router.post('/update',cuota_registrar)
-// router.post('/delete',)
-// router.post('/revisar',prom_buscar)
-// router.post('/mostrar',prom_analisar,prom_adjuntar)
-// router.post('/acoplar',prom_acoplar)
-// router.post('/eliminar',prom_remover)
+router.post('/mostrar',cuota_direccionador)
+/////mandalos a sus respectivas rutas
+router.post('/cobertura',cuota_cobertura)
+router.post('/cartera',cuota_cartera)
+// router.post('/especialista')
+// router.post('/jefatura')
 
 module.exports=router
