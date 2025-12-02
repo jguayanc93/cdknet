@@ -28,8 +28,8 @@ router.post('/update',cuota_registrar)
 router.get('/mostrar',cuota_direccionador)
 /////mandalos a sus respectivas rutas
 router.get('/cobertura',cuota_cobertura)
-router.post('/cartera',cuota_cartera)
-router.post('/especialista',cuota_especialista)
+router.get('/cartera',cuota_cartera)
+router.get('/especialista',cuota_especialista)
 // router.post('/jefatura')
 
 module.exports=router
