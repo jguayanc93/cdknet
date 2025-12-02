@@ -13,7 +13,7 @@ const {cuota_registrar} = require('../funciones/cuota/registrar')
 const {cuota_direccionador} = require('../funciones/cuota/mostrar')
 const {cuota_cobertura} = require('../funciones/cuota/cobertura')
 const {cuota_cartera} = require('../funciones/cuota/cartera')
-// const {} = require('../funciones/cuota/especialista')
+const {cuota_especialista} = require('../funciones/cuota/especialista')
 // const {} = require('../funciones/cuota/jefatura')
 
 router.use(express.json());
@@ -29,7 +29,7 @@ router.get('/mostrar',cuota_direccionador)
 /////mandalos a sus respectivas rutas
 router.get('/cobertura',cuota_cobertura)
 router.post('/cartera',cuota_cartera)
-// router.post('/especialista')
+router.post('/especialista',cuota_especialista)
 // router.post('/jefatura')
 
 module.exports=router
