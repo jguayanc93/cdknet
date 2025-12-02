@@ -25,8 +25,8 @@ async function cuota_cobertura(req,res,next) {
         const setima_call = await consulta5(sexta_call,primera_call,segunda_call);//monto recaudado hasta el momento
         const octava_call = await consulta6(cuarta_call,setima_call,quinta_call);
         
-        // res.status(200).json(octava_call);
-        res.status(200).json({"revisa":[octava_call,cuarta_call]});
+        res.status(200).json(octava_call);
+        // res.status(200).json({"revisa":[octava_call,cuarta_call]});
     }
     catch(err){
         error_corrector(res,err);
@@ -69,7 +69,7 @@ function galleta_tipo(resolve,reject,req){
 
 function avance_mensaje(resolve,reject,tiempo){
     ////aqui es donde le decimos en texto un mensaje referente al avance
-    switch (tiempo[7]) {
+    switch (true) {
         case tiempo[7]>=30:
             resolve("tienes tiempo de sobra");
             break;
@@ -111,7 +111,7 @@ function estimacion_monto(resolve,reject,tiempos,monto,textodia){
 
     let recortado = `${porcentaje.toFixed(2)} %`;
 
-    switch (porcentaje) {
+    switch (true) {
         case porcentaje<=5:
             mensaje="que asi se chambea?";
             break;
