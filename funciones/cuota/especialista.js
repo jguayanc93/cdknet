@@ -6,7 +6,7 @@ const {conn} = require('../../conexion/cnn')
 let {cuota_existe} = require('../../querys/cuota/revisar_registro')
 let {registro_cuota} = require('../../querys/cuota/registrar')
 let {cuota_tiempo} = require('../../querys/cuota/mostrar')
-let {cuota_avance_cartera} = require('../../querys/cuota/cartera')
+let {} = require('../../querys/cuota')
 ///////ESPACIO PARA FUNCIONES GENERALES
 
 ////ESPACIO PARA LOS MANEJOS DE ERRORES CON RESPUESTA

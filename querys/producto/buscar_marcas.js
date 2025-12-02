@@ -1,10 +1,13 @@
 require('dotenv').config();
 const {Request,TYPES} = require('../../conexion/cadena')
 
-let cuota_avance_cartera = (resolve,reject,conexion,galleta,diferenciador)=>{
+let marca_buscar = (resolve,reject,conexion,req,next)=>{
 
-    let sq_sql="select SUM(tota) from mst01fac where YEAR(fecha)=YEAR(GETDATE()) AND MONTH(fecha)=MONTH(GETDATE()) AND flag<>'*' AND codvta<>'04' AND codven=@codven";
-    let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
+    let caracter=`%${req.body.sugerencia}%`;
+    
+    let sp_sql="select codmar,Nommar,abrmar from tbl01mar where codmar NOT IN('0001','0002','0047','0123') AND Nommar like @pista";
+
+    let consulta= new Request(sp_sql,(err,rowCount,rows)=>{
         if(err){
             conexion.close();
             reject("error query");
@@ -13,10 +16,11 @@ let cuota_avance_cartera = (resolve,reject,conexion,galleta,diferenciador)=>{
             conexion.close();
             
             if(rows.length==0){
-                reject("cuota no existe");
+                reject("marca no registrada");
             }
             else{
-                let respuesta=[];                
+                let respuesta=[];
+                let respuesta2={};
                 let contador=0;
                 rows.forEach(fila=>{
                     let tmp={};
@@ -27,13 +31,13 @@ let cuota_avance_cartera = (resolve,reject,conexion,galleta,diferenciador)=>{
                     })
                     respuesta.push(tmp);
                 });
-                
-                resolve(respuesta[0][0]);
+                Object.assign(respuesta2,respuesta);
+                resolve(respuesta2);
             }
         }
     })
-    consulta.addParameter('codven',TYPES.VarChar,galleta.codigo);
+    consulta.addParameter('pista',TYPES.VarChar,caracter);
     conexion.execSql(consulta);
 }
 
-module.exports={cuota_avance_cartera}
+module.exports={marca_buscar}
