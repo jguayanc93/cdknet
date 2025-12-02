@@ -3,7 +3,7 @@ const {Request,TYPES} = require('../../conexion/cadena')
 
 let cuota_tiempo = (resolve,reject,conexion,galleta,diferenciador)=>{
 
-    let sq_sql="select *,DATEDIFF(DAY,DAY(GETDATE()),DAY(EOMONTH(GETDATE())))as'quedan',DAY(GETDATE())as'dia' from tbl_api_vendedores_meta where anno=YEAR(GETDATE()) AND mes=MONTH(GETDATE()) AND codven=@codusu";
+    let sq_sql="select *,DATEDIFF(DAY,DAY(GETDATE()),DAY(EOMONTH(GETDATE()))),DAY(GETDATE()) from tbl_api_vendedores_meta where anno=YEAR(GETDATE()) AND mes=MONTH(GETDATE()) AND codven=@codusu";
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
         if(err){
             conexion.close();

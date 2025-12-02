@@ -90,7 +90,7 @@ function avance_mensaje(resolve,reject,tiempo){
             resolve("tik tok señor wick");
             break;
 
-        case tiempo[7]=1:
+        case tiempo[7]==1:
             resolve("ahora ps llego el dia");
             break;
     
