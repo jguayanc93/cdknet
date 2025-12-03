@@ -21,7 +21,7 @@ async function cuota_multiple(req,res,next) {
         // const cuarta_call = await obtenerpromesa_conexion();
         // const quinta_call = await consulta3(cuarta_call,tercera_call);
         
-        res.status(200).json({"permitido":cuarta_call});
+        res.status(200).json({"multiple":cuarta_call});
     }
     catch(err){
         error_corrector(res,err);

@@ -20,7 +20,7 @@ async function cuota_simple(req,res,next) {
         // const quinta_call = await consulta3(cuarta_call,tercera_call);
         // const sexta_call = await consulta4(quinta_call);
         
-        res.status(200).json({"permitido":tercera_call});
+        res.status(200).json({"simple":tercera_call});
     }
     catch(err){
         error_corrector(res,err);
