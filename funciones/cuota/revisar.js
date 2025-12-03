@@ -14,12 +14,12 @@ const {error_corrector} = require('../error/err1')
 async function cuota_revisar(req,res,next) {
     try{
         const primera_call = await consulta1(req);//galletas
-        const segunda_call = await consulta2(primera_call)
-        res.redirect(`/v1/cuota/${segunda_call}`)
+        // const segunda_call = await consulta2(primera_call)
+        // res.redirect(`/v1/cuota/${segunda_call}`)
         // const segunda_call = await obtenerpromesa_conexion();
         // const tercera_call = await consulta2(segunda_call,primera_call);
         
-        // res.status(200).json({"permitido":tercera_call});
+        res.status(200).json({"permitido":primera_call});
     }
     catch(err){
         error_corrector(res,err);
