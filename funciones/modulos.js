@@ -1,17 +1,37 @@
 // const modulos_generales=[cotizacion,facturas,promocion,reporte];
+const coti=["cotizacion","Permite manejar cotizaciones"];
+const factura=["factura","Permite manejar facturas"];
+const prom=["promocion","Permite adjuntar y retirar promociones"];
+const listas=["listas","Lista tus ventas"];
+const cuota=["cuota","Ver el avance de las cuotas"];
+const reporte=["reporte","Permite sacar reportes de marcas"];
 
+// const grp20={
+//     "cotizacion":"Permite manejar cotizaciones",
+//     "listas":"Lista tus ventas",
+//     "factura":"Permite manejar facturas",
+//     "promocion":"Permite adjuntar y retirar promociones",
+//     "cuota":"Ver el avance de las cuotas"
+// }
+// const grp25={
+//     "cotizacion":"Permite manejar cotizaciones",
+//     "factura":"Permite manejar facturas",
+//     "promocion":"Permite adjuntar y retirar promociones",
+//     "reporte":"Permite sacar reportes de marcas"
+// };
 const grp20={
-    "cotizacion":"Permite manejar cotizaciones",
-    "listas":"Lista tus ventas",
-    "factura":"Permite manejar facturas",
-    "promocion":"Permite adjuntar y retirar promociones",
-    "cuota":"Ver el avance de las cuotas"
+    [coti[0]]:coti[1],
+    [listas[0]]:listas[1],
+    [factura[0]]:factura[1],
+    [prom[0]]:prom[1],
+    [cuota[0]]:cuota[1]
 }
 const grp25={
-    "cotizacion":"Permite manejar cotizaciones",
-    "factura":"Permite manejar facturas",
-    "promocion":"Permite adjuntar y retirar promociones",
-    "reporte":"Permite sacar reportes de marcas"
+    [coti[0]]:coti[1],
+    [factura[0]]:factura[1],
+    [prom[0]]:prom[1],
+    [cuota[0]]:cuota[1],
+    [reporte[0]]:reporte[1]
 };
 const grp34={
     "factura":"Permite manejar facturas",
