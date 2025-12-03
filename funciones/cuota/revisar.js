@@ -14,12 +14,12 @@ const {error_corrector} = require('../error/err1')
 async function cuota_revisar(req,res,next) {
     try{
         const primera_call = await consulta1(req);//galletas
-        // const segunda_call = await consulta2(primera_call)
-        // res.redirect(`/v1/cuota/${segunda_call}`)
+        const segunda_call = await consulta2(primera_call.id_grupo)
+        res.redirect(`/v1/cuota/${segunda_call}`)
         // const segunda_call = await obtenerpromesa_conexion();
         // const tercera_call = await consulta2(segunda_call,primera_call);
         
-        res.status(200).json({"permitido":primera_call});
+        // res.status(200).json({"permitido":primera_call});
     }
     catch(err){
         error_corrector(res,err);
@@ -30,19 +30,19 @@ function obtenerpromesa_conexion(){ return new Promise((resolve,reject)=>conn(re
 
 function consulta1(req){ return new Promise((resolve,reject)=>galleta_credencial(resolve,reject,req)) }
 
-function consulta2(galleta){ return new Promise((resolve,reject)=>manejador_grupos(resolve,reject,galleta)) }
+function consulta2(grupo){ return new Promise((resolve,reject)=>manejador_grupos(resolve,reject,grupo)) }
 
-function manejador_grupos(resolve,reject,galleta){
-    switch (galleta.id_grupo) {
-        case 20:
+function manejador_grupos(resolve,reject,grupo){
+    switch (grupo) {
+        case "20":
             resolve("simple");
             break;
 
-        case 25:
+        case "25":
             resolve("multiple");
             break;
 
-        case 34:
+        case "34":
             resolve("superior");
             break;
     
