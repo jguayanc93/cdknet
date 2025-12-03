@@ -16,12 +16,12 @@ async function cuota_multiple(req,res,next) {
         const primera_call = await consulta1(req);//galletas
         const segunda_call = await obtenerpromesa_conexion();
         const tercera_call = await consulta2(segunda_call,primera_call);
-        // const cuarta_call = await consulta3(tercera_call);
+        const cuarta_call = await consulta3(tercera_call);
 
         // const cuarta_call = await obtenerpromesa_conexion();
         // const quinta_call = await consulta3(cuarta_call,tercera_call);
         
-        res.status(200).json({"permitido":tercera_call});
+        res.status(200).json({"permitido":cuarta_call});
     }
     catch(err){
         error_corrector(res,err);

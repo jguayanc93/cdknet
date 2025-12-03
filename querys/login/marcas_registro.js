@@ -4,8 +4,8 @@ const {Request,TYPES} = require('../../conexion/cadena')
 let marcas_registro = (resolve,reject,conexion,galleta,diferenciador,body)=>{
 
     let mar_arr = body.marcas;
-    for(const marc of mar_arr){ marc.pop()}
-    let mar_obj = {};    
+    // for(const marc of mar_arr){ marc.pop()}
+    let mar_obj = {};
 
     Object.assign(mar_obj,mar_arr);
 
