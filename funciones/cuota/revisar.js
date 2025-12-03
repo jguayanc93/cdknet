@@ -14,15 +14,8 @@ const {error_corrector} = require('../error/err1')
 async function cuota_revisar(req,res,next) {
     try{
         const primera_call = await consulta1(req);//galletas
-        if(primera_call.id_grupo===20){
-            res.redirect('/v1/cuota/simple');
-        }
-        else if(primera_call.id_grupo===25){
-            res.redirect('/v1/cuota/multiple');
-        }
-        else if(primera_call.id_grupo===34){
-            res.redirect('/v1/cuota/superior');
-        }
+        const segunda_call = await consulta2(primera_call)
+        res.redirect(`/v1/cuota/${segunda_call}`)
         // const segunda_call = await obtenerpromesa_conexion();
         // const tercera_call = await consulta2(segunda_call,primera_call);
         
@@ -37,8 +30,27 @@ function obtenerpromesa_conexion(){ return new Promise((resolve,reject)=>conn(re
 
 function consulta1(req){ return new Promise((resolve,reject)=>galleta_credencial(resolve,reject,req)) }
 
-// function consulta2(conexion,galleta){ return new Promise((resolve,reject)=>cuota_existe(resolve,reject,conexion,galleta)) }
+function consulta2(galleta){ return new Promise((resolve,reject)=>manejador_grupos(resolve,reject,galleta)) }
 
+function manejador_grupos(resolve,reject,galleta){
+    switch (galleta.id_grupo) {
+        case 20:
+            resolve("simple");
+            break;
+
+        case 25:
+            resolve("multiple");
+            break;
+
+        case 34:
+            resolve("superior");
+            break;
+    
+        default:
+            resolve("nada")
+            break;
+    }
+}
 
 function galleta_credencial(resolve,reject,req){
     let user_id=req.signedCookies.cdk;
