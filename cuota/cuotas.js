@@ -15,6 +15,8 @@ const {cuota_cobertura} = require('../funciones/cuota/cobertura')
 const {cuota_cartera} = require('../funciones/cuota/cartera')
 const {cuota_especialista} = require('../funciones/cuota/especialista')
 // const {} = require('../funciones/cuota/jefatura')
+const {cuota_simple} = require('../funciones/cuota/simple')
+const {cuota_multiple} = require('../funciones/cuota/multiple')
 
 router.use(express.json());
 
@@ -22,6 +24,9 @@ router.use(express.json());
 router.get('/',objevacio,cuota_permisos)
 // router.get('/',(req,res)=>{res.status(200).send("deberia enviarte al login de nuevo por no tener galletas")})
 ////////////REVISA PORQE ESTE COTIZACION DA PROBLEMAS 009-00910388 CUANDO SE LE PIDE QUE TRAIGA SUS PROMOCIONES
+router.get('/simple',cuota_simple)
+router.get('/multiple',cuota_multiple)
+// router.get('/superior',)
 /////estas rutas son para sus respectivos accesos segun pueda o no
 router.get('/revisar',cuota_revisar)
 router.post('/update',cuota_registrar)
