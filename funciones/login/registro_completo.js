@@ -5,6 +5,7 @@ const jws = require('jws');
 const {conn} = require('../../conexion/cnn')
 /////////espacio para la llamada de los querys
 let {logeo_registro} = require('../../querys/login/registro');
+let {marcas_registro} = require('../../querys/login/marcas_registro')
 //////espacio para la implementacion del token
 // let {jwtgenerator} = require('../../login/token')
 ////ESPACIO PARA LOS MANEJOS DE ERRORES CON RESPUESTA
@@ -16,6 +17,10 @@ async function usuario_registrado(req,res,next) {
         const primera_call= await consulta1(req,next);
         const segunda_call= await obtenerpromesa_conexion();
         const tercera_call= await consulta2(primera_call,segunda_call,req);
+        if(req.body.marcas.length!==0){
+            const cuarta_call= await obtenerpromesa_conexion();
+            const quinta_call= await consulta3(cuarta_call,primera_call,tercera_call,req.body);
+        }
 
         res.cookie('tip',tercera_call,{
             domain:'compudiskett.com.pe',
@@ -43,6 +48,10 @@ function consulta1(req,next){
 
 function consulta2(payload,conexion,req){
     return new Promise((resolve,reject)=>logeo_registro(resolve,reject,payload,conexion,req))
+}
+
+function consulta3(conexion,galleta,diferenciador,body){
+    return new Promise((resolve,reject)=>marcas_registro(resolve,reject,conexion,galleta,diferenciador,body))
 }
 
 function galleta_credencial(resolve,reject,req,next){
