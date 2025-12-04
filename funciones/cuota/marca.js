@@ -31,7 +31,7 @@ async function cuota_marca_dinamica(req,res,next) {
         const unceava_call = await consulta7(octava_call);///texto del mes
         const doceava_call = await consulta8(decima_call,octava_call,unceava_call);
         
-        res.status(200).json({"montos":cuarta_call});
+        res.status(200).json({"estimado":doceava_call});
     }
     catch(err){
         error_corrector(res,err);

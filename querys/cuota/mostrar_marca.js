@@ -3,7 +3,7 @@ const {Request,TYPES} = require('../../conexion/cadena')
 
 let cuota_marca_seleccionada_avance = (resolve,reject,conexion,galleta,body)=>{
 
-    let codmar=body.codigo;
+    let marc=body.recortado;
     
     let sq_sql="select ISNULL(SUM(case a.mone when 'D' then a.tota else a.tota/a.tcam end),0),ISNULL(SUM(case a.mone when 'D' then (case a.cdocu when '01' then a.cost*a.cant when '03' then a.cost*a.cant when '07' then a.cost*a.cant*-1 end) when 'S' then (case a.cdocu when '01' then (a.cost/a.tcam)*a.cant when '03' then (a.cost/a.tcam)*a.cant when '07' then ((a.cost/a.tcam)*a.cant)*-1 end) end),0),ISNULL(SUM(case a.mone when 'D' then a.tota else a.tota/a.tcam end)-SUM(case a.mone when 'D' then (case a.cdocu when '01' then a.cost*a.cant when '03' then a.cost*a.cant when '07' then a.cost*a.cant*-1 end) when 'S' then (case a.cdocu when '01' then (a.cost/a.tcam)*a.cant when '03' then (a.cost/a.tcam)*a.cant when '07' then ((a.cost/a.tcam)*a.cant)*-1 end) end),0) from dtl01fac a inner join mst01fac b on (b.ndocu=a.ndocu) where b.flag<>'*' AND b.codvta<>'04' AND YEAR(b.fecha)=YEAR(GETDATE()) AND MONTH(b.fecha)=MONTH(GETDATE()) AND a.marc=@codmar";
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
@@ -34,7 +34,7 @@ let cuota_marca_seleccionada_avance = (resolve,reject,conexion,galleta,body)=>{
             }
         }
     })
-    consulta.addParameter('codmar',TYPES.VarChar,codmar);
+    consulta.addParameter('codmar',TYPES.VarChar,marc);
     conexion.execSql(consulta);
 }
 
