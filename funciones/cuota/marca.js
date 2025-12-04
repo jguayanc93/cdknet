@@ -48,7 +48,7 @@ function consulta3(conexion,galleta,body){ return new Promise((resolve,reject)=>
 
 function consulta4(conexion,body,avance){ return new Promise((resolve,reject)=>guardar_marca_seleccionada_avance(resolve,reject,conexion,body,avance)) }
 
-function consulta5(conexion,galleta,diferenciador){ return new Promise((resolve,reject)=>cuota_marca_tiempo_avance(resolve,reject,conexion,galleta,diferenciador)) }
+function consulta5(conexion){ return new Promise((resolve,reject)=>cuota_marca_tiempo_avance(resolve,reject,conexion)) }
 
 function consulta6(conexion,body){ return new Promise((resolve,reject)=>cuota_marca_monto_estimado(resolve,reject,conexion,body)) }
 

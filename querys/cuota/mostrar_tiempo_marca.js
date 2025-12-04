@@ -1,7 +1,7 @@
 require('dotenv').config();
 const {Request,TYPES} = require('../../conexion/cadena')
 
-let cuota_marca_tiempo_avance = (resolve,reject,conexion,galleta,body)=>{
+let cuota_marca_tiempo_avance = (resolve,reject,conexion)=>{
     
     let sq_sql="select DATEDIFF(DAY,DAY(GETDATE()),DAY(EOMONTH(GETDATE()))),DAY(GETDATE())";
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
@@ -32,7 +32,6 @@ let cuota_marca_tiempo_avance = (resolve,reject,conexion,galleta,body)=>{
             }
         }
     })
-    consulta.addParameter('codmar',TYPES.VarChar,codmar);
     conexion.execSql(consulta);
 }
 

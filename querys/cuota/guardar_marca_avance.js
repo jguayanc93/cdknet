@@ -5,7 +5,7 @@ let guardar_marca_seleccionada_avance = (resolve,reject,conexion,body,avance)=>{
 
     let codmar=body.codigo;
     
-    let sq_sql="update tbl01api_jefaturas_meta set avance=@ven,costo=@cost,rentabilidad=@rent where anno=YEAR(GETDATE()) AND mes=MONTH(GETDATE()) AND codmar=@codmar";
+    let sq_sql="update tbl01api_jefaturas_meta set avance=@ven,costo=@cost,rentabilidad=@rent,dia=DAY(GETDATE()) where anno=YEAR(GETDATE()) AND mes=MONTH(GETDATE()) AND codmar=@codmar";
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
         if(err){
             conexion.close();

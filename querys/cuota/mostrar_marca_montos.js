@@ -1,7 +1,7 @@
 require('dotenv').config();
 const {Request,TYPES} = require('../../conexion/cadena')
 
-let cuota_marca_monto_estimado = (resolve,reject,conexion,galleta,body)=>{
+let cuota_marca_monto_estimado = (resolve,reject,conexion,body)=>{
 
     let codmar=body.codigo;
     
