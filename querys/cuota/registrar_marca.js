@@ -8,7 +8,7 @@ let registro_cuota_marca = (resolve,reject,conexion,galleta,diferenciador,body)=
     let recortado = body.recortado;
 
     // let sq_sql="INSERT INTO tbl_api_vendedores_meta(codven,anno,mes,monto,volumen,cobertura,diferenciador) VALUES(@codusu,YEAR(GETDATE()),MONTH(GETDATE()),@cuota,50,50,@diferenciador)";
-    let sq_sql="INSERT INTO tbl01api_jefaturas_meta(codmar,marc,anno,mes,dia,monto,costo,rentabilidad,unidades,codusu,nombre) VALUES(@codmarc,@marc,YEAR(GETDATE()),MONTH(GETDATE()),DAY(GETDATE()),@cuota,0,0,0,@codusu,@usu)";
+    let sq_sql="INSERT INTO tbl01api_jefaturas_meta(codmar,marc,anno,mes,dia,monto,costo,rentabilidad,unidades,codusu,nombre,avance) VALUES(@codmarc,@marc,YEAR(GETDATE()),MONTH(GETDATE()),DAY(GETDATE()),@cuota,0,0,0,@codusu,@usu,0)";
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
         if(err){
             conexion.close();
