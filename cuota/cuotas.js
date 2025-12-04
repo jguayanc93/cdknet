@@ -20,6 +20,8 @@ const {cuota_especialista} = require('../funciones/cuota/especialista')
 const {cuota_simple} = require('../funciones/cuota/simple')
 const {cuota_multiple} = require('../funciones/cuota/multiple')
 
+const {cuota_marca_dinamica} = require('../funciones/cuota/marca')
+
 router.use(express.json());
 
 //////TENDRAS QUE LANSAR RUTAS ALTERNAS PARA CADA TIPO DE VENDEDOR
@@ -35,10 +37,11 @@ router.post('/marcarevisar',cuota_marca_revisor_rapido)
 router.post('/update',cuota_registrar)
 router.post('/marcaupdate',cuota_registrar_marca)
 router.get('/mostrar',cuota_direccionador)
+router.post('/marcamostrar',cuota_marca_dinamica)
 /////mandalos a sus respectivas rutas
 router.get('/cobertura',cuota_cobertura)
 router.get('/cartera',cuota_cartera)
-// router.get('/especialista',cuota_especialista)
+router.get('/especialista',cuota_especialista)
 // router.post('/jefatura')
 
 module.exports=router

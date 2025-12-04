@@ -6,26 +6,32 @@ const {conn} = require('../../conexion/cnn')
 let {cuota_existe} = require('../../querys/cuota/revisar_registro')
 let {registro_cuota} = require('../../querys/cuota/registrar')
 let {cuota_tiempo} = require('../../querys/cuota/mostrar')
-let {cuota_avance_cartera} = require('../../querys/cuota/cartera')
-// let {promo_vertodo} = require('../../querys/promocion/cotizacion')
-// let {promo_buscador} = require('../../querys/promocion/buscador')
+let {cuota_marca_seleccionada_avance} = require('../../querys/cuota/mostrar_marca')
+// let {cuota_avance_cartera} = require('../../querys/cuota/cartera')
+let {guardar_marca_seleccionada_avance} = require('../../querys/cuota/guardar_marca_avance')
+let {cuota_marca_tiempo_avance} = require('../../querys/cuota/mostrar_tiempo_marca')
+let {cuota_marca_monto_estimado} = require('../../querys/cuota/mostrar_marca_montos')
 ///////ESPACIO PARA FUNCIONES GENERALES
 
 ////ESPACIO PARA LOS MANEJOS DE ERRORES CON RESPUESTA
 const {error_corrector} = require('../error/err1')
 
-async function cuota_cartera(req,res,next) {
+async function cuota_marca_dinamica(req,res,next) {
     try{
         const primera_call = await consulta1(req);//galletas
         const segunda_call = await consulta2(req);
         const tercer_call = await obtenerpromesa_conexion();
-        const cuarta_call = await consulta3(tercer_call,primera_call,segunda_call);
-        const quinta_call = await consulta4(cuarta_call);
-        const sexta_call = await obtenerpromesa_conexion();
-        const setima_call = await consulta5(sexta_call,primera_call,segunda_call);
-        const octava_call = await consulta6(cuarta_call,setima_call,quinta_call);
+        const cuarta_call = await consulta3(tercer_call,primera_call,req.body);///avance,costo,rentabilidad
+        const quinta_call = await obtenerpromesa_conexion();
+        const sexta_call = await consulta4(quinta_call,req.body,cuarta_call);///actualisacion de montos
+        const setima_call = await obtenerpromesa_conexion();
+        const octava_call = await consulta5(setima_call);///tiempos dias restantes
+        const novena_call = await obtenerpromesa_conexion();
+        const decima_call = await consulta6(novena_call,req.body);///monto estimado a llegar de la marca
+        const unceava_call = await consulta7(octava_call);///texto del mes
+        const doceava_call = await consulta8(decima_call,octava_call,unceava_call);
         
-        res.status(200).json({"simple":octava_call});
+        res.status(200).json({"multiple":doceava_call});
     }
     catch(err){
         error_corrector(res,err);
@@ -38,13 +44,17 @@ function consulta1(req){ return new Promise((resolve,reject)=>galleta_credencial
 
 function consulta2(req){ return new Promise((resolve,reject)=>galleta_tipo(resolve,reject,req)) }
 
-function consulta3(conexion,galleta,diferenciador){ return new Promise((resolve,reject)=>cuota_tiempo(resolve,reject,conexion,galleta,diferenciador)) }
+function consulta3(conexion,galleta,body){ return new Promise((resolve,reject)=>cuota_marca_seleccionada_avance(resolve,reject,conexion,galleta,body)) }
 
-function consulta4(tiempo){ return new Promise((resolve,reject)=>avance_mensaje(resolve,reject,tiempo)) }
+function consulta4(conexion,body,avance){ return new Promise((resolve,reject)=>guardar_marca_seleccionada_avance(resolve,reject,conexion,body,avance)) }
 
-function consulta5(conexion,galleta,diferenciador){ return new Promise((resolve,reject)=>cuota_avance_cartera(resolve,reject,conexion,galleta,diferenciador)) }
+function consulta5(conexion,galleta,diferenciador){ return new Promise((resolve,reject)=>cuota_marca_tiempo_avance(resolve,reject,conexion,galleta,diferenciador)) }
 
-function consulta6(tiempos,monto,textodia){ return new Promise((resolve,reject)=>estimacion_monto(resolve,reject,tiempos,monto,textodia)) }
+function consulta6(conexion,body){ return new Promise((resolve,reject)=>cuota_marca_monto_estimado(resolve,reject,conexion,body)) }
+
+function consulta7(tiempos){ return new Promise((resolve,reject)=>avance_mensaje(resolve,reject,tiempos)) }
+
+function consulta8(monto,tiempos,textodia){ return new Promise((resolve,reject)=>estimacion_monto(resolve,reject,monto,tiempos,textodia)) }
 
 function galleta_credencial(resolve,reject,req){
     let user_id=req.signedCookies.cdk;
@@ -68,23 +78,23 @@ function galleta_tipo(resolve,reject,req){
 function avance_mensaje(resolve,reject,tiempo){
     ////aqui es donde le decimos en texto un mensaje referente al avance
     switch (true) {
-        case tiempo[7]>=30:
+        case tiempo[0]>=30:
             resolve("tienes tiempo de sobra");
             break;
 
-        case tiempo[7]>=20:
+        case tiempo[0]>=20:
             resolve("aun tienes mas de la mitad de mes");
             break;
 
-        case tiempo[7]>=10:
+        case tiempo[0]>=10:
             resolve("anda ajustando que ya no tienes ni la mitad de mes");
             break;
 
-        case tiempo[7]>=5:
+        case tiempo[0]>=5:
             resolve("ya estas en los ultimos dias");
             break;
 
-        case tiempo[7]>=2:
+        case tiempo[0]>=2:
             resolve("tik tok señor wick");
             break;
     
@@ -93,14 +103,15 @@ function avance_mensaje(resolve,reject,tiempo){
             break;
     }
 }
+//////manejar de manera diferente porqe los montos son diferentes
 
-
-function estimacion_monto(resolve,reject,tiempos,monto,textodia){
+function estimacion_monto(resolve,reject,monto,tiempos,textodia){
+    // recuerda que este monto es [avance,costo,rentabilidad]
     let objformato={}
     let mensaje="";
 
-    let cuota_fijada=tiempos[3];
-    let cuota_avanse=monto;
+    let cuota_fijada=monto[0];
+    let cuota_avanse=monto[1];
 
     let porcentaje= (cuota_avanse/cuota_fijada)*100;
 
@@ -161,14 +172,16 @@ function estimacion_monto(resolve,reject,tiempos,monto,textodia){
     }
     //////////////////
     objformato["diastexto"]=textodia;
-    objformato["meta"]=tiempos[3];
-    objformato["avance"]=monto;
+    objformato["meta"]=monto[0];
+    objformato["avance"]=monto[1];    
     objformato["porcentaje"]=recortado;
     objformato["mensaje"]=mensaje;
+    objformato["costo"]=monto[2];
+    objformato["rentabilidad"]=monto[3];
 
     resolve(objformato);
 }
 
 
 
-module.exports={cuota_cartera}
+module.exports={cuota_marca_dinamica}
