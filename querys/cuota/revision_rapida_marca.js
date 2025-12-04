@@ -16,10 +16,10 @@ let revision_rapida_marca_existe = (resolve,reject,conexion,galleta,body)=>{
             conexion.close();
                         
             if(rows.length==0){
-                resolve("puede registrar cuota de esta marca");
+                reject("tiene un registro marca");
             }
             else{
-                reject("tiene un registro marca");
+                resolve("puede registrar cuota de esta marca");
             }
         }
     })
