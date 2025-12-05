@@ -5,6 +5,7 @@ const prom=["promocion","Permite adjuntar y retirar promociones"];
 const listas=["listas","Lista tus ventas"];
 const cuota=["cuota","Ver el avance de las cuotas"];
 const reporte=["reporte","Permite sacar reportes de marcas"];
+const despachador=["programador","Permite entregar factura a almacen"];
 
 // const grp20={
 //     "cotizacion":"Permite manejar cotizaciones",
@@ -24,7 +25,8 @@ const grp20={
     [listas[0]]:listas[1],
     [factura[0]]:factura[1],
     [prom[0]]:prom[1],
-    [cuota[0]]:cuota[1]
+    [cuota[0]]:cuota[1],
+    [despachador[0]]:despachador[1]
 }
 const grp25={
     [coti[0]]:coti[1],

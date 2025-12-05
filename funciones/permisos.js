@@ -50,6 +50,11 @@ const lista={
     "factura":[20,25]
 }
 
+const programador={
+    "entregar":[20],
+    "retirar":[]
+}
+
 
 const permisos={}
 permisos["cotizacion"]=cotizacion;
@@ -58,5 +63,6 @@ permisos["factura"]=factura;
 permisos["promocion"]=promocion;
 permisos["cuota"]=cuota;
 permisos["lista"]=lista;
+permisos["programador"]=programador;
 
 module.exports=permisos;
