@@ -11,6 +11,8 @@ const {vendedor_permisos} = require('../funciones/vendedor/redirigir_tipo')
 // const {grupos_modulos} = require('../funciones/vendedor/cobertura_modulos')
 const {lista_permisos} = require('../funciones/lista/permisos')
 const {cotizacionxdia} = require('../funciones/lista/cotizacion')
+const {pedidoxdia} = require('../funciones/lista/pedido')
+const {facturaxdia} = require('../funciones/lista/factura')
 const {creacion} = require('../funciones/cotizacion/crear')
 const {modificacion} = require('../funciones/cotizacion/modificar')
 const {revisar} = require('../funciones/cotizacion/mostrar')
@@ -23,6 +25,8 @@ router.get('/',objevacio,lista_permisos)
 
 /////estas rutas son para sus respectivos accesos segun pueda o no
 router.post('/cotis',cotizacionxdia)
+router.post('/pedidos',pedidoxdia)
+router.post('/facturas',facturaxdia)
 // router.post('/read',revisar)
 // router.post('/update',modificacion)
 
