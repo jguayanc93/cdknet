@@ -44,6 +44,12 @@ const cuota={
     "delete":[]    
 }
 
+const lista={
+    "cotizacion":[20,25],
+    "pedido":[20,25],
+    "factura":[20,25]
+}
+
 
 const permisos={}
 permisos["cotizacion"]=cotizacion;
@@ -51,5 +57,6 @@ permisos["pedido"]=pedido;
 permisos["factura"]=factura;
 permisos["promocion"]=promocion;
 permisos["cuota"]=cuota;
+permisos["lista"]=lista;
 
 module.exports=permisos;

@@ -13,9 +13,9 @@ const promocion = require('../promociones/promocion.js');
 
 const cuotas= require('../cuota/cuotas.js');
 
-// const lista = require('../lista/listas.js');
+const lista = require('../lista/lista.js');
 
 // const reporte = require('../reportes/reportes.js');
 
 // module.exports={login,vendedor,coti,prom,cuotas,lista,reporte}
-module.exports={login,vendedor,coti,cliente,producto,promocion,cuotas}
+module.exports={login,vendedor,coti,cliente,producto,promocion,cuotas,lista}
