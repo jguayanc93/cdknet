@@ -17,7 +17,9 @@ const lista = require('../lista/lista.js');
 
 const programador = require('../programador/programador.js');
 
+const factura = require('../factura/factura.js');
+
 // const reporte = require('../reportes/reportes.js');
 
 // module.exports={login,vendedor,coti,prom,cuotas,lista,reporte}
-module.exports={login,vendedor,coti,cliente,producto,promocion,cuotas,lista,programador}
+module.exports={login,vendedor,coti,cliente,producto,promocion,cuotas,lista,programador,factura}

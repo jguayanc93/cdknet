@@ -23,11 +23,13 @@ const pedido={
 }
 
 const factura={
-    "crear":[],
-    "leer":[],
-    "update":[20,25,34],
-    "delete":[],
-    "despachar":[20,25]
+    "despacho":[20,25],
+    "transporte":[20,25],
+    "atencion":[20,25,34],
+    "direccion":[20,25],
+    "vendedor":[20,25],
+    "observacion":[20,25],
+    "orden":[20,25]
 }
 
 const promocion={
@@ -55,6 +57,12 @@ const programador={
     "retirar":[]
 }
 
+const reporte={
+    "stock":[25],
+    "tiempo":[25],
+    "precio":[25]
+}
+
 
 const permisos={}
 permisos["cotizacion"]=cotizacion;
@@ -64,5 +72,6 @@ permisos["promocion"]=promocion;
 permisos["cuota"]=cuota;
 permisos["lista"]=lista;
 permisos["programador"]=programador;
+permisos["reporte"]=reporte;
 
 module.exports=permisos;

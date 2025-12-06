@@ -38,4 +38,6 @@ app.use('/v1/lista',ruta.lista);
 
 app.use('/v1/programador',ruta.programador);
 
+app.use('/v1/factura',ruta.factura);
+
 app.listen(port,()=>{console.log("servicio levantado")})
