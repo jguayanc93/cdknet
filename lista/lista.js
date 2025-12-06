@@ -13,9 +13,9 @@ const {lista_permisos} = require('../funciones/lista/permisos')
 const {cotizacionxdia} = require('../funciones/lista/cotizacion')
 const {pedidoxdia} = require('../funciones/lista/pedido')
 const {facturaxdia} = require('../funciones/lista/factura')
-const {creacion} = require('../funciones/cotizacion/crear')
-const {modificacion} = require('../funciones/cotizacion/modificar')
-const {revisar} = require('../funciones/cotizacion/mostrar')
+const {cotizacionxdiaxelegido} = require('../funciones/lista/cotizacionxdia')
+const {pedidoxdiaxelegido} = require('../funciones/lista/pedidosxdia')
+const {facturaxdiaxelegido} = require('../funciones/lista/facturasxdia')
 
 router.use(express.json());
 
@@ -27,7 +27,9 @@ router.get('/',objevacio,lista_permisos)
 router.post('/cotis',cotizacionxdia)
 router.post('/pedidos',pedidoxdia)
 router.post('/facturas',facturaxdia)
-// router.post('/read',revisar)
+router.post('/cotisxdia',cotizacionxdiaxelegido)
+router.post('/pedidosxdia',pedidoxdiaxelegido)
+router.post('/facturasxdia',facturaxdiaxelegido)
 // router.post('/update',modificacion)
 
 
