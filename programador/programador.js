@@ -12,6 +12,7 @@ const {vendedor_permisos} = require('../funciones/vendedor/redirigir_tipo')
 const {programador_permisos} = require('../funciones/programador/permisos')
 const {despacharxdia} = require('../funciones/programador/despachar')
 const {programarfactura} = require('../funciones/programador/programar')
+const {despacharxdiaelegido} = require('../funciones/programador/despachardia')
 // const {facturaxdia} = require('../funciones/lista/factura')
 
 
@@ -24,7 +25,7 @@ router.get('/',objevacio,programador_permisos)
 /////estas rutas son para sus respectivos accesos segun pueda o no
 router.post('/despacho',despacharxdia)
 router.post('/programar',programarfactura)
-// router.post('/read',revisar)
+router.post('/despachoxdia',despacharxdiaelegido)
 // router.post('/update',modificacion)
 
 
