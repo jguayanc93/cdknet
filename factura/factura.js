@@ -34,6 +34,11 @@ router.post('/vendedor',facturaxvendedor)
 router.post('/observacion',facturaxobservacion)
 router.post('/orden',facturaxorden)
 // router.post('/update',modificacion)
+router.post('/despacho/cambio',)
+router.post('/transporte/cambio',)
+router.post('/atencion/cambio',)
+router.post('/direccion/cambio',)
+router.post('/vendedor/cambio',)
 
 
 module.exports=router
