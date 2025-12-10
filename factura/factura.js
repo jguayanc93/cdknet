@@ -18,6 +18,14 @@ const {facturaxvendedor} = require('../funciones/factura/vendedor')
 const {facturaxobservacion} = require('../funciones/factura/observacion')
 const {facturaxorden} = require('../funciones/factura/orden')
 
+const {facturaxdespachoxsugerencia} = require('../funciones/factura/cambio_despacho')
+const {facturaxtransportistaxsugerencia} = require('../funciones/factura/cambio_transportista')
+const {facturaxatencionxsugerencia} = require('../funciones/factura/cambio_atencion')
+const {facturaxdireccionxsugerencia} = require('../funciones/factura/cambio_direccion')
+const {facturaxvendedorxsugerencia} = require('../funciones/factura/cambio_vendedor')
+// const {} = require('../funciones/factura/cambio_observacion')
+// const {} = require('../funciones/factura/cambio_orden')
+
 router.use(express.json());
 
 //////TENDRAS QUE LANSAR RUTAS ALTERNAS PARA CADA TIPO DE VENDEDOR
@@ -34,11 +42,11 @@ router.post('/vendedor',facturaxvendedor)
 router.post('/observacion',facturaxobservacion)
 router.post('/orden',facturaxorden)
 // router.post('/update',modificacion)
-router.post('/despacho/cambio',)
-router.post('/transporte/cambio',)
-router.post('/atencion/cambio',)
-router.post('/direccion/cambio',)
-router.post('/vendedor/cambio',)
+router.post('/despacho/cambio',facturaxdespachoxsugerencia)
+router.post('/transporte/cambio',facturaxtransportistaxsugerencia)
+router.post('/atencion/cambio',facturaxatencionxsugerencia)
+router.post('/direccion/cambio',facturaxdireccionxsugerencia)
+router.post('/vendedor/cambio',facturaxvendedorxsugerencia)
 
 
 module.exports=router
