@@ -25,6 +25,7 @@ const {facturaxdireccionxsugerencia} = require('../funciones/factura/cambio_dire
 const {facturaxvendedorxsugerencia} = require('../funciones/factura/cambio_vendedor')
 // const {} = require('../funciones/factura/cambio_observacion')
 // const {} = require('../funciones/factura/cambio_orden')
+const {facturaxcampoxcambiado} = require('../funciones/factura/campo_cambiado')
 
 router.use(express.json());
 
@@ -47,6 +48,8 @@ router.post('/transporte/cambio',facturaxtransportistaxsugerencia)
 router.post('/atencion/cambio',facturaxatencionxsugerencia)
 router.post('/direccion/cambio',facturaxdireccionxsugerencia)
 router.post('/vendedor/cambio',facturaxvendedorxsugerencia)
+
+router.post('/cambiado',facturaxcampoxcambiado)
 
 
 module.exports=router
