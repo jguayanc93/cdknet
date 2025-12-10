@@ -51,7 +51,7 @@ function relacionar_marcas(resolve,reject,respuesta){
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook,worksheet,"stocc");
     ///////cabesera
-    XLSX.utils.sheet_add_aoa(worksheet,[["CODF","DESCRIPCION","FAMILIA","PART NUMBER","DIAS"]],{origin:"A1"});
+    XLSX.utils.sheet_add_aoa(worksheet,[["CODF","DESCRIPCION","FAMILIA","PART NUMBER","PRINCIPAL STOCK","MYM STOCK","ORDENADO"]],{origin:"A1"});
     ///columna anchura
     worksheet["!cols"]=[{wch:16}];
     ///////////BUFFER DE DATA CONVERTIDA
