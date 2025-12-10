@@ -6,7 +6,7 @@ let factura_info_observacion = (resolve,reject,conexion,galleta,body)=>{
     let vendedor= galleta.codigo;
     let documento = body.opc1;
 
-    let sq_sql="select a.observ from mst01fac a where a.cdocu in ('01','03') AND a.flag<>'*' AND a.ndge='' AND a.codven_usu=@codven AND a.ndocu=@doc";
+    let sq_sql="select a.observ,a.codcli,a.ndocu from mst01fac a where a.cdocu in ('01','03') AND a.flag<>'*' AND a.ndge='' AND a.codven_usu=@codven AND a.ndocu=@doc";
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
         if(err){
             conexion.close();

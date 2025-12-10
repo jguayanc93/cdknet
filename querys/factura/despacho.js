@@ -7,7 +7,7 @@ let factura_info_despacho = (resolve,reject,conexion,galleta,body)=>{
     let documento = body.opc1;
 
 
-    let sq_sql="select a.TipEnt,b.despacho from mst01fac a inner join tbl_tipo_despacho b on (b.IDdespacho=a.TipEnt) where a.cdocu in ('01','03') AND a.flag<>'*' AND a.ndge='' AND a.codven_usu=@codven AND a.ndocu=@doc";
+    let sq_sql="select a.TipEnt,b.despacho,a.codcli,a.ndocu from mst01fac a inner join tbl_tipo_despacho b on (b.IDdespacho=a.TipEnt) where a.cdocu in ('01','03') AND a.flag<>'*' AND a.ndge='' AND a.codven_usu=@codven AND a.ndocu=@doc";
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
         if(err){
             conexion.close();
