@@ -11,6 +11,9 @@ const {vendedor_permisos} = require('../funciones/vendedor/redirigir_tipo')
 // const {grupos_modulos} = require('../funciones/vendedor/cobertura_modulos')
 const {coti_permisos} = require('../funciones/cotizacion/permisos')
 const {mostrador_marcas} = require('../funciones/reportes/marcas')
+const {marcas_stock} = require('../funciones/reportes/stoc')
+const {marcas_precios} = require('../funciones/reportes/precios')
+const {marcas_tiempo} = require('../funciones/reportes/tiempo')
 
 router.use(express.json());
 
@@ -19,8 +22,8 @@ router.get('/',objevacio,coti_permisos)
 
 /////estas rutas son para sus respectivos accesos segun pueda o no
 router.post('/marcas',mostrador_marcas)
-// router.post('/stoc',revisar)
-// router.post('/precios',ver_all)
-// router.post('/tiempo',modificacion)
+router.post('/stoc',marcas_stock)
+router.post('/precios',marcas_precios)
+router.post('/tiempo',marcas_tiempo)
 
 module.exports=router
