@@ -37,7 +37,7 @@ async function creacion(req,res,next) {
         const diecisesava_call = await consulta9(quinceava_call,primera_call,sexta_call);
 
         // res.status(200).json(JSON.stringify(tercer_call));
-        res.status(200).json(JSON.stringify({"catorceava":diecisesava_call}));
+        res.status(200).json({"numero":sexta_call});
     }
     catch(err){
         error_corrector(res,err);
