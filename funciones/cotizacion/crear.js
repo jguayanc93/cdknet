@@ -9,6 +9,7 @@ let {correlativo_update} = require('../../querys/cotizacion/correlativo_update')
 let {coti_atencion} = require('../../querys/cotizacion/atencion')
 let {coti_cabecera} = require('../../querys/cotizacion/crear_cabecera')
 let {coti_detallado} = require('../../querys/cotizacion/crear_detallado')
+let {cotizacion_registrar_vendedor} = require('../../querys/cotizacion//otorgar_cotizacion')
 ///////ESPACIO PARA FUNCIONES GENERALES
 
 ////ESPACIO PARA LOS MANEJOS DE ERRORES CON RESPUESTA
@@ -31,9 +32,12 @@ async function creacion(req,res,next) {
         ////CONSTRUIDO CON EXITO EL MST FALTA EL DETALLADO
         const treceava_call = await obtenerpromesa_conexion();
         const catorceava_call = await consulta8(treceava_call,req.body,segundo_call[0],cuarta_call,sexta_call);
+        ////OTORGARLE LA COTI AL VENDEDOR
+        const quinceava_call = await obtenerpromesa_conexion();
+        const diecisesava_call = await consulta9(quinceava_call,primera_call,sexta_call);
 
         // res.status(200).json(JSON.stringify(tercer_call));
-        res.status(200).json(JSON.stringify({"catorceava":catorceava_call}));
+        res.status(200).json(JSON.stringify({"catorceava":diecisesava_call}));
     }
     catch(err){
         error_corrector(res,err);
@@ -60,6 +64,10 @@ function consulta7(conexion,fecha,formato,info_cliente,atencion,totalisado){
 
 function consulta8(conexion,info_cliente,objtotal,fecha,formato){
     return new Promise((resolve,reject)=>coti_detallado(resolve,reject,conexion,info_cliente,objtotal,fecha,formato))
+};
+
+function consulta9(conexion,galleta,documento){
+    return new Promise((resolve,reject)=>cotizacion_registrar_vendedor(resolve,reject,conexion,galleta,documento))
 };
 
 function galleta_credencial(resolve,reject,req,next){
