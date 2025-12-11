@@ -14,6 +14,7 @@ const {creacion} = require('../funciones/cotizacion/crear')
 const {modificacion} = require('../funciones/cotizacion/modificar')
 const {revisar} = require('../funciones/cotizacion/mostrar')
 const {ver_all} = require('../funciones/cotizacion/mostrar_todo')
+const {almacen_cambio} = require('../funciones/cotizacion/almacen')
 
 router.use(express.json());
 
@@ -26,7 +27,7 @@ router.post('/create',creacion)
 router.post('/read',revisar)
 router.post('/readprom',ver_all)
 router.post('/update',modificacion)
+router.post('/almacen',almacen_cambio)
 // router.get('/delete',)
-// router.get('/alm',)
 
 module.exports=router
