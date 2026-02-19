@@ -55,9 +55,10 @@ function descuento(res,nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipomet
         ///ESTO ES PARA DARLE FORMA AL NOMBRE DE LA PROMOCION
         let comodin_dsc_cabesera=comodin_dsc+promcabesa[1];
         ////ESTO PARA SACAR EL MONTO DE CUANTO SE LE DEBE DESCONTAR SEGUN PROMOCION
-        let cantidad_recibir=items_promos2[0][1]*items_promos2[0][2]*-1;
+        let cantidad_recibir=Number((items_promos2[0][1]*items_promos2[0][2]*-1).toFixed(2));
         ////ESTO ES PARA MULTIPLICARLO CON LA CANTIDAD QUE MERECE PREVIAMENTE CALCULADO
         let cantidad_recibir2=items_validos2[7]*cantidad_recibir;
+        // console.log("revisar valores",items_promos2[0][1],items_promos2[0][2],items_validos2[7],cantidad_recibir)
         ////ESTO ES PARA KITIARLE EL IGV
         let cantidad_recibir_sin_igv=(cantidad_recibir2/1.18).toFixed(2);
         ////ESTO ES PARA DARLE FORMA AL NOMBRE Y NO SUPERAR LOS 80 CARACTERES
