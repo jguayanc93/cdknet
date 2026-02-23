@@ -18,9 +18,9 @@ const {error_corrector} = require('../error/err1')
 async function creacion(req,res,next) {
     try{
         const primera_call = await consulta1(req,next);//galletas
-        const segundo_call = await consulta2(req.body);//totalisados para la cabecera
         const tercer_call = await obtenerpromesa_conexion();
         const cuarta_call = await consulta3(tercer_call);//tipo de cambio
+        const segundo_call = await consulta2(req.body,cuarta_call);//totalisados para la cabecera
         const quinta_call = await obtenerpromesa_conexion();
         const sexta_call = await consulta4(quinta_call);//correlativo actual
         const setima_call = await obtenerpromesa_conexion();
@@ -28,7 +28,7 @@ async function creacion(req,res,next) {
         const novena_call = await obtenerpromesa_conexion();
         const decima_call = await consulta6(novena_call,req.body["cliente"][0]);//atencion del cliente
         const undecima_call = await obtenerpromesa_conexion();
-        const doceava_call= await consulta7(undecima_call,cuarta_call,sexta_call,req.body["cliente"],decima_call,segundo_call);
+        const doceava_call= await consulta7(undecima_call,cuarta_call,sexta_call,req.body["cliente"],decima_call,segundo_call,req.body["moneda"]);
         ////CONSTRUIDO CON EXITO EL MST FALTA EL DETALLADO
         const treceava_call = await obtenerpromesa_conexion();
         const catorceava_call = await consulta8(treceava_call,req.body,segundo_call[0],cuarta_call,sexta_call);
@@ -48,7 +48,7 @@ function obtenerpromesa_conexion(){ return new Promise((resolve,reject)=>conn(re
 
 function consulta1(req,next){ return new Promise((resolve,reject)=>galleta_credencial(resolve,reject,req,next)) }
 
-function consulta2(dataenviada){ return new Promise((resolve,reject)=>calcular(resolve,reject,dataenviada)) }
+function consulta2(dataenviada,tipocambio){ return new Promise((resolve,reject)=>calcular_moneda(resolve,reject,dataenviada,tipocambio)) }
 
 function consulta3(conexion){ return new Promise((resolve,reject)=>tipo_cambio(resolve,reject,conexion)) }
 
@@ -58,8 +58,8 @@ function consulta5(conexion,correlativo){ return new Promise((resolve,reject)=>c
 
 function consulta6(conexion,codcli){ return new Promise((resolve,reject)=>coti_atencion(resolve,reject,conexion,codcli)) }
 
-function consulta7(conexion,fecha,formato,info_cliente,atencion,totalisado){
-    return new Promise((resolve,reject)=>coti_cabecera(resolve,reject,conexion,fecha,formato,info_cliente,atencion,totalisado))
+function consulta7(conexion,fecha,formato,info_cliente,atencion,totalisado,moneda){
+    return new Promise((resolve,reject)=>coti_cabecera(resolve,reject,conexion,fecha,formato,info_cliente,atencion,totalisado,moneda))
 }
 
 function consulta8(conexion,info_cliente,objtotal,fecha,formato){
@@ -80,7 +80,7 @@ function galleta_credencial(resolve,reject,req,next){
     else{reject("falsa galleta")}    
 }
 
-function calcular(resolve,reject,dataenviada){
+function calcular(resolve,reject,dataenviada,tipocambio){
     let objtotal={};
     let totalisado=0;
     for(let indice in dataenviada["productos"]){
@@ -103,6 +103,64 @@ function calcular(resolve,reject,dataenviada){
         objtotal[indice]=[codf,marca,descripcion,cantidad,preu,total_solo_item,dsct,total_solo_item_conigv,costo];
         totalisado+=saca_total;
     }
+    resolve([objtotal,totalisado])
+}
+function calcular_moneda(resolve,reject,dataenviada,tipocambio){
+    let objtotal={};
+    let totalisado=0;
+    if(dataenviada["moneda"]=='S'){
+        let tip_cambio=tipocambio[0];
+
+        for(let indice in dataenviada["productos"]){
+            let descripcion=dataenviada["productos"][indice][0];
+            let cantidad=parseInt(dataenviada["productos"][indice][1]);
+            let costo=parseFloat(dataenviada["productos"][indice][2]).toFixed(2);
+            let preu=parseFloat(dataenviada["productos"][indice][3]);
+            let dsct=parseFloat(dataenviada["productos"][indice][4]);
+            ///////////////////calcular en soles
+            let costo_sol= Number((costo*tip_cambio).toFixed(2));
+            let preu_sol=Number((preu*tip_cambio).toFixed(2));
+            ////////////
+            let codf=dataenviada["productos"][indice][5];
+            let marca=dataenviada["productos"][indice][6];
+            ////calcular moneda
+            let saca_descuento=dsct/100;
+            //////////
+            let saca_tota_por_descuento=Number((preu_sol*saca_descuento).toFixed(2));
+            let saca_tota_con_descuento=Number((preu_sol-saca_tota_por_descuento).toFixed(2));
+            let saca_total=saca_tota_con_descuento*cantidad;
+            let total_solo_item=saca_total.toFixed(2);
+            let total_solo_item_igv=(saca_total*0.18).toFixed(2);
+            let total_solo_item_conigv=(saca_total*1.18).toFixed(2);
+            // objtotal[indice]=[total_solo_item,total_solo_item_igv,total_solo_item_conigv];
+            ////creacion del molde para el objeto globlal de productos
+            objtotal[indice]=[codf,marca,descripcion,cantidad,preu_sol,total_solo_item,dsct,total_solo_item_conigv,costo_sol];
+            totalisado+=saca_total;
+        }
+    }
+    else{
+        for(let indice in dataenviada["productos"]){
+        let descripcion=dataenviada["productos"][indice][0];
+        let cantidad=parseInt(dataenviada["productos"][indice][1]);
+        let costo=parseFloat(dataenviada["productos"][indice][2]).toFixed(2);
+        let preu=parseFloat(dataenviada["productos"][indice][3]);
+        let dsct=parseFloat(dataenviada["productos"][indice][4]);
+        let codf=dataenviada["productos"][indice][5];
+        let marca=dataenviada["productos"][indice][6];
+        let saca_descuento=dsct/100;
+        let saca_tota_por_descuento=(preu*saca_descuento).toFixed(2);
+        let saca_tota_con_descuento=(preu-saca_tota_por_descuento).toFixed(2);
+        let saca_total=saca_tota_con_descuento*cantidad;
+        let total_solo_item=saca_total.toFixed(2);
+        let total_solo_item_igv=(saca_total*0.18).toFixed(2);
+        let total_solo_item_conigv=(saca_total*1.18).toFixed(2);
+        // objtotal[indice]=[total_solo_item,total_solo_item_igv,total_solo_item_conigv];
+        ////creacion del molde para el objeto globlal de productos
+        objtotal[indice]=[codf,marca,descripcion,cantidad,preu,total_solo_item,dsct,total_solo_item_conigv,costo];
+        totalisado+=saca_total;
+        }
+    }
+    
     resolve([objtotal,totalisado])
 }
 

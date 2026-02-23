@@ -1,7 +1,7 @@
 require('dotenv').config();
 const {Request,TYPES} = require('../../conexion/cadena')
 
-let coti_cabecera = (resolve,reject,conexion,fecha,formato,info_cliente,atencion,totalisado)=>{
+let coti_cabecera = (resolve,reject,conexion,fecha,formato,info_cliente,atencion,totalisado,moneda)=>{
 
     let sq_sql="GrabaMstCotFac";
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
@@ -24,7 +24,7 @@ let coti_cabecera = (resolve,reject,conexion,fecha,formato,info_cliente,atencion
     consulta.addParameter('atte',TYPES.Char,atencion);///SACAR DEL CLIENTE
     consulta.addParameter('nrefe',TYPES.Char,'');
     consulta.addParameter('requ',TYPES.Char,'');
-    consulta.addParameter('mone',TYPES.Char,'D');///SACAR DEL CLIENTE
+    consulta.addParameter('mone',TYPES.Char,moneda);///SACAR DEL CLIENTE
     consulta.addParameter('tcam',TYPES.Float,fecha[0]);///CREAR LA CONSULTA
 
     consulta.addParameter('tota',TYPES.Float,totalisado[1]);///SACAR DEL CLIENTE
@@ -40,7 +40,7 @@ let coti_cabecera = (resolve,reject,conexion,fecha,formato,info_cliente,atencion
     consulta.addParameter('cOperacion',TYPES.Char,'Nuevo');
     consulta.addParameter('obser',TYPES.Char,'');///identificador para diferenciar
     consulta.addParameter('estado',TYPES.Char,'0');
-    consulta.addParameter('obsere',TYPES.Char,'');
+    consulta.addParameter('obsere',TYPES.Char,'Solicitud ya fue atendido por el bot.');
     consulta.addParameter('word',TYPES.Int,0);
     consulta.addParameter('obser2',TYPES.Char,'');
     consulta.addParameter('dirent',TYPES.VarChar,'');

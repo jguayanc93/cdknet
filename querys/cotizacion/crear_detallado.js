@@ -29,7 +29,7 @@ let detallado_bucle =(resolve,reject,conexion,dataenviada,objtotal,fecha,formato
         consulta.addParameter('ndocu',TYPES.Char,formato);
         consulta.addParameter('codcli',TYPES.Char,dataenviada["cliente"][0]);
         consulta.addParameter('tcam',TYPES.Float,fecha);
-        consulta.addParameter('mone',TYPES.Char,'D');
+        consulta.addParameter('mone',TYPES.Char,dataenviada["moneda"]);
         consulta.addParameter('moneitm',TYPES.Char,'D');
         consulta.addParameter('aigv',TYPES.Char,'S');
         consulta.addParameter('item',TYPES.Float,contador+1);
@@ -44,7 +44,7 @@ let detallado_bucle =(resolve,reject,conexion,dataenviada,objtotal,fecha,formato
         consulta.addParameter('dsct',TYPES.Float,objtotal[orden[contador]][6]);
         consulta.addParameter('totn',TYPES.Float,objtotal[orden[contador]][7]);
         consulta.addParameter('AnulaDetalle',TYPES.Char,'');
-        consulta.addParameter('codalm',TYPES.Char,dataenviada["alm"]);
+        consulta.addParameter('codalm',TYPES.Char,'01');
         consulta.addParameter('cost',TYPES.Float,objtotal[orden[contador]][8]);
         consulta.addParameter('msto',TYPES.Char,'S');
         consulta.addParameter('ucon',TYPES.Float,1.000);
