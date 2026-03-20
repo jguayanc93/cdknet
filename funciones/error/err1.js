@@ -51,8 +51,8 @@ const error_corrector=(res,mensaje)=>{
             res.status(403).json({"status":mensaje,"codigo":3,"msg":"vendedor tiene un registro de cuota de este mes"})
             break;
 
-        case "":
-            res.status(400).json({"status":mensaje,"codigo":2,"msg":""})
+        case "promo ya aplicada":
+            res.status(400).json({"status":mensaje,"codigo":2,"msg":"la promocion ya esta aplicada"})
             break;
 
         default:

@@ -18,7 +18,7 @@ const {error_corrector} = require('../error/err1')
 async function prom_remover(req,res,next) {
     try{
         const primera_call = await consulta1(req,next);//galletas
-        // const segunda_call = await consulta2(req.body);
+        
         const tercera_call = await obtenerpromesa_conexion();
         const cuarta_call = await consulta3(tercera_call,req.body);///eliminar las promociones
         const quinta_call = await consulta4(req.body)///extraer el numero de documento
@@ -37,8 +37,6 @@ async function prom_remover(req,res,next) {
 function obtenerpromesa_conexion(){ return new Promise((resolve,reject)=>conn(resolve,reject)) }
 
 function consulta1(req,next){ return new Promise((resolve,reject)=>galleta_credencial(resolve,reject,req,next)) }
-
-// function consulta2(cuerpo){ return new Promise((resolve,reject)=>direccionador(resolve,reject,cuerpo))}
 
 function consulta3(conexion,body){ return new Promise((resolve,reject)=>removido_items_bucle(resolve,reject,conexion,body)) }
 

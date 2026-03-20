@@ -3,10 +3,11 @@ const {Request,TYPES} = require('../../conexion/cadena')
 
 let factura_sugerencia_direccion = (resolve,reject,conexion,body)=>{
     
-    let caracter = "%"+body.sugerencia+"%";
+    // let caracter = "%"+body.sugerencia+"%";
     let cli = body.cli;
 
-    let sq_sql="select dirent from mst01cli where codcli=@cliente1 union select dirent from Dtl_Cliente_Alias where codcli=@cliente2 and dirent<>'' and dirent like @sugerencia";
+    // let sq_sql="select dirent from mst01cli where codcli=@cliente1 union select dirent from Dtl_Cliente_Alias where codcli=@cliente2 and dirent<>'' and dirent like @sugerencia";
+    let sq_sql="select dirent from mst01cli where codcli=@cliente1 union select dirent from Dtl_Cliente_Alias where codcli=@cliente2 and dirent<>''";
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
         if(err){
             conexion.close();
@@ -38,7 +39,7 @@ let factura_sugerencia_direccion = (resolve,reject,conexion,body)=>{
     })
     consulta.addParameter('cliente1',TYPES.VarChar,cli);
     consulta.addParameter('cliente2',TYPES.VarChar,cli);
-    consulta.addParameter('sugerencia',TYPES.VarChar,caracter);
+    // consulta.addParameter('sugerencia',TYPES.VarChar,caracter);
     conexion.execSql(consulta);
 }
 
