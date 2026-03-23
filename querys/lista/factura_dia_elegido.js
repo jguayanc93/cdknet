@@ -7,7 +7,7 @@ let fac_dia_elegido = (resolve,reject,conexion,galleta,body)=>{
     let fecha_elegida=body.dia;
     let dia = fecha_elegida.substring(8);
 
-    let sq_sql="select CONVERT(varchar,fecha,111),ndocu,nomcli,totn,(case TipEnt when 1 then 'ventanilla' when 3 then 'Lima' when 4 then 'Provincia' end),(case cdge when '' then 'FACTURA' when '09' then 'GUIA' when '51' then 'N.DESPACHO' end) from mst01fac where flag<>'*' and YEAR(fecha)=2025 and MONTH(fecha)=CONVERT(varchar(2),GETDATE(),101) and DAY(fecha)=@dia AND cdocu in('01','03') and codven_usu=@codven";
+    let sq_sql="select CONVERT(varchar,fecha,111),ndocu,nomcli,totn,(case TipEnt when 1 then 'ventanilla' when 3 then 'Lima' when 4 then 'Provincia' end),(case cdge when '' then 'FACTURA' when '09' then 'GUIA' when '51' then 'N.DESPACHO' end) from mst01fac where flag<>'*' and YEAR(fecha)=YEAR(GETDATE()) and MONTH(fecha)=CONVERT(varchar(2),GETDATE(),101) and DAY(fecha)=@dia AND cdocu in('01','03') and codven_usu=@codven";
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
         if(err){
             conexion.close();

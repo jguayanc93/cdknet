@@ -36,7 +36,8 @@ const promocion={
     "crear":[],
     "leer":[],
     "update":[20,25,34],
-    "delete":[20,25,34]
+    "delete cotizacion":[20,25,34],
+    "delete pedido":[20,25,34]
 }
 
 const cuota={
