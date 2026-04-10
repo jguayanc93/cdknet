@@ -110,6 +110,7 @@ function direccionador2(resolve,reject){
 }
 
 function buscar_tipo(resolve,reject,respuesta2){
+    ///falta manejar las direcciones a partir de la separacion de promocions
     const posibilidades={
     "tipo111":[1,1,1],
     "tipo113":[1,1,3],///ya esta
@@ -130,12 +131,12 @@ function buscar_tipo(resolve,reject,respuesta2){
     resolve(encontrado)
 
 }
-
+/////SOLO EXISTEN 2 METRICAS,POR MONTO Y POR UNIDADES,CON ESTO VAS A MONTO DE DINERO O CANTIDAD DE UNIDADES
 function buscar_metrica(resolve,reject,respuesta2){
     let tipo_metrica=respuesta2[6];
     resolve(tipo_metrica)
 }
-
+/////CLAVE PARA DETERMINAR SI ESTA PROMOCION ESTA AGRUPADA O NO, DE ESTARLO TOMAR OTRA RUTA PARA SU APLICACION
 function buscar_grupo(resolve,reject,respuesta2){
     let tipo_grupo=respuesta2[9];
     resolve(tipo_grupo)
