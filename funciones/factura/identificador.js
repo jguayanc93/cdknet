@@ -1,6 +1,6 @@
 let consultas_almacenadas={
     1:"update mst01fac set TipEnt=@update where ndocu=@doc",
-    2:"update mst01fac set codtra=@update where ndocu=@doc",
+    2:"update mst01fac set codtra2=@update where ndocu=@doc",
     3:"update mst01fac set Consig=@update where ndocu=@doc",
     4:"update mst01fac set dirent=@update where ndocu=@doc",
     5:"update mst01fac set codven_usu=@update where ndocu=@doc",
