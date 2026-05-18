@@ -13,7 +13,7 @@ async function clientes_atendidos(req,res,next) {
     try{
         const primera_call = await consulta1(req,next);//galletas
         const segunda_call = await obtenerpromesa_conexion();
-        const tercera_call = await consulta2(segunda_call,primera_call);
+        const tercera_call = await consulta2(segunda_call,primera_call,req.body);
         
         res.status(200).json(JSON.stringify(tercera_call));
     }
@@ -26,7 +26,7 @@ function obtenerpromesa_conexion(){ return new Promise((resolve,reject)=>conn(re
 
 function consulta1(req,next){ return new Promise((resolve,reject)=>galleta_credencial(resolve,reject,req,next)) }
 
-function consulta2(conexion,galleta){ return new Promise((resolve,reject)=>seleccion_clientes(resolve,reject,conexion,galleta)) }
+function consulta2(conexion,galleta,body){ return new Promise((resolve,reject)=>seleccion_clientes(resolve,reject,conexion,galleta,body)) }
 
 function galleta_credencial(resolve,reject,req,next){
     let user_id=req.signedCookies.cdk;

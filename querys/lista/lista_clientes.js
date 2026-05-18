@@ -1,9 +1,10 @@
 require('dotenv').config();
 const {Request,TYPES} = require('../../conexion/cadena')
 
-let seleccion_clientes = (resolve,reject,conexion,galleta)=>{
+let seleccion_clientes = (resolve,reject,conexion,galleta,body)=>{
 
     let vendedor= galleta.codigo;
+    let eleccion=body.tipo;
 
     let sq_sql="jc_lista_clientes";
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
@@ -35,8 +36,8 @@ let seleccion_clientes = (resolve,reject,conexion,galleta)=>{
             }
         }
     })
-    consulta.addParameter('codven',TYPES.VarChar,'');
-    consulta.addParameter('lista',TYPES.VarChar,'');
+    consulta.addParameter('codven',TYPES.VarChar,vendedor);
+    consulta.addParameter('lista',TYPES.VarChar,eleccion);
     conexion.callProcedure(consulta);
 }
 
