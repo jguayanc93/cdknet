@@ -50,11 +50,12 @@ const cuota={
 const lista={
     "cotizacion":[20,25],
     "pedido":[20,25],
-    "factura":[20,25]
+    "factura":[20,25],
+    "clientes":[20,25]
 }
 
 const programador={
-    "entregar":[20],
+    "entregar":[20,34],
     "retirar":[]
 }
 

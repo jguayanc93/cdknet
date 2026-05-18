@@ -1,11 +1,11 @@
 require('dotenv').config();
 const {Request,TYPES} = require('../../conexion/cadena')
 
-let pedi_de_hoy = (resolve,reject,conexion,galleta)=>{
+let seleccion_clientes = (resolve,reject,conexion,galleta)=>{
 
     let vendedor= galleta.codigo;
 
-    let sq_sql="select CONVERT(varchar,fecha,111),ndocu,nomcli,totn,(case flag when '1' then 'atendido' when '0' then 'aprobado' end) from mst01ped where flag<>'*' and YEAR(fecha)=YEAR(GETDATE()) and MONTH(fecha)=CONVERT(varchar(2),GETDATE(),101) and DAY(fecha)=CONVERT(varchar(2),GETDATE(),103) and codven_usu=@codven";
+    let sq_sql="jc_lista_clientes";
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
         if(err){
             conexion.close();
@@ -15,7 +15,7 @@ let pedi_de_hoy = (resolve,reject,conexion,galleta)=>{
             conexion.close();
             
             if(rows.length==0){
-                reject("cotizacion no registrada");
+                reject("no tienes clientes");
             }
             else{
                 let respuesta=[];
@@ -35,8 +35,9 @@ let pedi_de_hoy = (resolve,reject,conexion,galleta)=>{
             }
         }
     })
-    consulta.addParameter('codven',TYPES.VarChar,vendedor);
-    conexion.execSql(consulta);
+    consulta.addParameter('codven',TYPES.VarChar,'');
+    consulta.addParameter('lista',TYPES.VarChar,'');
+    conexion.callProcedure(consulta);
 }
 
-module.exports={pedi_de_hoy}
+module.exports={seleccion_clientes}

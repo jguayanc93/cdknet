@@ -13,7 +13,7 @@ const config = {
     },
     options:{
         encrypt:false,
-        database:'bdnava03',
+        database:'bdnava01',
         rowCollectionOnRequestCompletion:true,
         trustServerCertificate:true,
         requestTimeout:0
