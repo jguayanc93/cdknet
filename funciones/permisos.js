@@ -15,12 +15,16 @@ const cotizacion={
 }
 
 const pedido={
-    "crear":[20,34],
-    "leer":[20],
-    "update":[20,34],
-    "delete":[20,25,34],
-    "alm":[34]
+    "flete":[20,34]
 }
+
+// const pedido={
+//     "crear":[20,34],
+//     "leer":[20],
+//     "update":[20,34],
+//     "delete":[20,25,34],
+//     "alm":[34]
+// }
 
 const factura={
     "despacho":[20,25],

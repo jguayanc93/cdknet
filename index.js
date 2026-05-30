@@ -28,6 +28,8 @@ app.use('/v1/vendedor',ruta.vendedor);
 
 app.use('/v1/cotizacion',ruta.coti)
 
+app.use('/v1/pedido',ruta.pedido);
+
 app.use('/v1/cliente',ruta.cliente);
 
 app.use('/v1/producto',ruta.producto);

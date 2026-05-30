@@ -11,6 +11,8 @@ const producto = require('../producto/producto.js')
 
 const coti = require('../cotizacion/cotizacion.js');
 
+const pedido = require('../pedido/pedido.js');
+
 const promocion = require('../promociones/promocion.js');
 
 const cuotas= require('../cuota/cuotas.js');
@@ -23,4 +25,4 @@ const factura = require('../factura/factura.js');
 
 const reporte = require('../reporte/reportes.js');
 
-module.exports={login,logout,vendedor,coti,cliente,producto,promocion,cuotas,lista,programador,factura,reporte}
+module.exports={login,logout,vendedor,coti,cliente,producto,promocion,cuotas,lista,programador,factura,reporte,pedido}
