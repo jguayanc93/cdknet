@@ -1,6 +1,6 @@
 // const modulos_generales=[cotizacion,facturas,promocion,reporte];
 const coti=["cotizacion","Permite manejar cotizaciones"];
-const pedi=["pedidos","Permite manejar pedidos"];
+const pedi=["pedido","Permite manejar pedidos"];
 const factura=["factura","Modifica ciertos campos de la factura"];
 const prom=["promocion","Permite adjuntar y retirar promociones"];
 const listas=["listas","Lista tus ventas realizadas"];
