@@ -12,6 +12,7 @@ const {objevacio} = require('../funciones/objvacio')
 const {pedi_permisos} = require('../funciones/pedido/permisos')
 const {revisar} = require('../funciones/cotizacion/mostrar')
 const {aplicar_flete} = require('../funciones/pedido/aplicar_flete')
+const {autorizar_flete} = require('../funciones/pedido/autorizar_flete')
 // const {almacen_cambio} = require('../funciones/cotizacion/almacen')
 
 router.use(express.json());
@@ -21,6 +22,6 @@ router.get('/',objevacio,pedi_permisos)
 
 /////estas rutas son para sus respectivos accesos segun pueda o no
 router.post('/mostrar',aplicar_flete)
-// router.post('/flete',)
+router.post('/flete',autorizar_flete)
 
 module.exports=router
