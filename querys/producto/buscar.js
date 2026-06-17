@@ -9,10 +9,12 @@ let producto_buscar = (resolve,reject,conexion,req,next)=>{
     let sp_sql;
 
     if(tipbusq=='1'){
-        sp_sql="select top 5 a.codi,a.descr,CAST(a.stoc as int) as 'principal',ISNULL(CAST(b.stoc as int),0) as 'm&m' from prd0101 a left join prd0108 b on (b.codi=a.codi) where a.estado=1 AND CAST(a.vvus as  int)>1 and a.descr like @pista order by a.stoc desc";
+        // sp_sql="select top 5 a.codi,a.descr,CAST(a.stoc as int) as 'principal',ISNULL(CAST(b.stoc as int),0) as 'm&m' from prd0101 a left join prd0108 b on (b.codi=a.codi) where a.estado=1 AND CAST(a.vvus as  int)>1 and a.descr like @pista order by a.stoc desc";
+        sp_sql="select top 5 a.codi,a.descr,CAST(a.stoc as int) as 'principal',ISNULL(CAST(b.stoc as int),0) as 'm&m',c.dscto_maxven from prd0101 a left join prd0108 b on (b.codi=a.codi) inner join dtl_dscto_marca_tc c on (c.codmar=a.codmar) where a.estado=1 AND CAST(a.vvus as  int)>1 AND c.codtcl='F' and a.descr like @pista order by a.stoc desc";
     }
     else if(tipbusq=='2'){
-        sp_sql="select top 5 a.codi,a.descr,CAST(a.stoc as int) as 'principal',ISNULL(CAST(b.stoc as int),0) as 'm&m' from prd0101 a left join prd0108 b on (b.codi=a.codi) where a.estado=1 AND CAST(a.vvus as  int)>1 and a.Usr_001 like @pista order by a.stoc desc";
+        // sp_sql="select top 5 a.codi,a.descr,CAST(a.stoc as int) as 'principal',ISNULL(CAST(b.stoc as int),0) as 'm&m' from prd0101 a left join prd0108 b on (b.codi=a.codi) where a.estado=1 AND CAST(a.vvus as  int)>1 and a.Usr_001 like @pista order by a.stoc desc";
+        sp_sql="select top 5 a.codi,a.descr,CAST(a.stoc as int) as 'principal',ISNULL(CAST(b.stoc as int),0) as 'm&m',c.dscto_maxven from prd0101 a left join prd0108 b on (b.codi=a.codi) inner join dtl_dscto_marca_tc c on (c.codmar=a.codmar) where a.estado=1 AND CAST(a.vvus as  int)>1 AND c.codtcl='F' and a.Usr_001 like @pista order by a.stoc desc";
     }
 
     let consulta= new Request(sp_sql,(err,rowCount,rows)=>{
