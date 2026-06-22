@@ -14,8 +14,7 @@ let promo_vertodo = (resolve,reject,conexion,cuerpo)=>{
         }
         else{
             conexion.close();
-
-            ////////lo mandara aqui porqe aunque si exista no esta registrado en la intranet y debe registrarse
+            
             if(rows.length==0){
                 reject("cotizacion no registrada");
             }

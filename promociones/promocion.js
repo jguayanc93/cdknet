@@ -16,6 +16,8 @@ const {prom_analisar} = require('../funciones/promocion/mostrar')
 const {prom_adjuntar} = require('../funciones/promocion/analisar')
 const {prom_acoplar} = require('../funciones/promocion/adjuntar')
 const {prom_remover} = require('../funciones/promocion/remover')
+//////////////
+const {prom_buscar_paso1} = require('../funciones/promocion/simple_buscador_paso1')
 
 router.use(express.json());
 
@@ -24,6 +26,7 @@ router.get('/',objevacio,promo_permisos)
 // router.get('/',(req,res)=>{res.status(200).send("deberia enviarte al login de nuevo por no tener galletas")})
 
 /////estas rutas son para sus respectivos accesos segun pueda o no
+router.post('/recolector',prom_buscar_paso1)
 // router.post('/update',)
 // router.post('/delete',)
 router.post('/revisar',prom_buscar)
