@@ -14,13 +14,12 @@ const {error_corrector} = require('../error/err1')
 async function prom_buscar_paso1(req,res,next) {
     try{
         const primera_call = await consulta1(req,next);//galletas
-        // const segunda_call = await obtenerpromesa_conexion();
-        // const tercera_call = await consulta2(segunda_call,req.body);
-        const cuarta_call = await obtenerpromesa_conexion();
-        const quinta_call = await consulta3(cuarta_call,req.body);
-        const sexta_call = await consulta4(quinta_call);
+        // const cuarta_call = await obtenerpromesa_conexion();
+        // const quinta_call = await consulta3(cuarta_call,req.body);
+        // const sexta_call = await consulta4(quinta_call);
         
-        res.status(200).json(sexta_call);
+        // res.status(200).json(sexta_call);
+        res.status(200).json(req.body.productos);
     }
     catch(err){
         error_corrector(res,err);
@@ -31,7 +30,7 @@ function obtenerpromesa_conexion(){ return new Promise((resolve,reject)=>conn(re
 
 function consulta1(req,next){ return new Promise((resolve,reject)=>galleta_credencial(resolve,reject,req,next)) }
 
-function consulta2(conexion,cuerpo){ return new Promise((resolve,reject)=>promo_vertodo(resolve,reject,conexion,cuerpo)) }
+// function consulta2(conexion,cuerpo){ return new Promise((resolve,reject)=>promo_vertodo(resolve,reject,conexion,cuerpo)) }
 
 function consulta3(conexion,detallado){ return new Promise((resolve,reject)=>promo_buscador_simple(resolve,reject,conexion,detallado)) }
 
