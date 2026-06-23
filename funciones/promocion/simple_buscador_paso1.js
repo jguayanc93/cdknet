@@ -14,12 +14,12 @@ const {error_corrector} = require('../error/err1')
 async function prom_buscar_paso1(req,res,next) {
     try{
         const primera_call = await consulta1(req,next);//galletas
-        // const cuarta_call = await obtenerpromesa_conexion();
-        // const quinta_call = await consulta3(cuarta_call,req.body);
-        // const sexta_call = await consulta4(quinta_call);
+        const cuarta_call = await obtenerpromesa_conexion();
+        const quinta_call = await consulta3(cuarta_call,req.body);
+        const sexta_call = await consulta4(quinta_call);
         
-        // res.status(200).json(sexta_call);
-        res.status(200).json(req.body.productos);
+        res.status(200).json(sexta_call);
+        // res.status(200).json(req.body.productos);
     }
     catch(err){
         error_corrector(res,err);

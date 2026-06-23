@@ -6,7 +6,7 @@ let promo_buscador_simple = (resolve,reject,conexion,respuesta2)=>{
 
     let items=respuesta2.productos;
 
-    for(let codi in items){ codi_recolector.push(items[codi][codigo]); }
+    for(let codi in items){ codi_recolector.push(items[codi]["codigo"]); }
     
     let contador=1;
     // let sp_sql="select a.idprom,b.codi from mst_promocion a join dtl_promocion_progra b on b.idprom=a.idprom where a.estado=1 group by a.idprom,b.codi";
