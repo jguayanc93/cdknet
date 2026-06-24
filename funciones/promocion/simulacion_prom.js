@@ -34,7 +34,7 @@ async function prom_temporal_mejorada(req,res,next) {
         // const decima_call = await consulta7(req.body.nprom,segunda_call,cuarta_call,novena_call,quinta_call,sexta_call);
         const decima_call = await consulta7(segunda_call[0],segunda_call[1],quinta_call,cuarta_call,novena_call);        
 
-        res.status(200).json(decima_call)
+        res.status(200).json({"respuesta":decima_call})
         
     }
     catch(err){ error_corrector(res,err); }
