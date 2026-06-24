@@ -14,7 +14,7 @@ let prom_cabeza_seccion1 = (resolve,reject,conexion,body)=>{
         else{
             conexion.close();
             
-            if(rows.length==0){ reject("promocion no existe"); }
+            if(rows.length==0){ reject("promocion no registrada"); }
             else{
                 let respuesta=[];
                 let respuesta2={};
