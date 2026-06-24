@@ -18,6 +18,7 @@ const {prom_acoplar} = require('../funciones/promocion/adjuntar')
 const {prom_remover} = require('../funciones/promocion/remover')
 //////////////
 const {prom_buscar_paso1} = require('../funciones/promocion/simple_buscador_paso1')
+const {prom_temporal_mejorada} = require('../funciones/promocion/simulacion_prom')
 
 router.use(express.json());
 
@@ -27,7 +28,7 @@ router.get('/',objevacio,promo_permisos)
 
 /////estas rutas son para sus respectivos accesos segun pueda o no
 router.post('/recolector',prom_buscar_paso1)
-// router.post('/update',)
+router.post('/detalle',prom_temporal_mejorada)
 // router.post('/delete',)
 router.post('/revisar',prom_buscar)
 router.post('/mostrar',prom_analisar,prom_adjuntar)
