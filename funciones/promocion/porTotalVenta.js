@@ -38,6 +38,8 @@ function vx_valorizados(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
         ///como es valorizado la logica cambia en la tabla es al reves los campos
         let unidades_minimas=promdetalle[0][1];///tanto monto necesita
         let cantidad_descuento=promdetalle[0][2];///cuantos debe darle
+        ////AUN FALTA PASARLE EL PARAMETRO DEL VALORIZADO REAL DE LOS PRODUCTOS ACUMULADOS OSEA EL TOTAL
+        ///NO OLVIDAR
         let division=Math.floor(Number(cantidad_momentanea)/Number(check_monto_prom));
         ///ESTO PUEDE QUE ESTE DEMAS EN CUANTO A UN REGALO
         // let corresponde=division*(Number(unidades_minimas)*Number(cantidad_descuento))
@@ -69,7 +71,7 @@ function vx_unidades(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
         ////como si alcansa ahora veremos cuanto debe otorgarle en cantidad y descuento
         let unidades_minimas=promdetalle[0][1];
         let cantidad_descuento=promdetalle[0][2];
-        let division=Math.floor(Number(check_monto_prom)/Number(cantidad_momentanea));
+        let division=Math.floor(Number(cantidad_momentanea)/Number(check_monto_prom));
         let corresponde=division*(Number(unidades_minimas)*Number(cantidad_descuento))
         return [division,corresponde];
     }
