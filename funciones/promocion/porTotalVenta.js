@@ -50,6 +50,7 @@ function vx_valorizados(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
     }
 }
 function vx_unidades(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
+    let objeto_regresar={};
     let items_correspondientes={};
     let check_monto_prom=0;
     /////solo queremos saber cuando se cumple la promo y que items son los que cumplen la promo
@@ -64,16 +65,21 @@ function vx_unidades(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
     ////una ves recojido los items que coinciden en el grupo de la promo
     ///falta comparar las cantidad si es valido o invalido pa recibir la promo
     let cantidad_momentanea=0
-    for(let x in items_correspondientes){
-        cantidad_momentanea=cantidad_momentanea+items_correspondientes[x][0];
-    }
+    for(let x in items_correspondientes){ cantidad_momentanea=cantidad_momentanea+items_correspondientes[x][0]; }
+
     if(Number(check_monto_prom)<=Number(cantidad_momentanea)){
         ////como si alcansa ahora veremos cuanto debe otorgarle en cantidad y descuento
         let unidades_minimas=promdetalle[0][1];
         let cantidad_descuento=promdetalle[0][2];
         let division=Math.floor(Number(cantidad_momentanea)/Number(check_monto_prom));
         let corresponde=division*(Number(unidades_minimas)*Number(cantidad_descuento))
-        return [division,corresponde];
+        // return [division,corresponde];
+        objeto_regresar["codigo"]=tipopromo["idprom"];
+        objeto_regresar["descripcion"]=tipopromo["nombre"];
+        objeto_regresar["cantidad"]=division;
+        objeto_regresar["montoDescuento"]=corresponde;
+        objeto_regresar["monedaDescuento"]="D";
+        return objeto_regresar;
     }
     else{
         return "NO SUFICIENTE UNIDADES TOTALVENTA";
