@@ -54,7 +54,8 @@ function vx_valorizados(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
 
     }
     else{
-        return "NO SUFICIENTE MONTO TOTALVENTA";
+        // return "NO SUFICIENTE MONTO TOTALVENTA";
+        return `NO SUFICIENTE MONTO TOTALVENTA, SE REQUIERE ${check_monto_prom} Y SOLO HAY ${cantidad_momentanea}`;
     }
 }
 function vx_unidades(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
