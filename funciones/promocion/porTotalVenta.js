@@ -24,7 +24,7 @@ function vx_valorizados(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
         if(codigos.includes(promdetalle[y][0])){
             check_monto_prom=promdetalle[y][1];////MONTO MINIMO CUIDADO PUEDE SER UND/MONTO EJE 306.8
             let check_monto_item=cotdetalle[promdetalle[y][0]]["cantidad"];///MONTO QUE TIENE EL ITEM EN EL DETALLE
-            let check_monto_precio=cotdetalle[promdetalle[y][0]]["PreciosinIGV"];///MONTO QUE TIENE EL ITEM EN EL DETALLE
+            let check_monto_precio=cotdetalle[promdetalle[y][0]]["preciosinIGV"];///MONTO QUE TIENE EL ITEM EN EL DETALLE
             items_correspondientes[promdetalle[y][0]]=[check_monto_item,check_monto_precio];
         }
     }
@@ -51,11 +51,9 @@ function vx_valorizados(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
         objeto_regresar["montoDescuento"]=promdetalle[0][3];
         objeto_regresar["monedaDescuento"]="D";
         return objeto_regresar;
-
     }
     else{
-        // return "NO SUFICIENTE MONTO TOTALVENTA";
-        return `NO SUFICIENTE MONTO TOTALVENTA, SE REQUIERE ${check_monto_prom} Y SOLO HAY ${cantidad_momentanea}`;
+        return "NO SUFICIENTE MONTO TOTALVENTA";
     }
 }
 function vx_unidades(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
