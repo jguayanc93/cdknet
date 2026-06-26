@@ -18,6 +18,8 @@ let bonificacion = require('./bonificacion')
 //////NUEVAS FUNCIONES PARA REEMPLAZAR LAS BIFURCACIONES DE PROMOCION QUE TIENE
 let por_ITEM = require('./porItem')
 let por_TOTALVENTA = require('./porTotalVenta')
+///NUEVAS FUNCIONES PARA MANEJAR LA PROMO OBTENIDA EJEM DESCUENTO O REGALO
+let descuento_acomodado = require('./acomodar_descuento')
 ////ESPACIO PARA LOS MANEJOS DE ERRORES CON RESPUESTA
 const {error_corrector} = require('../error/err1')
 //////////SE DEBE CORREGIR TODO
@@ -32,7 +34,9 @@ async function prom_temporal_mejorada(req,res,next) {
         const novena_call = await consulta6(octava_call,req.body.codigo);///promocion detallado
         /////falta como direccionar bien las 4 lados de una promo
         // const decima_call = await consulta7(req.body.nprom,segunda_call,cuarta_call,novena_call,quinta_call,sexta_call);
-        const decima_call = await consulta7(segunda_call[0],segunda_call[1],quinta_call,cuarta_call,novena_call);        
+        const decima_call = await consulta7(segunda_call[0],segunda_call[1],quinta_call,cuarta_call,novena_call);
+
+        // const onceava_call = await consulta8(segunda_call[0],);
 
         res.status(200).json(JSON.stringify(decima_call));
         
@@ -86,16 +90,13 @@ function nuevo_separador_tipos(resolve,reject,respuesta2){
 }
 /////////////funcion para bifurcar la direccion de la promo segun el tipo de promo y la metrica
 function que_venta(resolve,reject,codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
-    let respuesta_devuelta;        
+    let respuesta_devuelta;
     if(tipopromo["venta"]==1){
-        // respuesta_devuelta=por_ITEM(nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica);
         respuesta_devuelta=por_ITEM(codigos,cotdetalle,tipopromo,promcabesa,promdetalle);
     }
     else{
-        // respuesta_devuelta=por_TOTALVENTA(nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica);
         respuesta_devuelta=por_TOTALVENTA(codigos,cotdetalle,tipopromo,promcabesa,promdetalle);
     }
-
     resolve(respuesta_devuelta);
 }
 ///////////////////////////////////////////////////////////////////////
@@ -104,10 +105,7 @@ function direccionador(resolve,reject,nprom,cotdetalle,promcabesa,promdetalle,ti
     if(tipopromo[0]==1){
         respuesta_devuelta=v_xitems(nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica);
     }
-    else{
-        respuesta_devuelta=v_xitotalisado(nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica);
-    }
-
+    else{respuesta_devuelta=v_xitotalisado(nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica);}
     resolve(respuesta_devuelta);
 }
 

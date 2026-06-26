@@ -16,6 +16,7 @@ let descuento_correspondiente=(codigos,cotdetalle,tipopromo,promcabesa,promdetal
     return cantidad_correspondiente_obtenida;
 }
 function vx_valorizados(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
+    let objeto_regresar={};
     let items_correspondientes={};
     let check_monto_prom=0;
     /////solo queremos saber cuando se cumple la promo y que items son los que cumplen la promo
@@ -23,7 +24,7 @@ function vx_valorizados(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
         if(codigos.includes(promdetalle[y][0])){
             check_monto_prom=promdetalle[y][1];////MONTO MINIMO CUIDADO PUEDE SER UND/MONTO EJE 306.8
             let check_monto_item=cotdetalle[promdetalle[y][0]]["cantidad"];///MONTO QUE TIENE EL ITEM EN EL DETALLE
-            let check_monto_precio=cotdetalle[promdetalle[y][0]]["PrecioUnitario"];///MONTO QUE TIENE EL ITEM EN EL DETALLE
+            let check_monto_precio=cotdetalle[promdetalle[y][0]]["PreciosinIGV"];///MONTO QUE TIENE EL ITEM EN EL DETALLE
             items_correspondientes[promdetalle[y][0]]=[check_monto_item,check_monto_precio];
         }
     }
@@ -43,7 +44,14 @@ function vx_valorizados(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
         let division=Math.floor(Number(cantidad_momentanea)/Number(check_monto_prom));
         ///ESTO PUEDE QUE ESTE DEMAS EN CUANTO A UN REGALO
         // let corresponde=division*(Number(unidades_minimas)*Number(cantidad_descuento))
-        return [division,promdetalle[0][3]];
+        // return [division,promdetalle[0][3]];
+        objeto_regresar["codigo"]=tipopromo["idprom"];
+        objeto_regresar["descripcion"]=tipopromo["nombre"];
+        objeto_regresar["cantidad"]=division;
+        objeto_regresar["montoDescuento"]=promdetalle[0][3];
+        objeto_regresar["monedaDescuento"]="D";
+        return objeto_regresar;
+
     }
     else{
         return "NO SUFICIENTE MONTO TOTALVENTA";
@@ -58,7 +66,7 @@ function vx_unidades(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
         if(codigos.includes(promdetalle[y][0])){
             check_monto_prom=promdetalle[y][1];////MONTO MINIMO DE PROMOCION
             let check_monto_item=cotdetalle[promdetalle[y][0]]["cantidad"];///MONTO QUE TIENE EL ITEM EN EL DETALLE
-            let check_monto_precio=cotdetalle[promdetalle[y][0]]["PrecioUnitario"];///MONTO QUE TIENE EL ITEM EN EL DETALLE
+            let check_monto_precio=cotdetalle[promdetalle[y][0]]["PreciosinIGV"];///MONTO QUE TIENE EL ITEM EN EL DETALLE
             items_correspondientes[promdetalle[y][0]]=[check_monto_item,check_monto_precio];
         }
     }
