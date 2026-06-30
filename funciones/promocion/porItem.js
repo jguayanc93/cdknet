@@ -37,7 +37,7 @@ function vx_unidad(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
         let unidades_minimas= items_correspondientes[x][2];
         let tengo_esta_cantidad= items_correspondientes[x][0];
         let cantidad_descuento= items_correspondientes[x][3];
-        let division=Math.floor(Number(tengo_esta_cantidad)/Number(cantidad_descuento));
+        let division=Math.floor(Number(tengo_esta_cantidad)/Number(unidades_minimas));
         let corresponde= division*cantidad_descuento;
 
         objeto_regresar[contador_momentane]={}
