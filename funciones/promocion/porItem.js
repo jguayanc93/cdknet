@@ -1,13 +1,61 @@
 
-let descuento_correspondiente=(nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica)=>{
+let descuento_correspondiente=(codigos,cotdetalle,tipopromo,promcabesa,promdetalle)=>{
     //////FALTA UN FOR PARA SABER EN Q NUMERO DE ITEM SE ENCUENTRA
     let numero_item=1;
     numero_item=Object.keys(cotdetalle).length;
     let cantidad_correspondiente_obtenida;
+
+    if(tipopromo["metrica"]==1){
+        cantidad_correspondiente_obtenida=vx_valorizado(codigos,cotdetalle,tipopromo,promcabesa,promdetalle)
+    }else{
+        cantidad_correspondiente_obtenida=vx_unidad(codigos,cotdetalle,tipopromo,promcabesa,promdetalle)
+    }
+
     tipometrica==1 ? cantidad_correspondiente_obtenida=m_valorizado() : cantidad_correspondiente_obtenida=m_unidades(nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica,numero_item);
     return cantidad_correspondiente_obtenida;
 }
-function m_valorizado(){}
+function vx_valorizado(){}
+function vx_unidad(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
+    let objeto_regresar={};
+    let items_correspondientes={};
+    // let check_monto_prom=0;
+
+    for(let y in promdetalle){
+        if(codigos.includes(promdetalle[y][0])){
+            let check_monto_prom=promdetalle[y][1];///UNIDADES MINIMAS QUE PIDE LA PROMO
+            let check_monto_dsct=Number(promdetalle[y][2])///recuperado el descuento que se le otorga por promo  
+            let check_monto_item=cotdetalle[promdetalle[y][0]]["cantidad"];
+            let check_monto_precio=cotdetalle[promdetalle[y][0]]["preciosinIGV"];
+            if(Number(check_monto_prom)<=Number(check_monto_item)){
+            ///aca le estoi agregando al final el monto que le pide como minimo la promo lo usare en el bucle de abajo
+            items_correspondientes[promdetalle[y][0]]=[check_monto_item,check_monto_precio,check_monto_prom,check_monto_dsct];
+            }
+        }
+    }
+    ///hace esto porqe necesita recojer de todos pero ahora solo necesita de 1x1
+    let contador_momentane=0;
+    for(let x in items_correspondientes){
+        let unidades_minimas= items_correspondientes[x][2];
+        let tengo_esta_cantidad= items_correspondientes[x][0];
+        let cantidad_descuento= items_correspondientes[x][3];
+        let division=Math.floor(Number(tengo_esta_cantidad)/Number(cantidad_descuento));
+        let corresponde= division*cantidad_descuento;
+
+        objeto_regresar[contador_momentane]={}
+        objeto_regresar[contador_momentane]["codigo"]=tipopromo["idprom"];
+        objeto_regresar[contador_momentane]["descripcion"]=tipopromo["nombre"];
+        objeto_regresar[contador_momentane]["cantidad"]=division;
+        objeto_regresar[contador_momentane]["montoDescuento"]=corresponde;
+        objeto_regresar[contador_momentane]["monedaDescuento"]="D";
+        contador_momentane++;
+    }
+    if(Object.keys(objeto_regresar).length>0){
+        return objeto_regresar;
+    }
+    else{
+        return "NO SUFICIENTE UNIDAD PARA ESTE ITEM";
+    }
+}
 
 function m_unidades(nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica,numero_item){
     ///////////SOLO PARA LOS TOTALISADOS DE LA CABESERA

@@ -65,7 +65,7 @@ function vx_unidades(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
         if(codigos.includes(promdetalle[y][0])){
             check_monto_prom=promdetalle[y][1];////MONTO MINIMO DE PROMOCION
             let check_monto_item=cotdetalle[promdetalle[y][0]]["cantidad"];///MONTO QUE TIENE EL ITEM EN EL DETALLE
-            let check_monto_precio=cotdetalle[promdetalle[y][0]]["PreciosinIGV"];///MONTO QUE TIENE EL ITEM EN EL DETALLE
+            let check_monto_precio=cotdetalle[promdetalle[y][0]]["preciosinIGV"];///MONTO QUE TIENE EL ITEM EN EL DETALLE
             items_correspondientes[promdetalle[y][0]]=[check_monto_item,check_monto_precio];
         }
     }
