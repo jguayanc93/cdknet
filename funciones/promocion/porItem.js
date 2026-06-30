@@ -10,8 +10,7 @@ let descuento_correspondiente=(codigos,cotdetalle,tipopromo,promcabesa,promdetal
     }else{
         cantidad_correspondiente_obtenida=vx_unidad(codigos,cotdetalle,tipopromo,promcabesa,promdetalle)
     }
-
-    tipometrica==1 ? cantidad_correspondiente_obtenida=m_valorizado() : cantidad_correspondiente_obtenida=m_unidades(nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica,numero_item);
+    // tipometrica==1 ? cantidad_correspondiente_obtenida=m_valorizado() : cantidad_correspondiente_obtenida=m_unidades(nprom,cotdetalle,promcabesa,promdetalle,tipopromo,tipometrica,numero_item);
     return cantidad_correspondiente_obtenida;
 }
 function vx_valorizado(){}
