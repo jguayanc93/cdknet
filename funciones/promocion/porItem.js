@@ -49,6 +49,8 @@ function vx_unidad(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
         contador_momentane++;
     }
     if(Object.keys(objeto_regresar).length>0){
+        ////sumado para saber si es descuento o regalo, si es 1 es descuento y si es 2 es regalo
+        tipopromo["descuento"]=1 ? objeto_regresar["tipo"]=["descuento"] : objeto_regresar["tipo"]=["regalo"];
         return objeto_regresar;
     }
     else{
