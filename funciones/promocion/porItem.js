@@ -49,9 +49,11 @@ function vx_unidad(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
         contador_momentane++;
     }
     if(Object.keys(objeto_regresar).length>0){
+        ////esta linea es para ver si pasa la funcion 1 en el frontend
+        objeto_regresar2["items"]=Object.values(objeto_regresar);
         ////sumado para saber si es descuento o regalo, si es 1 es descuento y si es 2 es regalo
-        tipopromo["descuento"]=1 ? objeto_regresar["tipo"]=["descuento"] : objeto_regresar["tipo"]=["regalo"];
-        return objeto_regresar;
+        tipopromo["descuento"]=1 ? objeto_regresar2["tipo"]=["descuento"] : objeto_regresar2["tipo"]=["regalo"];
+        return objeto_regresar2;
     }
     else{
         return "NO SUFICIENTE UNIDAD PARA ESTE ITEM";
