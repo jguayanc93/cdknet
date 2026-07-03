@@ -25,9 +25,11 @@ function vx_unidad(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
             let check_monto_dsct=Number(promdetalle[y][2])///recuperado el descuento que se le otorga por promo  
             let check_monto_item=cotdetalle[promdetalle[y][0]]["cantidad"];
             let check_monto_precio=cotdetalle[promdetalle[y][0]]["preciosinIGV"];
+            ////esto solo sera para agregar el nombre del producto al cual se le esta aplicando la promo
+            let check_monto_nombre=cotdetalle[promdetalle[y][0]]["descripcion"];
             if(Number(check_monto_prom)<=Number(check_monto_item)){
             ///aca le estoi agregando al final el monto que le pide como minimo la promo lo usare en el bucle de abajo
-            items_correspondientes[promdetalle[y][0]]=[check_monto_item,check_monto_precio,check_monto_prom,check_monto_dsct];
+        items_correspondientes[promdetalle[y][0]]=[check_monto_item,check_monto_precio,check_monto_prom,check_monto_dsct,check_monto_nombre];
             }
         }
     }
@@ -46,6 +48,7 @@ function vx_unidad(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
         objeto_regresar[contador_momentane]["cantidad"]=division;
         objeto_regresar[contador_momentane]["montoDescuento"]=corresponde;
         objeto_regresar[contador_momentane]["monedaDescuento"]="D";
+        objeto_regresar[contador_momentane]["itemdescr"]=items_correspondientes[x][4];
         tipopromo["descuento"]==1 ? objeto_regresar[contador_momentane]["tipo"]=["descuento"] : objeto_regresar[contador_momentane]["tipo"]=["regalo"];
         contador_momentane++;
     }
