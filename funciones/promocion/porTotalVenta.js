@@ -66,7 +66,7 @@ function vx_unidades(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
             check_monto_prom=promdetalle[y][1];////MONTO MINIMO DE PROMOCION
             let check_monto_item=cotdetalle[promdetalle[y][0]]["cantidad"];///MONTO QUE TIENE EL ITEM EN EL DETALLE
             let check_monto_precio=cotdetalle[promdetalle[y][0]]["preciosinIGV"];///MONTO QUE TIENE EL ITEM EN EL DETALLE
-            items_correspondientes[promdetalle[y][0]]=[check_monto_item,check_monto_precio];
+        items_correspondientes[promdetalle[y][0]]=[check_monto_item,check_monto_precio];
         }
     }
     ////una ves recojido los items que coinciden en el grupo de la promo
@@ -86,6 +86,7 @@ function vx_unidades(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
         objeto_regresar["cantidad"]=division;
         objeto_regresar["montoDescuento"]=corresponde;
         objeto_regresar["monedaDescuento"]="D";
+        tipopromo["descuento"]==1 ? objeto_regresar["tipo"]=["descuento"] : objeto_regresar["tipo"]=["regalo"];
         return objeto_regresar;
     }
     else{
