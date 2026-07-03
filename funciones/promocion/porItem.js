@@ -46,6 +46,7 @@ function vx_unidad(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
         objeto_regresar[contador_momentane]["cantidad"]=division;
         objeto_regresar[contador_momentane]["montoDescuento"]=corresponde;
         objeto_regresar[contador_momentane]["monedaDescuento"]="D";
+        tipopromo["descuento"]==1 ? objeto_regresar[contador_momentane]["tipo"]=["descuento"] : objeto_regresar[contador_momentane]["tipo"]=["regalo"];
         contador_momentane++;
     }
     if(Object.keys(objeto_regresar).length>0){
