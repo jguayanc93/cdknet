@@ -54,6 +54,7 @@ function vx_unidad(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
         // objeto_regresar2["items"]=Object.values(objeto_regresar);
         ////sumado para saber si es descuento o regalo, si es 1 es descuento y si es 2 es regalo
         tipopromo["descuento"]==1 ? objeto_regresar["tipo"]=["descuento"] : objeto_regresar["tipo"]=["regalo"];
+        objeto_regresar["descripcion"]=tipopromo["nombre"];
         return objeto_regresar;
     }
     else{
