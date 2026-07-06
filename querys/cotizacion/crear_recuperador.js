@@ -9,12 +9,11 @@ let recuperar_detallado = (resolve,reject,conexion,objtotal)=>{
         ////captura todas los codis
         orden.push(objtotal[indice]["codigo"]);
     }
-    detallado_bucle(resolve,reject,conexion,manejador,objtotal,Object.keys(objtotal).length,orden,contador);
+    detallado_bucle(resolve,reject,conexion,manejador,objtotal,orden,contador);
 }
 
-let detallado_bucle =(resolve,reject,conexion,manejador,objtotal,longuitud,orden,contador)=>{
-
-    if(longuitud<=contador){
+let detallado_bucle =(resolve,reject,conexion,manejador,objtotal,orden,contador)=>{
+    if(Object.keys(objtotal).length<=contador){
         conexion.close();
         resolve(manejador);
     }
@@ -40,8 +39,9 @@ let detallado_bucle =(resolve,reject,conexion,manejador,objtotal,longuitud,orden
                     });
                     // resolve(respuesta[0]);
                     manejador[orden[contador]] = respuesta[0];
+                    detallado_bucle(resolve,reject,conexion,manejador,objtotal,orden,contador+1);
                 }
-                detallado_bucle(resolve,reject,conexion,manejador,objtotal,longuitud,orden,contador+1);
+                // detallado_bucle(resolve,reject,conexion,manejador,objtotal,longuitud,orden,contador+1);
             }
         })
         consulta.addParameter('codi',TYPES.Char,orden[contador]);
