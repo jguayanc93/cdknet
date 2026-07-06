@@ -10,6 +10,7 @@ let {coti_atencion} = require('../../querys/cotizacion/atencion')
 let {coti_cabecera} = require('../../querys/cotizacion/crear_cabecera')
 let {coti_detallado} = require('../../querys/cotizacion/crear_detallado')
 let {cotizacion_registrar_vendedor} = require('../../querys/cotizacion//otorgar_cotizacion')
+let {recuperar_detallado} = require('../../querys/cotizacion/crear_recuperador')
 ///////ESPACIO PARA FUNCIONES GENERALES
 
 ////ESPACIO PARA LOS MANEJOS DE ERRORES CON RESPUESTA
@@ -20,7 +21,9 @@ async function new_creacion(req,res,next) {
         const primera_call = await consulta1(req,next);//galletas
         const tercer_call = await obtenerpromesa_conexion();
         const cuarta_call = await consulta3(tercer_call);//tipo de cambio
-        // const segundo_call = await consulta2(req.body,cuarta_call);//totalisados para la cabecera
+        const activar = await obtenerpromesa_conexion();
+        const recuperar_call = await recuperador(activar,req.body["productos"]);
+        // const segundo_call = await consulta2(recuperar_call,cuarta_call);//totalisados para la cabecera
         // const quinta_call = await obtenerpromesa_conexion();
         // const sexta_call = await consulta4(quinta_call);//correlativo actual
         // const setima_call = await obtenerpromesa_conexion();
@@ -37,7 +40,7 @@ async function new_creacion(req,res,next) {
         // const diecisesava_call = await consulta9(quinceava_call,primera_call,sexta_call);
 
         // res.status(200).json(JSON.stringify(tercer_call));
-        res.status(200).json(JSON.stringify({"contenido":req.body}));
+        res.status(200).json(JSON.stringify({"contenido":recuperar_call}));
     }
     catch(err){
         error_corrector(res,err);
@@ -45,6 +48,8 @@ async function new_creacion(req,res,next) {
 }
 
 function obtenerpromesa_conexion(){ return new Promise((resolve,reject)=>conn(resolve,reject)) }
+
+function recuperador(conexion,productos){ return new Promise((resolve,reject)=>recuperar_detallado(resolve,reject,conexion,productos)) }
 
 function consulta1(req,next){ return new Promise((resolve,reject)=>galleta_credencial(resolve,reject,req,next)) }
 
