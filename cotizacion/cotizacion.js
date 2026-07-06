@@ -15,6 +15,8 @@ const {modificacion} = require('../funciones/cotizacion/modificar')
 const {revisar} = require('../funciones/cotizacion/mostrar')
 const {ver_all} = require('../funciones/cotizacion/mostrar_todo')
 const {almacen_cambio} = require('../funciones/cotizacion/almacen')
+///////cambio de perspectiva para la creacion de cotizacion en nueva ruta
+const {new_creacion} = require('../funciones/cotizacion/new_crear')
 
 router.use(express.json());
 
@@ -23,6 +25,7 @@ router.get('/',objevacio,coti_permisos)
 // router.get('/',(req,res)=>{res.status(200).send("deberia enviarte al login de nuevo por no tener galletas")})
 
 /////estas rutas son para sus respectivos accesos segun pueda o no
+router.post('/pegar',new_creacion)
 router.post('/create',creacion)
 router.post('/read',revisar)
 router.post('/readprom',ver_all)
