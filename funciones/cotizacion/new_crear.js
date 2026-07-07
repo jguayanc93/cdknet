@@ -36,11 +36,11 @@ async function new_creacion(req,res,next) {
         const treceava_call = await obtenerpromesa_conexion();
         const catorceava_call = await consulta8(treceava_call,req.body,segundo_call[0],cuarta_call,sexta_call);
         // ////OTORGARLE LA COTI AL VENDEDOR
-        // const quinceava_call = await obtenerpromesa_conexion();
-        // const diecisesava_call = await consulta9(quinceava_call,primera_call,sexta_call);
+        const quinceava_call = await obtenerpromesa_conexion();
+        const diecisesava_call = await consulta9(quinceava_call,primera_call,sexta_call);
 
-        // res.status(200).json(JSON.stringify(tercer_call));
-        res.status(200).json(JSON.stringify({"contenido":catorceava_call}));
+        res.status(200).json(JSON.stringify({"success":true}));
+        // res.status(200).json(JSON.stringify({"contenido":catorceava_call}));
     }
     catch(err){
         error_corrector(res,err);
