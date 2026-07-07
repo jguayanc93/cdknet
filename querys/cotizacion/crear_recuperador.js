@@ -10,11 +10,11 @@ let recuperar_detallado = (resolve,reject,conexion,objtotal)=>{
         orden.push(objtotal[indice]["codigo"]);
     }
     // resolve(orden);
-    detallado_bucle(resolve,reject,conexion,manejador,objtotal,orden,contador);
+    detallado_bucle(resolve,reject,conexion,manejador,objtotal,orden,contadorr);
 }
 
-let detallado_bucle =(resolve,reject,conexion,manejador,objtotal,orden,contador)=>{
-    if(Object.keys(objtotal).length<=contador){
+let detallado_bucle =(resolve,reject,conexion,manejador,objtotal,orden,contadorr)=>{
+    if(Object.keys(objtotal).length<=contadorr){
         conexion.close();
         resolve(manejador);
     }
@@ -38,14 +38,13 @@ let detallado_bucle =(resolve,reject,conexion,manejador,objtotal,orden,contador)
                         })
                     respuesta.push(tmp);
                     });
-                    // resolve(respuesta[0]);
-                    manejador[orden[contador]] = respuesta[0];
-                    detallado_bucle(resolve,reject,conexion,manejador,objtotal,orden,contador+1);
+                    manejador[orden[contadorr]] = respuesta[0];
+                    detallado_bucle(resolve,reject,conexion,manejador,objtotal,orden,contadorr+1);
                 }
                 // detallado_bucle(resolve,reject,conexion,manejador,objtotal,longuitud,orden,contador+1);
             }
         })
-        consulta.addParameter('codi',TYPES.Char,orden[contador]);
+        consulta.addParameter('codi',TYPES.Char,orden[contadorr]);
         conexion.execSql(consulta);
     }
 }
