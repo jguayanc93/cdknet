@@ -3,14 +3,14 @@ const {Request,TYPES} = require('../../conexion/cadena')
 
 let recuperar_detallado = (resolve,reject,conexion,objtotal)=>{
     let contador=0;
-    const manejador={};
+    let manejador={};
     let orden=[];
     for(let indice in objtotal){
         ////captura todas los codis
         orden.push(objtotal[indice]["codigo"]);
     }
-    resolve(orden);
-    // detallado_bucle(resolve,reject,conexion,manejador,objtotal,orden,contador);
+    // resolve(orden);
+    detallado_bucle(resolve,reject,conexion,manejador,objtotal,orden,contador);
 }
 
 let detallado_bucle =(resolve,reject,conexion,manejador,objtotal,orden,contador)=>{
