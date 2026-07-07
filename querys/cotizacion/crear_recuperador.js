@@ -9,7 +9,8 @@ let recuperar_detallado = (resolve,reject,conexion,objtotal)=>{
         ////captura todas los codis
         orden.push(objtotal[indice]["codigo"]);
     }
-    detallado_bucle(resolve,reject,conexion,manejador,objtotal,orden,contador);
+    resolve(orden);
+    // detallado_bucle(resolve,reject,conexion,manejador,objtotal,orden,contador);
 }
 
 let detallado_bucle =(resolve,reject,conexion,manejador,objtotal,orden,contador)=>{
