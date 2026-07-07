@@ -87,7 +87,9 @@ function vx_unidades(codigos,cotdetalle,tipopromo,promcabesa,promdetalle){
         objeto_regresar["montoDescuento"]=corresponde;
         objeto_regresar["monedaDescuento"]="D";
         tipopromo["descuento"]==1 ? objeto_regresar["tipo"]=["descuento"] : objeto_regresar["tipo"]=["regalo"];
-        return objeto_regresar;
+        ///temporalmente recuerda regresarlo a como era antes
+        // return objeto_regresar;
+        return {"0":objeto_regresar};
     }
     else{
         return "NO SUFICIENTE UNIDADES TOTALVENTA";
