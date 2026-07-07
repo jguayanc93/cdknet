@@ -3,7 +3,7 @@ const {Request,TYPES} = require('../../conexion/cadena')
 
 let tipo_cambio = (resolve,reject,conexion)=>{
 
-    let sq_sql="select tcmer,fecha,DATEADD(DAY,10,fecha) from tbl01tca where CONVERT(char(10),fecha,111)=CONVERT(char(10),GETDATE(),111)";
+    let sq_sql="select tcvta,fecha,DATEADD(DAY,10,fecha) from tbl01tca where CONVERT(char(10),fecha,111)=CONVERT(char(10),GETDATE(),111)";
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
         if(err){
             conexion.close();
