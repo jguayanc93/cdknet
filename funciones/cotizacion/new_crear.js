@@ -24,15 +24,15 @@ async function new_creacion(req,res,next) {
         const activar = await obtenerpromesa_conexion();
         const recuperar_call = await recuperador(activar,req.body["productos"]);///items recuperados de la BD
         const segundo_call = await consulta2(recuperar_call,cuarta_call,req.body["productos"],req.body["moneda"]);//totalisados para la cabecera
-        // const quinta_call = await obtenerpromesa_conexion();
-        // const sexta_call = await consulta4(quinta_call);//correlativo actual
-        // const setima_call = await obtenerpromesa_conexion();
-        // const octava_call = await consulta5(setima_call,sexta_call);//actualisar el correlativo en la tabla
-        // const novena_call = await obtenerpromesa_conexion();
-        // const decima_call = await consulta6(novena_call,req.body["cliente"][0]);//atencion del cliente
-        // const undecima_call = await obtenerpromesa_conexion();
-        // const doceava_call= await consulta7(undecima_call,cuarta_call,sexta_call,req.body["cliente"],decima_call,segundo_call,req.body["moneda"]);
-        // ////CONSTRUIDO CON EXITO EL MST FALTA EL DETALLADO
+        const quinta_call = await obtenerpromesa_conexion();
+        const sexta_call = await consulta4(quinta_call);//correlativo actual
+        const setima_call = await obtenerpromesa_conexion();
+        const octava_call = await consulta5(setima_call,sexta_call);//actualisar el correlativo en la tabla
+        const novena_call = await obtenerpromesa_conexion();
+        const decima_call = await consulta6(novena_call,req.body["cliente"][0]);//atencion del cliente
+        const undecima_call = await obtenerpromesa_conexion();
+        const doceava_call= await consulta7(undecima_call,cuarta_call,sexta_call,req.body["cliente"],decima_call,segundo_call,req.body["moneda"]);
+        ////CONSTRUIDO CON EXITO EL MST FALTA EL DETALLADO
         // const treceava_call = await obtenerpromesa_conexion();
         // const catorceava_call = await consulta8(treceava_call,req.body,segundo_call[0],cuarta_call,sexta_call);
         // ////OTORGARLE LA COTI AL VENDEDOR
@@ -40,7 +40,7 @@ async function new_creacion(req,res,next) {
         // const diecisesava_call = await consulta9(quinceava_call,primera_call,sexta_call);
 
         // res.status(200).json(JSON.stringify(tercer_call));
-        res.status(200).json(JSON.stringify({"contenido":segundo_call}));
+        res.status(200).json(JSON.stringify({"contenido":doceava_call}));
     }
     catch(err){
         error_corrector(res,err);
@@ -155,9 +155,10 @@ function calcular_moneda(resolve,reject,recuperada,tipocambio,dataenviada,moneda
                 let codf=recuperada[dataenviada[indice]["codigo"]][1];
                 let marca=recuperada[dataenviada[indice]["codigo"]][2];
                 let total_solo_item=dataenviada[indice]["preciosinIGV"];
-                let total_solo_item_conigv=(total_solo_item*1.18);
+                let total_solo_item_conigv=Number((total_solo_item*1.18).toFixed(2));
                 
             objtotal[dataenviada[indice]["codigo"]]=[codf,marca,descripcion,cantidad,preu,total_solo_item,dsct,total_solo_item_conigv,costo];
+            ///aun falta corregir el totalisado con igv para la suma general
             totalisado+=total_solo_item;
             }
         // let descripcion=dataenviada["productos"][indice][0];
@@ -180,7 +181,6 @@ function calcular_moneda(resolve,reject,recuperada,tipocambio,dataenviada,moneda
         // totalisado+=saca_total;
         }
     }
-    
     resolve([objtotal,totalisado])
 }
 
