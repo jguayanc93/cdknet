@@ -9,7 +9,6 @@ let recuperar_detallado = (resolve,reject,conexion,objtotal)=>{
         ////captura todas los codis
         orden.push(objtotal[indice]["codigo"]);
     }
-    // resolve(orden);
     detallado_bucle(resolve,reject,conexion,manejador,objtotal,orden,contador);
 }
 
@@ -41,7 +40,6 @@ let detallado_bucle =(resolve,reject,conexion,manejador,objtotal,orden,contadorr
                     manejador[orden[contadorr]] = respuesta[0];
                     detallado_bucle(resolve,reject,conexion,manejador,objtotal,orden,contadorr+1);
                 }
-                // detallado_bucle(resolve,reject,conexion,manejador,objtotal,longuitud,orden,contador+1);
             }
         })
         consulta.addParameter('codi',TYPES.Char,orden[contadorr]);
