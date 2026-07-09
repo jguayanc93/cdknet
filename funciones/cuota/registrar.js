@@ -16,11 +16,11 @@ async function cuota_registrar(req,res,next) {
     try{
         const primera_call = await consulta1(req);//galletas
         const segunda_call = await consulta2(req);
+        const quinta_call = await consulta4(req.body);///lo que regresa es el codfam
         const tercer_call = await obtenerpromesa_conexion();
-        const cuarta_call = await consulta3(tercer_call,primera_call,segunda_call,req.body);
+        const cuarta_call = await consulta3(tercer_call,primera_call,segunda_call,req.body,quinta_call);
         // const cuarta_call = await obtenerpromesa_conexion();
         // const quinta_call = await consulta3(cuarta_call,tercera_call);
-        // const sexta_call = await consulta4(quinta_call);
         
         res.status(200).json({"permitido":cuarta_call});
     }
@@ -35,12 +35,36 @@ function consulta1(req){ return new Promise((resolve,reject)=>galleta_credencial
 
 function consulta2(req){ return new Promise((resolve,reject)=>galleta_tipo(resolve,reject,req)) }
 
-function consulta3(conexion,galleta,diferenciador,body){ return new Promise((resolve,reject)=>registro_cuota(resolve,reject,conexion,galleta,diferenciador,body)) }
+function consulta3(conexion,galleta,diferenciador,body,codfam){ return new Promise((resolve,reject)=>registro_cuota(resolve,reject,conexion,galleta,diferenciador,body,codfam)) }
 
-// function consulta3(conexion,detallado){ return new Promise((resolve,reject)=>promo_buscador(resolve,reject,conexion,detallado)) }
+function consulta4(body){ return new Promise((resolve,reject)=>familia_descrifador(resolve,reject,body)) }
 
-// function consulta4(agrupados){ return new Promise((resolve,reject)=>promocion_agrupados(resolve,reject,agrupados)) }
-
+function familia_descrifador(resolve,reject,body){
+    let codfam=body.objetivo_especial;
+    switch(codfam){
+        case 'ACCESORIOS Y PERIFERICOS':
+            resolve('01');
+            break;
+        case 'EQUIPOS INFORMATICOS':
+            resolve('02');
+            break;
+        case 'COMPONENTES':
+            resolve('06');
+            break;
+        case 'ALM. EXTERNO':
+            resolve('09');
+            break;
+        case 'IMPRESION':
+            resolve('11');
+            break;
+        case 'TELEFONIA':
+            resolve('12');
+            break;
+        default:
+            resolve('06');
+            break;
+    }
+}
 
 function galleta_credencial(resolve,reject,req){
     let user_id=req.signedCookies.cdk;
