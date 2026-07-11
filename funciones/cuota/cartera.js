@@ -7,8 +7,7 @@ let {cuota_existe} = require('../../querys/cuota/revisar_registro')
 let {registro_cuota} = require('../../querys/cuota/registrar')
 let {cuota_tiempo} = require('../../querys/cuota/mostrar')
 let {cuota_avance_cartera} = require('../../querys/cuota/cartera')
-// let {promo_vertodo} = require('../../querys/promocion/cotizacion')
-// let {promo_buscador} = require('../../querys/promocion/buscador')
+let {cuota_avance_objetivo_especifico} = require('../../querys/cuota/objetivo_specifico')
 ///////ESPACIO PARA FUNCIONES GENERALES
 
 ////ESPACIO PARA LOS MANEJOS DE ERRORES CON RESPUESTA
@@ -24,8 +23,13 @@ async function cuota_cartera(req,res,next) {
         const sexta_call = await obtenerpromesa_conexion();
         const setima_call = await consulta5(sexta_call,primera_call,segunda_call);
         const octava_call = await consulta6(cuarta_call,setima_call,quinta_call);
+        ////AUN falta calcular el porcentaje segun el objetivo especifico
+        const novena_call = await consulta7(octava_call);
+        const decima_call = await obtenerpromesa_conexion();
+        const onceava_call = await consulta8(decima_call,primera_call,novena_call);
+        const doceava_call = await consulta9(novena_call,onceava_call);
         
-        res.status(200).json({"simple":octava_call});
+        res.status(200).json({"simple":doceava_call});
     }
     catch(err){
         error_corrector(res,err);
@@ -45,6 +49,29 @@ function consulta4(tiempo){ return new Promise((resolve,reject)=>avance_mensaje(
 function consulta5(conexion,galleta,diferenciador){ return new Promise((resolve,reject)=>cuota_avance_cartera(resolve,reject,conexion,galleta,diferenciador)) }
 
 function consulta6(tiempos,monto,textodia){ return new Promise((resolve,reject)=>estimacion_monto(resolve,reject,tiempos,monto,textodia)) }
+
+function consulta7(montos){ return new Promise((resolve,reject)=>calculo_porcentaje(resolve,reject,montos)) }
+
+function consulta8(conexion,galleta,objformato){ return new Promise((resolve,reject)=>cuota_avance_objetivo_especifico(resolve,reject,conexion,galleta,objformato)) }
+
+function consulta9(objformato,avance){ return new Promise((resolve,reject)=>calculo_avance_objetivo_especifico(resolve,reject,objformato,avance)) }
+
+function calculo_avance_objetivo_especifico(resolve,reject,objformato,avance){
+    ////termina de calcular el porcentaje de avance de su objetivo
+    let cuota_objspec_fijada=objformato["objspec_cuota"];
+    objformato["objspec_avance"]=avance;
+    let objspec_avance = avance;
+    let porcentaje_objspecifico= Number(((avance/cuota_objspec_fijada)*100).toFixed(2));
+    objformato["objspec_porcentaje"]=porcentaje_objspecifico;
+    resolve (objformato);
+}
+
+function calculo_porcentaje(resolve,reject,objformato){    
+    let cuota_fijada=objformato["meta"];
+    let cuota_objspecifico= Number(((cuota_fijada*objformato["objesp"])/100).toFixed(3));
+    objformato["objspec_cuota"]=cuota_objspecifico;
+    resolve(objformato);
+}
 
 function galleta_credencial(resolve,reject,req){
     let user_id=req.signedCookies.cdk;
@@ -165,6 +192,8 @@ function estimacion_monto(resolve,reject,tiempos,monto,textodia){
     objformato["avance"]=monto;
     objformato["porcentaje"]=recortado;
     objformato["mensaje"]=mensaje;
+    objformato["codfam"]=tiempos[9];
+    objformato["objesp"]=tiempos[10];
 
     resolve(objformato);
 }

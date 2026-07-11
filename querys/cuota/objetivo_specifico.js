@@ -1,10 +1,10 @@
 require('dotenv').config();
 const {Request,TYPES} = require('../../conexion/cadena')
 
-let cuota_tiempo = (resolve,reject,conexion,galleta,diferenciador)=>{
+let cuota_avance_objetivo_especifico = (resolve,reject,conexion,galleta,objformato)=>{
 
-    // let sq_sql="select *,DATEDIFF(DAY,DAY(GETDATE()),DAY(EOMONTH(GETDATE()))),DAY(GETDATE()) from tbl_api_vendedores_meta where anno=YEAR(GETDATE()) AND mes=MONTH(GETDATE()) AND codven=@codusu";
-    let sq_sql="select codven,anno,mes,monto,volumen,cobertura,diferenciador,DATEDIFF(DAY,DAY(GETDATE()),DAY(EOMONTH(GETDATE()))),DAY(GETDATE()),family,obj_espc from tbl_api_vendedores_meta where anno=YEAR(GETDATE()) AND mes=MONTH(GETDATE()) AND codven=@codusu";
+    // let sq_sql="select SUM(CASE mone WHEN 'D' THEN tota WHEN 'S' THEN tota/tcam END) from mst01fac where YEAR(fecha)=YEAR(GETDATE()) AND MONTH(fecha)=MONTH(GETDATE()) AND flag<>'*' AND codvta<>'04' AND codven_usu=@codven";
+    let sq_sql="select SUM(CASE a.mone WHEN 'D' THEN a.tota WHEN 'S' THEN a.tota/a.tcam END) from dtl01fac a inner join mst01fac b on (b.ndocu=a.ndocu) where YEAR(b.fecha)=YEAR(GETDATE()) AND MONTH(b.fecha)=MONTH(GETDATE()) AND b.flag<>'*' AND b.codven_usu=@codven AND LEFT(a.codi,2)=@codfam";
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
         if(err){
             conexion.close();
@@ -14,7 +14,7 @@ let cuota_tiempo = (resolve,reject,conexion,galleta,diferenciador)=>{
             conexion.close();
             
             if(rows.length==0){
-                reject("cuota no existe");
+                reject("ninguna venta");
             }
             else{
                 let respuesta=[];                
@@ -29,12 +29,13 @@ let cuota_tiempo = (resolve,reject,conexion,galleta,diferenciador)=>{
                     respuesta.push(tmp);
                 });
                 
-                resolve(respuesta[0]);
+                resolve( Number((respuesta[0][0]).toFixed(3)) );
             }
         }
     })
-    consulta.addParameter('codusu',TYPES.VarChar,galleta.identificador);
+    consulta.addParameter('codven',TYPES.VarChar,galleta.codigo);
+    consulta.addParameter('codfam',TYPES.VarChar,objformato["codfam"]);
     conexion.execSql(consulta);
 }
 
-module.exports={cuota_tiempo}
+module.exports={cuota_avance_objetivo_especifico}
