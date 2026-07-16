@@ -22,6 +22,7 @@ const {cuota_simple} = require('../funciones/cuota/simple')
 const {cuota_multiple} = require('../funciones/cuota/multiple')
 
 const {cuota_marca_dinamica} = require('../funciones/cuota/marca')
+const {cuota_item_desechable} = require('../funciones/cuota/item_rematar')
 
 router.use(express.json());
 
@@ -45,5 +46,6 @@ router.get('/cobertura',cuota_cobertura)
 router.get('/cartera',cuota_cartera)
 router.get('/especialista',cuota_especialista)
 // router.post('/jefatura')
+router.get('/desechar',cuota_item_desechable)
 
 module.exports=router
