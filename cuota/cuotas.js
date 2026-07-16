@@ -46,6 +46,6 @@ router.get('/cobertura',cuota_cobertura)
 router.get('/cartera',cuota_cartera)
 router.get('/especialista',cuota_especialista)
 // router.post('/jefatura')
-router.get('/desechar',cuota_item_desechable)
+router.post('/desechar',cuota_item_desechable)
 
 module.exports=router
