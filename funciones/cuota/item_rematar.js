@@ -28,7 +28,7 @@ async function cuota_item_desechable(req,res,next) {
         const onceava_call = await consulta8(decima_call,primera_call,segunda_call);
         const doceava_call = await consulta9(onceava_call);
         
-        res.status(200).json({"simple":doceava_call});
+        res.status(200).json({"simple":setima_call});
     }
     catch(err){
         error_corrector(res,err);
