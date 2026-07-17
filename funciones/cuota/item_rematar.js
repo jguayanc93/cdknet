@@ -26,9 +26,9 @@ async function cuota_item_desechable(req,res,next) {
         // const novena_call = await consulta7(octava_call);
         const decima_call = await obtenerpromesa_conexion();
         const onceava_call = await consulta8(decima_call,primera_call,segunda_call);
-        // const doceava_call = await consulta9(novena_call,onceava_call);
+        const doceava_call = await consulta9(onceava_call);
         
-        res.status(200).json({"simple":onceava_call});
+        res.status(200).json({"simple":doceava_call});
     }
     catch(err){
         error_corrector(res,err);
@@ -49,16 +49,20 @@ function consulta7(montos){ return new Promise((resolve,reject)=>calculo_porcent
 
 function consulta8(conexion,galleta,diferenciador){ return new Promise((resolve,reject)=>cuota_items_desechables(resolve,reject,conexion,galleta,diferenciador)) }
 
-function consulta9(objformato,avance){ return new Promise((resolve,reject)=>calculo_avance_objetivo_especifico(resolve,reject,objformato,avance)) }
+function consulta9(arrobj){ return new Promise((resolve,reject)=>calculo_avance_objetivo_especifico(resolve,reject,arrobj)) }
 
-function calculo_avance_objetivo_especifico(resolve,reject,objformato,avance){
-    ////termina de calcular el porcentaje de avance de su objetivo
-    let cuota_objspec_fijada=objformato["objspec_cuota"];
-    objformato["objspec_avance"]=avance;
-    let objspec_avance = avance;
-    let porcentaje_objspecifico= Number(((avance/cuota_objspec_fijada)*100).toFixed(2));
-    objformato["objspec_porcentaje"]=porcentaje_objspecifico;
-    resolve (objformato);
+function calculo_avance_objetivo_especifico(resolve,reject,arrobj){
+    ////lo que se pretende hacer ahora es pasar todos los items del obj a un solo array
+    const codigos=[];
+    for(let codi of arrobj){
+        ///ya tengo los codis guardados en un array listo para buscar
+        codigos.push(codi[0])
+    }
+    ///ahora deberia buscar los items vendidos en los desechables
+    // for(let in ){}
+
+    
+    resolve (codigos);
 }
 
 function calculo_porcentaje(resolve,reject,objformato){    
