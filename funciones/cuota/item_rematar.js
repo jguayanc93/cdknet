@@ -26,9 +26,9 @@ async function cuota_item_desechable(req,res,next) {
         // const novena_call = await consulta7(octava_call);
         const decima_call = await obtenerpromesa_conexion();
         const onceava_call = await consulta8(decima_call,primera_call,segunda_call);
-        const doceava_call = await consulta9(onceava_call);
+        const doceava_call = await consulta9(onceava_call,setima_call);
         
-        res.status(200).json({"simple":setima_call});
+        res.status(200).json({"simple":doceava_call});
     }
     catch(err){
         error_corrector(res,err);
@@ -49,9 +49,9 @@ function consulta7(montos){ return new Promise((resolve,reject)=>calculo_porcent
 
 function consulta8(conexion,galleta,diferenciador){ return new Promise((resolve,reject)=>cuota_items_desechables(resolve,reject,conexion,galleta,diferenciador)) }
 
-function consulta9(arrobj){ return new Promise((resolve,reject)=>calculo_avance_objetivo_especifico(resolve,reject,arrobj)) }
+function consulta9(arrobj,vendidos){ return new Promise((resolve,reject)=>calculo_avance_objetivo_especifico(resolve,reject,arrobj,vendidos)) }
 
-function calculo_avance_objetivo_especifico(resolve,reject,arrobj){
+function calculo_avance_objetivo_especifico(resolve,reject,arrobj,vendidos){
     ////lo que se pretende hacer ahora es pasar todos los items del obj a un solo array
     const codigos=[];
     for(let codi of arrobj){
@@ -59,10 +59,18 @@ function calculo_avance_objetivo_especifico(resolve,reject,arrobj){
         codigos.push(codi[0])
     }
     ///ahora deberia buscar los items vendidos en los desechables
-    // for(let in ){}
-
-    
-    resolve (codigos);
+    const acumulados={};
+    for(let item of vendidos){
+        if(codigos.includes(item[1])){
+            if(Object.keys(acumulados).includes(item[1])){
+                acumulados[item[1]][3]=acumulados[item[1]][3]+item[3];
+            }
+            else{
+                acumulados[item[1]]=[item[0],item[1],item[2],item[3]];
+            }
+        }
+    }
+    resolve (acumulados);
 }
 
 function calculo_porcentaje(resolve,reject,objformato){    
