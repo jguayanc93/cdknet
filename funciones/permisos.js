@@ -8,7 +8,7 @@
 // const cuota=["volumen","rentabilidad","cobertura"];
 const cotizacion={
     "crear":[20,34,25,32],
-    "leer":[20,25,32],
+    "leer":[20,25,32,34],
     "update":[20,25,34,32],
     "delete":[25,34,32],
     "alm":[20,25,34,32]
@@ -27,13 +27,13 @@ const pedido={
 // }
 
 const factura={
-    "despacho":[20,25],
-    "transporte":[20,25],
+    "despacho":[20,25,34],
+    "transporte":[20,25,34],
     "atencion":[20,25,34],
-    "direccion":[20,25],
-    "vendedor":[20,25],
-    "observacion":[20,25],
-    "orden":[20,25]
+    "direccion":[20,25,34],
+    "vendedor":[20,25,34],
+    "observacion":[20,25,34],
+    "orden":[20,25,34]
 }
 
 const promocion={
@@ -52,10 +52,10 @@ const cuota={
 }
 
 const lista={
-    "cotizacion":[20,25],
-    "pedido":[20,25],
-    "factura":[20,25],
-    "clientes":[20,25]
+    "cotizacion":[20,25,34],
+    "pedido":[20,25,34],
+    "factura":[20,25,34],
+    "clientes":[20,25,34]
 }
 
 const programador={

@@ -27,6 +27,7 @@ const grp25={
 };
 const grp34={
     [coti[0]]:coti[1],
+    [pedi[0]]:pedi[1],
     [listas[0]]:listas[1],
     [factura[0]]:factura[1],
     [prom[0]]:prom[1],
