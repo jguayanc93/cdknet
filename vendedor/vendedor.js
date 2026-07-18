@@ -19,7 +19,7 @@ router.get('/',(req,res)=>{res.status(200).send("deberia enviarte al login de nu
 
 router.get('/cobertura',grupos_modulos)
 router.get('/cartera',grupos_modulos)
-router.get('/jefatura',grupos_modulos)
+router.get('/zona',grupos_modulos)
 router.get('/especialista',grupos_modulos)
 // router.get('/zona',)
 
