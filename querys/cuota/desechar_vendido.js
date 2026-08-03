@@ -2,9 +2,9 @@ require('dotenv').config();
 const {Request,TYPES} = require('../../conexion/cadena')
 
 let avance_items_recojidos = (resolve,reject,conexion,galleta,diferenciador)=>{
-
-    // let sq_sql="select SUM(CASE mone WHEN 'D' THEN tota WHEN 'S' THEN tota/tcam END) from mst01fac where YEAR(fecha)=YEAR(GETDATE()) AND MONTH(fecha)=MONTH(GETDATE()) AND flag<>'*' AND codvta<>'04' AND codven_usu=@codven";
-    let sq_sql="select a.ndocu,a.codi,a.descr,a.cant from dtl01fac a inner join mst01fac b on (b.ndocu=a.ndocu) where YEAR(b.fecha)=YEAR(GETDATE()) AND MONTH(b.fecha)=MONTH(GETDATE()) AND b.flag<>'*' AND b.codvta<>'04' AND a.codi<>'0303-010001' AND b.codven_usu=@codven";
+    
+    // let sq_sql="select a.ndocu,a.codi,a.descr,a.cant from dtl01fac a inner join mst01fac b on (b.ndocu=a.ndocu) where YEAR(b.fecha)=YEAR(GETDATE()) AND MONTH(b.fecha)=MONTH(GETDATE()) AND b.flag<>'*' AND b.codvta<>'04' AND a.codi<>'0303-010001' AND b.codven_usu=@codven";
+    let sq_sql="select a.ndocu,a.codi,a.descr,a.cant from dtl01fac a inner join mst01fac b on (b.ndocu=a.ndocu) where YEAR(b.fecha)=YEAR(GETDATE()) AND MONTH(b.fecha)=7 AND b.flag<>'*' AND b.codvta<>'04' AND a.codi<>'0303-010001' AND b.codven_usu=@codven";
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
         if(err){
             conexion.close();
