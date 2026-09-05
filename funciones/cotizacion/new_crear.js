@@ -30,7 +30,6 @@ async function new_creacion(req,res,next) {
         // const setima_call = await obtenerpromesa_conexion();
         // const octava_call = await consulta5(setima_call,sexta_call);//actualisar el correlativo en la tabla
 
-        
         const novena_call = await obtenerpromesa_conexion();
         const decima_call = await consulta6(novena_call,req.body["cliente"][0]);//atencion del cliente
         const undecima_call = await obtenerpromesa_conexion();
@@ -42,7 +41,7 @@ async function new_creacion(req,res,next) {
         const quinceava_call = await obtenerpromesa_conexion();
         const diecisesava_call = await consulta9(quinceava_call,primera_call,sexta_call);
 
-        res.status(200).json(JSON.stringify({"success":true}));
+        res.status(200).json(JSON.stringify({"cotizacion":sexta_call}));
         // res.status(200).json(JSON.stringify({"contenido":catorceava_call}));
     }
     catch(err){
