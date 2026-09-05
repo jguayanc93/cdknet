@@ -26,8 +26,11 @@ async function new_creacion(req,res,next) {
         const segundo_call = await consulta2(recuperar_call,cuarta_call,req.body["productos"],req.body["moneda"]);//totalisados para la cabecera
         const quinta_call = await obtenerpromesa_conexion();
         const sexta_call = await consulta4(quinta_call);//correlativo actual
-        const setima_call = await obtenerpromesa_conexion();
-        const octava_call = await consulta5(setima_call,sexta_call);//actualisar el correlativo en la tabla
+        ////POR EL MOMENTTO NO NECESITA ACTUALISAR UNA TABLA DE CORRELATIVO YA QUE NO SE ESTA USANDO PARA NADA
+        // const setima_call = await obtenerpromesa_conexion();
+        // const octava_call = await consulta5(setima_call,sexta_call);//actualisar el correlativo en la tabla
+
+        
         const novena_call = await obtenerpromesa_conexion();
         const decima_call = await consulta6(novena_call,req.body["cliente"][0]);//atencion del cliente
         const undecima_call = await obtenerpromesa_conexion();

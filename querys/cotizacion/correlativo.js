@@ -3,7 +3,8 @@ const {Request,TYPES} = require('../../conexion/cadena')
 
 let num_correlativo = (resolve,reject,conexion)=>{
 
-    let sq_sql="select top 1 RIGHT(ndocu,8) as nroactual from mst01cot where LEFT(ndocu,3)='009' order by RIGHT(ndocu,8) desc";
+    // let sq_sql="select top 1 RIGHT(ndocu,8) as nroactual from mst01cot where LEFT(ndocu,3)='098' order by RIGHT(ndocu,8) desc";
+    let sq_sql="select '00000000'";
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
         if(err){
             conexion.close();
@@ -28,10 +29,19 @@ let num_correlativo = (resolve,reject,conexion)=>{
                     })
                     respuesta.push(tmp);
                 });
-                let comodin="009-00";
+                let comodin="098-";
                 let n_actual = parseInt(respuesta[0][0]);
                 let n_calcular=n_actual+1;
-                let formato=comodin+n_calcular.toString();
+                ///aqui falta rellenar con ceros a la izquierda para que siempre tenga 8 digitos
+                let formato="";
+                if(n_calcular.toString().length<8){
+                    let diferencia=8-n_calcular.toString().length;///aca cuenta cuantos ceros le faltan para completar los 8 digitos
+                    let ceros="0".repeat(diferencia);///aca rellena con ceros a la izquierda
+                    formato=comodin+ceros+n_calcular.toString();
+                }
+                else{
+                    formato=comodin+n_calcular.toString();
+                }
 
                 resolve(formato);
             }
