@@ -10,6 +10,7 @@ let {coti_atencion} = require('../../querys/cotizacion/atencion')
 let {coti_cabecera} = require('../../querys/cotizacion/crear_cabecera')
 let {coti_detallado} = require('../../querys/cotizacion/crear_detallado')
 let {cotizacion_registrar_vendedor} = require('../../querys/cotizacion//otorgar_cotizacion')
+let {cotizacion_registrar_tcm} = require('../../querys/cotizacion/otorgar_tcm')
 let {recuperar_detallado} = require('../../querys/cotizacion/crear_recuperador')
 ///////ESPACIO PARA FUNCIONES GENERALES
 
@@ -40,6 +41,9 @@ async function new_creacion(req,res,next) {
         // ////OTORGARLE LA COTI AL VENDEDOR
         const quinceava_call = await obtenerpromesa_conexion();
         const diecisesava_call = await consulta9(quinceava_call,primera_call,sexta_call);
+        ///FALTA OTORGARLE LOS TIPOS DE CAMBIOS
+        const diecisietava_call = await obtenerpromesa_conexion();
+        const dieciochava_call = await consulta10(diecisietava_call,primera_call,sexta_call);
 
         res.status(200).json(JSON.stringify({"cotizacion":sexta_call}));
         // res.status(200).json(JSON.stringify({"contenido":catorceava_call}));
@@ -76,6 +80,10 @@ function consulta8(conexion,info_cliente,objtotal,fecha,formato){
 function consulta9(conexion,galleta,documento){
     return new Promise((resolve,reject)=>cotizacion_registrar_vendedor(resolve,reject,conexion,galleta,documento))
 };
+
+function consulta10(conexion,galleta,documento){
+    return new Promise((resolve,reject)=>cotizacion_registrar_tcm(resolve,reject,conexion,galleta,documento))
+}
 
 function galleta_credencial(resolve,reject,req,next){
     let user_id=req.signedCookies.cdk;
