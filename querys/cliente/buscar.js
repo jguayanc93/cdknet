@@ -4,8 +4,10 @@ const {Request,TYPES} = require('../../conexion/cadena')
 let cliente_buscar = (resolve,reject,conexion,req,next)=>{
 
     let caracter=`%${req.body.sugerencia}%`;
+    let numero=`${req.body.sugerencia}%`;
 
-    let sq_sql="select top 4 codcli,nomcli from mst01cli where estado=1 and nomcli like @pista";
+    // let sq_sql="select top 4 codcli,nomcli from mst01cli where estado=1 and nomcli like @pista"; 
+    let sq_sql="select top 4 codcli,nomcli from mst01cli where estado=1 and (nomcli like @pista OR ruccli like @num)";
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
         if(err){
             conexion.close();
@@ -37,6 +39,7 @@ let cliente_buscar = (resolve,reject,conexion,req,next)=>{
         }
     })
     consulta.addParameter('pista',TYPES.VarChar,caracter);
+    consulta.addParameter('num',TYPES.VarChar,numero);
     conexion.execSql(consulta);
 }
 
