@@ -45,7 +45,7 @@ async function new_creacion(req,res,next) {
         const diecisietava_call = await obtenerpromesa_conexion();
         const dieciochava_call = await consulta10(diecisietava_call,primera_call,sexta_call);
 
-        res.status(200).json(JSON.stringify({"cotizacion":sexta_call}));
+        res.status(200).json(JSON.stringify({"success":true}));
         // res.status(200).json(JSON.stringify({"contenido":catorceava_call}));
     }
     catch(err){

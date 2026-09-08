@@ -6,7 +6,7 @@ let cotizacion_registrar_tcm = (resolve,reject,conexion,galleta,documento)=>{
     // let vendedor = galleta.codigo;
 
     // let sq_sql="update mst01cot set codven_usu=@codven where ndocu=@doc";
-    let sq_sql="update mst01cot set tcme='3.38' where ndocu=@doc";
+    let sq_sql="update mst01cot set tcme='3.37' where ndocu=@doc";
     let consulta= new Request(sq_sql,(err,rowCount,rows)=>{
         if(err){
             conexion.close();
